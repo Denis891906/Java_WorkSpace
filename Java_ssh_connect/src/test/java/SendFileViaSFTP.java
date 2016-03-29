@@ -14,7 +14,7 @@ public class SendFileViaSFTP {
     this.SFTPPORT = 22;
     this.SFTPUSER = "centos";
     // this file can be id_rsa or id_dsa based on which algorithm is used to create the key
-    this.privateKey = "E:\\denys_key.pem";
+    this.privateKey = "E:\\Backup_from_laptop_Edinburht\\Keys\\URTDSM_CentOS_6\\dl_urtdsm_centos_6.pem";
     this.SFTPWORKINGDIR = "/home/centos/";
 }
 
