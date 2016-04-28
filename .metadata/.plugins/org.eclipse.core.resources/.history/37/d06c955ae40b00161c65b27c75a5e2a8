@@ -1,0 +1,38 @@
+package com.gui;
+import java.awt.*;
+import javax.swing.*;
+
+public class MainWindow extends JFrame{
+	
+	public MainWindow(){
+		
+		setSize(400, 600);
+		
+		GridBagLayout gridbag = new GridBagLayout();
+        GridBagConstraints c = new GridBagConstraints();
+        getContentPane().setLayout(gridbag);
+        
+        
+        
+        JLabel pdcIPLable=new JLabel("PDC IP");    
+        
+        
+        getContentPane.add(pdcIPLable,c);   
+             
+                
+        
+ 
+         
+       
+	}
+
+   
+ 
+    public static void main(String[] args)
+    {
+    	MainWindow flt = new MainWindow();
+        flt.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        flt.setVisible(true);
+    }
+
+}

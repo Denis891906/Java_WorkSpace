@@ -1,0 +1,71 @@
+package com.gui;
+import java.awt.*;
+import javax.swing.*;
+
+public class MainWindow extends JFrame{
+	
+	public MainWindow(){
+		
+		setSize(500, 500);
+		GridBagLayout gridbag = new GridBagLayout();
+        GridBagConstraints c = new GridBagConstraints();
+        
+        getContentPane().setLayout(gridbag);
+        
+           
+        //makebutton("My",gridbag,new GridBagConstraints(2,0,3,5,0,0,GridBagConstraints.CENTER,GridBagConstraints.BOTH, null, defaultCloseOperation, defaultCloseOperation)));
+        
+        c.fill = GridBagConstraints.HORIZONTAL; 
+        c.gridx = 0; 
+        c.gridy = 0; 
+        makebutton("a", gridbag, c);
+ 
+         
+        c.fill = GridBagConstraints.HORIZONTAL; 
+        c.weightx = 0.5; 
+        c.gridx = 1; 
+        c.gridy = 0; 
+        makebutton("0", gridbag, c);
+        
+        c.fill = GridBagConstraints.HORIZONTAL; 
+        c.weightx = 0.5; 
+        c.gridx = 2; 
+        c.gridy = 0; 
+        makebutton("1", gridbag, c);
+ 
+         
+        c.fill = GridBagConstraints.HORIZONTAL; 
+        c.ipady = 40;      // сделать эту кнопку высокой 
+        c.weightx = 0.0; 
+        c.gridwidth = 3; 
+        c.gridx = 0; 
+        c.gridy = 1; 
+        makebutton("12", gridbag, c);; 
+ 
+         
+        c.fill = GridBagConstraints.HORIZONTAL; 
+        c.ipady = 0;       // установить первоночальный размер кнопки 
+        c.weighty = 1.0;   // установить отступ 
+        c.anchor = GridBagConstraints.PAGE_END; // установить кнопку в конец окна 
+        c.insets = new Insets(10, 0, 0, 0);  // поставить заглушку 
+        c.gridx = 1;       // выравнять компонент по Button 2 
+        c.gridwidth = 2;   // установить в 2 колонку 
+        c.gridy = 2;       // и 3 столбец 
+        makebutton("123", gridbag, c);
+	}
+
+    private void makebutton(String name, GridBagLayout gridbag, GridBagConstraints c)
+    {
+        Button button = new Button(name);
+        gridbag.setConstraints(button, c);
+        getContentPane().add(button);
+    }
+ 
+    public static void main(String[] args)
+    {
+    	MainWindow flt = new MainWindow();
+        flt.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        flt.setVisible(true);
+    }
+
+}

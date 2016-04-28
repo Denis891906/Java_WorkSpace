@@ -1,0 +1,15 @@
+package com.gui;
+import java.awt.*;
+import javax.swing.*;
+
+public class MainWindow extends JFrame{
+	
+	public MainWindow(){
+		
+		GridBagLayout gridbag = new GridBagLayout();
+        GridBagConstraints c = new GridBagConstraints();
+        
+        
+	}
+
+}

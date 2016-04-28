@@ -1,0 +1,38 @@
+package com.gui;
+import java.awt.*;
+import javax.swing.*;
+
+public class MainWindow extends JFrame{
+	
+	public MainWindow(){
+		
+		GridBagLayout gridbag = new GridBagLayout();
+        GridBagConstraints c = new GridBagConstraints();
+        
+        getContentPane().setLayout(gridbag);
+        
+        c.fill = GridBagConstraints.BOTH;
+        // Попробуйте убрать эту строку
+        c.weightx = 1.0;
+        makebutton("Button1", gridbag, c);
+        makebutton("Button2", gridbag, c);
+        makebutton("Button3", gridbag, c);
+        
+        
+	}
+
+    private void makebutton(String name, GridBagLayout gridbag, GridBagConstraints c)
+    {
+        Button button = new Button(name);
+        gridbag.setConstraints(button, c);
+        getContentPane().add(button);
+    }
+ 
+    public static void main(String[] args)
+    {
+    	MainWindow flt = new MainWindow();
+        flt.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        flt.setVisible(true);
+    }
+
+}

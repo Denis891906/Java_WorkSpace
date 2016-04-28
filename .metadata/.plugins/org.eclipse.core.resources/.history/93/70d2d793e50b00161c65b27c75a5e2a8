@@ -1,0 +1,51 @@
+package com.gui;
+import java.awt.*;
+import javax.swing.*;
+
+public class MainWindow extends JFrame{
+	
+	public MainWindow(){
+		
+		setSize(400, 600);
+		
+		GridBagLayout gridbag = new GridBagLayout();
+        GridBagConstraints c = new GridBagConstraints();
+        getContentPane().setLayout(gridbag);
+              
+        
+        JLabel pdcIPLable=new JLabel("PDC IP");    
+        JLabel appIPLable=new JLabel("AppServer IP");
+        JLabel histIPLable=new JLabel("Historian IP");
+        
+        JTextField pdcIPText=new JTextField(16);
+        JTextField appIPText=new JTextField(16);
+        JTextField histIPText=new JTextField(16);
+        
+        JButton pdcInstallButton=new JButton("Install PDC");
+        JButton appInstallButton=new JButton("Install AppServer");
+        JButton histInstallButton=new JButton("Install Historian");
+        
+        
+        
+        this.add(pdcIPLable, c);
+        this.add(pdcIPText, c);
+        this.add(pdcInstallButton, c);
+           
+             
+                
+        
+ 
+         
+       
+	}
+
+   
+ 
+    public static void main(String[] args)
+    {
+    	MainWindow flt = new MainWindow();
+        flt.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        flt.setVisible(true);
+    }
+
+}

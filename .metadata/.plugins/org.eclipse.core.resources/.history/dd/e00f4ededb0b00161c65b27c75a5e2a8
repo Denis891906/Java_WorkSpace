@@ -1,0 +1,36 @@
+package com.gui;
+import java.awt.*;
+import javax.swing.*;
+
+public class MainWindow extends JFrame{
+	
+	public MainWindow(){
+		
+		setSize(500, 500);
+		GridBagLayout gridbag = new GridBagLayout();
+        GridBagConstraints c = new GridBagConstraints();
+        
+        getContentPane().setLayout(gridbag);
+        
+           
+        c.gridx=1;
+        c.gridy=4;
+        makebutton("My",gridbag,c);
+        
+	}
+
+    private void makebutton(String name, GridBagLayout gridbag, GridBagConstraints c)
+    {
+        Button button = new Button(name);
+        gridbag.setConstraints(button, c);
+        getContentPane().add(button);
+    }
+ 
+    public static void main(String[] args)
+    {
+    	MainWindow flt = new MainWindow();
+        flt.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        flt.setVisible(true);
+    }
+
+}
