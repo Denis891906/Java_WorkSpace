@@ -2,14 +2,23 @@ package com.gui;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.nio.file.Path;
 import java.awt.event.ActionEvent;
 
 
 import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
 
-public class MainWindow extends JFrame implements ActionListener{
+public class MainWindow extends JFrame{
 	public JLabel buildPathLable;
+	public JLabel keyPathLable;
+	public JLabel buildPDCPathLable1;
+	public JLabel buildPDCPathLable2;
+	public JLabel buildAppServerPathLable1;
+	public JLabel buildAppServerPathLable2;
+	public JLabel buildHistoranPathLable1;
+	public JLabel buildHistoranPathLable2;
+	
 	public MainWindow(){
 		
 		
@@ -27,21 +36,33 @@ public class MainWindow extends JFrame implements ActionListener{
         JLabel histIPLable=new JLabel("3 IP");
         histIPLable.setHorizontalAlignment(SwingConstants.LEFT);
         buildPathLable=new JLabel();
+        keyPathLable=new JLabel();
+        buildPDCPathLable1 = new JLabel();
+        buildPDCPathLable2 = new JLabel();
+        buildAppServerPathLable1 = new JLabel();
+    	buildAppServerPathLable2 = new JLabel();
+    	buildHistoranPathLable1 = new JLabel();
+    	buildHistoranPathLable2 = new JLabel();
         
         
         JTextField pdcIPText=new JTextField(16);
         JTextField appIPText=new JTextField(16);
         JTextField histIPText=new JTextField(16);
-//        JTextField buildPathText=new JTextField(16);
+
         
         JButton pdcInstallButton=new JButton("Install 1");
         JButton appInstallButton=new JButton("Install 2");
         JButton histInstallButton=new JButton("Install 3");
         JButton selectBuildFolderButton=new JButton("Select Build Folder");
+        JButton selectKeyFileButton=new JButton("Select Key File");
         
         //Add listener for button selectBuildFolder
         
-        selectBuildFolderButton.addActionListener(this);
+        GUIEngine guiEngine=new GUIEngine(this);
+        
+        selectBuildFolderButton.addActionListener(guiEngine);
+        pdcInstallButton.addActionListener(guiEngine);
+        selectKeyFileButton.addActionListener(guiEngine);
         
       
         
@@ -57,9 +78,7 @@ public class MainWindow extends JFrame implements ActionListener{
         //c.fill=GridBagConstraints.HORIZONTAL; //как будет располагаться элемент
         c.insets=new Insets(0, 0, 0, 0); // отступы компонентов ( top,left, bottom, right )
         c.ipadx=1; // на сколько увеличиваеться минимальная ширина элемента
-        c.ipady=1; // на сколько увеличиваеться минимальная высота элемента
-       
-        
+        c.ipady=1; // на сколько увеличиваеться минимальная высота элемента       
         
         
         
@@ -104,25 +123,88 @@ public class MainWindow extends JFrame implements ActionListener{
         c.insets=new Insets(1, 200, 0, 0); // отступы компонентов ( top,left, bottom, right )
         this.add(histInstallButton, c);
              
-        
+        //Builds path elements
         c.gridx=0;
         c.gridy=3;
         c.fill=GridBagConstraints.HORIZONTAL;
         c.insets=new Insets(0, 0, 0, 0); // отступы компонентов ( top,left, bottom, right )
         this.add(selectBuildFolderButton, c);
         
-        c.gridx=2;
+        c.gridx=1;
         c.gridy=3;
+                c.insets=new Insets(0, 0, 0, 0); // отступы компонентов ( top,left, bottom, right )
+        c.gridwidth=5;
+        c.fill=GridBagConstraints.HORIZONTAL;;
+        this.add(buildPathLable, c);   
+    	
+        c.gridx=0;
+        c.gridy=4;
+        c.gridwidth=1;
+        this.add(buildPDCPathLable1,c);
         
-        c.insets=new Insets(0, 0, 0, 0); // отступы компонентов ( top,left, bottom, right )
-        c.gridwidth=3;
-        this.add(buildPathLable, c);
+        
+        c.gridx=1;
+        c.gridy=4;
+        c.gridwidth=5;
+        this.add(buildPDCPathLable2,c);
+        
+        c.gridx=0;
+        c.gridy=5;
+        c.gridwidth=1;
+        this.add(buildAppServerPathLable1, c);
+        
+        c.gridx=1;
+        c.gridy=5;
+        c.gridwidth=5;
+        this.add(buildAppServerPathLable2, c);
+    	
+        c.gridx=0;
+        c.gridy=6;
+        c.gridwidth=1;
+        this.add(buildHistoranPathLable1, c);
+    	
+        c.gridx=1;
+        c.gridy=6;
+        c.gridwidth=5;
+        this.add(buildHistoranPathLable2, c);
+        
+         
+      //key path elements       
+        c.gridx=0;
+        c.gridy=7;
+        c.fill=GridBagConstraints.HORIZONTAL;
+        c.gridwidth=1;
+        this.add(selectKeyFileButton,c);
+        
+        c.gridx=1;
+        c.gridwidth=7;
+        this.add(keyPathLable,c);
         
         this.pack(); // delete empty space from window
-         
-       
+	}
+	public void SetBuildPath(String path, String pdcPath,String appPath,String histPath){
+		buildPathLable.setText(path);
+		buildPDCPathLable1.setText("PDC rpm file path:");
+		buildPDCPathLable2.setText(pdcPath);
+		buildAppServerPathLable1.setText("AppServer rpm file path:");
+		buildAppServerPathLable2.setText(appPath);
+		buildHistoranPathLable1.setText("Historian rpm file path:");
+		buildHistoranPathLable2.setText(histPath);
+	}
+	
+	public String GetBuildPath(){
+		System.out.println("GetBuildPath method returns path: "+buildPathLable.getText());
+		return buildPathLable.getText();
+	}
+	
+	public void SetKeyPath(String path){
+		keyPathLable.setText(path);
 	}
 
+	public void ShowWarningDialog (String text){
+		JOptionPane.showMessageDialog(new JFrame(), text, "Dialog", JOptionPane.ERROR_MESSAGE);
+	} 
+	
    
  
     public static void main(String[] args)
@@ -132,34 +214,5 @@ public class MainWindow extends JFrame implements ActionListener{
         flt.setVisible(true);
     }
 
-
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		int result;
-		 JFileChooser chooser;
-		 
-        
-	    chooser = new JFileChooser(); 
-	    chooser.setCurrentDirectory(new java.io.File("."));
-	    chooser.setDialogTitle("Dialog");
-	    chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-	    //
-	    // disable the "All files" option.
-	    //
-	    chooser.setAcceptAllFileFilterUsed(false);
-	    //    
-	    if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) { 
-	      System.out.println("getCurrentDirectory(): " 
-	         +  chooser.getCurrentDirectory());
-	      System.out.println("getSelectedFile() : " 
-	         +  chooser.getSelectedFile());
-	      buildPathLable.setText(chooser.getCurrentDirectory().getAbsolutePath());
-	      }
-	    else {
-	      System.out.println("No Selection ");
-	      }
-	}
 
 }
