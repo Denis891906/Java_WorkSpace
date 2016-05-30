@@ -18,6 +18,7 @@ public class MainWindow extends JFrame{
 	public JLabel buildAppServerPathLable2;
 	public JLabel buildHistoranPathLable1;
 	public JLabel buildHistoranPathLable2;
+	private JTextField pdcIPText;
 	
 	public MainWindow(){
 		
@@ -45,7 +46,7 @@ public class MainWindow extends JFrame{
     	buildHistoranPathLable2 = new JLabel();
         
         
-        JTextField pdcIPText=new JTextField(16);
+        pdcIPText=new JTextField(16);
         JTextField appIPText=new JTextField(16);
         JTextField histIPText=new JTextField(16);
 
@@ -205,6 +206,9 @@ public class MainWindow extends JFrame{
 		JOptionPane.showMessageDialog(new JFrame(), text, "Dialog", JOptionPane.ERROR_MESSAGE);
 	} 
 	
+	public String GetPDCIP(){
+		return pdcIPText.getText();
+	}
    
  
     public static void main(String[] args)

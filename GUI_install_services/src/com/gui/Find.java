@@ -58,7 +58,7 @@ public class Find {
             Path name = file.getFileName();
             if (name != null && matcher.matches(name)) {
                 numMatches++;
-                FoundFiles.add(file);
+                FoundFiles.add(file.getFileName());
                 System.out.println("I found " + file);
             }
         }

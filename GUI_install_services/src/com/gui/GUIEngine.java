@@ -1,4 +1,5 @@
 package com.gui;
+
 import java.awt.event.*;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -13,6 +14,11 @@ import com.gui.Find.Finder;
 
 public class GUIEngine implements ActionListener {
 	MainWindow parent;
+	String pdcBuildPath;
+	String appServerBuildPath;
+	String historianBuildPath;
+	String keyPath;
+	
 	GUIEngine(MainWindow parent){
 		 this.parent = parent;
 		 }
@@ -27,9 +33,11 @@ public class GUIEngine implements ActionListener {
 		
 		if (clickedButton.getText()=="Install 1"){
 			System.out.println("Button "+clickedButton.getText().toString()+ " was clicked");
+			parent.ShowWarningDialog("File "+ pdcBuildPath + " was send to VM with IP:"+parent.GetPDCIP());
 			
-			parent.ShowWarningDialog("ppppp");
-			
+			SendFileViaSFTP sendBuild=new SendFileViaSFTP(parent.GetPDCIP(), "centos", keyPath);
+			sendBuild.SendFile(pdcBuildPath);
+			parent.ShowWarningDialog("File "+ pdcBuildPath + " was send to VM with IP:"+parent.GetPDCIP());
 			
 			
 			
@@ -69,6 +77,9 @@ public class GUIEngine implements ActionListener {
 		    			  temp.returnFilePath(directPath,"*app*").toString(),
 		    			  temp.returnFilePath(directPath,"*hist*").toString()
 		    			  );
+		    	  pdcBuildPath= chooser.getSelectedFile().getAbsolutePath()+"\\" + temp.returnFilePath(directPath,"*pdc*").toString() ;
+		    	  appServerBuildPath=chooser.getSelectedFile().getAbsolutePath()+"\\" + temp.returnFilePath(directPath,"*app*").toString();
+		    	  historianBuildPath=chooser.getSelectedFile().getAbsolutePath()+"\\" + temp.returnFilePath(directPath,"*hist*").toString();
 		    	  
 		      }
 		      
@@ -96,6 +107,7 @@ public class GUIEngine implements ActionListener {
 		       System.out.println("You chose to open this file: " +
 		            chooser.getSelectedFile().getName());
 		       parent.SetKeyPath(chooser.getSelectedFile().getAbsolutePath());
+		       keyPath=chooser.getSelectedFile().getAbsolutePath();
 		    }
 		}
 		

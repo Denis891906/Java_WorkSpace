@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eclipse-userlibraries>
+  <library name="Maven: net.vrallev.ecc:ecc-25519-java:1.0.1">
+    <archive path="C:/Users/DOLebedev/.m2/repository/net/vrallev/ecc/ecc-25519-java/1.0.1/ecc-25519-java-1.0.1.jar" />
+  </library>
+  <library name="Maven: com.jcraft:jzlib:1.1.3">
+    <archive path="C:/Users/DOLebedev/.m2/repository/com/jcraft/jzlib/1.1.3/jzlib-1.1.3.jar" />
+  </library>
+  <library name="Maven: com.hierynomus:sshj:0.15.0">
+    <archive path="C:/Users/DOLebedev/.m2/repository/com/hierynomus/sshj/0.15.0/sshj-0.15.0.jar" />
+  </library>
+  <library name="Maven: com.jcraft:jsch:0.1.53">
+    <archive path="C:/Users/DOLebedev/.m2/repository/com/jcraft/jsch/0.1.53/jsch-0.1.53.jar" />
+  </library>
+  <library name="Maven: org.slf4j:slf4j-api:1.6.6">
+    <archive path="C:/Users/DOLebedev/.m2/repository/org/slf4j/slf4j-api/1.6.6/slf4j-api-1.6.6.jar" />
+  </library>
+  <library name="Maven: org.bouncycastle:bcprov-jdk15on:1.51">
+    <archive path="C:/Users/DOLebedev/.m2/repository/org/bouncycastle/bcprov-jdk15on/1.51/bcprov-jdk15on-1.51.jar" />
+  </library>
+  <library name="Maven: commons-io:commons-io:1.3.2">
+    <archive path="C:/Users/DOLebedev/.m2/repository/commons-io/commons-io/1.3.2/commons-io-1.3.2.jar" />
+  </library>
+  <library name="Maven: org.apache.sshd:sshd-sftp:0.11.0">
+    <archive path="C:/Users/DOLebedev/.m2/repository/org/apache/sshd/sshd-sftp/0.11.0/sshd-sftp-0.11.0.jar" />
+  </library>
+  <library name="Maven: org.apache.mina:mina-core:2.0.7">
+    <archive path="C:/Users/DOLebedev/.m2/repository/org/apache/mina/mina-core/2.0.7/mina-core-2.0.7.jar" />
+  </library>
+  <library name="Maven: org.slf4j:slf4j-api:1.7.7">
+    <archive path="C:/Users/DOLebedev/.m2/repository/org/slf4j/slf4j-api/1.7.7/slf4j-api-1.7.7.jar" />
+  </library>
+  <library name="Maven: org.apache.sshd:sshd-core:0.11.0">
+    <archive path="C:/Users/DOLebedev/.m2/repository/org/apache/sshd/sshd-core/0.11.0/sshd-core-0.11.0.jar" />
+  </library>
+  <library name="Maven: org.bouncycastle:bcpkix-jdk15on:1.51">
+    <archive path="C:/Users/DOLebedev/.m2/repository/org/bouncycastle/bcpkix-jdk15on/1.51/bcpkix-jdk15on-1.51.jar" />
+  </library>
+</eclipse-userlibraries>
+

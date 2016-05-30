@@ -16,4 +16,6 @@
 <fullyQualifiedTypeName name="java.nio.file.Paths"/>
 <fullyQualifiedTypeName name="java.nio.file.Path"/>
 <fullyQualifiedTypeName name="javax.swing.JLabel"/>
+<fullyQualifiedTypeName name="com.ssh_connect.SendFileViaSFTP"/>
+<fullyQualifiedTypeName name="com.jcraft.jsch.SftpProgressMonitor"/>
 </qualifiedTypeNameHistroy>
