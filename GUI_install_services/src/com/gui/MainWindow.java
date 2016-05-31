@@ -1,8 +1,11 @@
 package com.gui;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.image.ImageObserver;
 import java.io.File;
+import java.io.PrintStream;
 import java.nio.file.Path;
+import java.text.AttributedCharacterIterator;
 import java.awt.event.ActionEvent;
 
 
@@ -19,15 +22,24 @@ public class MainWindow extends JFrame{
 	public JLabel buildHistoranPathLable1;
 	public JLabel buildHistoranPathLable2;
 	private JTextField pdcIPText;
+	private JTextArea textArea;
+	
+	
+	
+	
 	
 	public MainWindow(){
 		
 		
-		setSize(700, 300);
+		setSize(700, 1000);
 		
 		GridBagLayout gridbag = new GridBagLayout();
         GridBagConstraints c = new GridBagConstraints();
         getContentPane().setLayout(gridbag);
+        
+        
+        
+        
               
         
         JLabel pdcIPLable=new JLabel("1 IP");  
@@ -47,6 +59,7 @@ public class MainWindow extends JFrame{
         
         
         pdcIPText=new JTextField(16);
+        pdcIPText.setText("10.35.204.56");
         JTextField appIPText=new JTextField(16);
         JTextField histIPText=new JTextField(16);
 
@@ -56,6 +69,29 @@ public class MainWindow extends JFrame{
         JButton histInstallButton=new JButton("Install 3");
         JButton selectBuildFolderButton=new JButton("Select Build Folder");
         JButton selectKeyFileButton=new JButton("Select Key File");
+        
+        
+        
+        
+        
+        
+        
+        
+        //
+        
+        textArea = new JTextArea();
+        textArea.setEditable(false);
+        PrintStream printStream = new PrintStream(new CustomOutputStream(textArea));
+         
+        // keeps reference of standard output stream
+        
+         
+        // re-assigns standard output stream and error output stream
+        System.setOut(printStream);
+        System.setErr(printStream);
+        
+        
+        
         
         //Add listener for button selectBuildFolder
         
@@ -180,6 +216,17 @@ public class MainWindow extends JFrame{
         c.gridx=1;
         c.gridwidth=7;
         this.add(keyPathLable,c);
+        
+        // text area
+       c.gridx=0;
+        c.gridy=8;
+        c.fill=GridBagConstraints.BOTH;
+        c.gridwidth=6;
+        c.gridheight=10;//сколько клеток занимает элемент в высоту
+        this.add(new JScrollPane(textArea), c);
+        
+        
+        
         
         this.pack(); // delete empty space from window
 	}

@@ -18,4 +18,7 @@
 <fullyQualifiedTypeName name="javax.swing.JLabel"/>
 <fullyQualifiedTypeName name="com.ssh_connect.SendFileViaSFTP"/>
 <fullyQualifiedTypeName name="com.jcraft.jsch.SftpProgressMonitor"/>
+<fullyQualifiedTypeName name="javax.swing.ProgressMonitor"/>
+<fullyQualifiedTypeName name="java.io.PrintStream"/>
+<fullyQualifiedTypeName name="java.awt.Graphics"/>
 </qualifiedTypeNameHistroy>

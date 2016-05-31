@@ -33,11 +33,11 @@ public class GUIEngine implements ActionListener {
 		
 		if (clickedButton.getText()=="Install 1"){
 			System.out.println("Button "+clickedButton.getText().toString()+ " was clicked");
-			parent.ShowWarningDialog("File "+ pdcBuildPath + " was send to VM with IP:"+parent.GetPDCIP());
+			//parent.ShowWarningDialog("File "+ pdcBuildPath + " was send to VM with IP:"+parent.GetPDCIP());
 			
 			SendFileViaSFTP sendBuild=new SendFileViaSFTP(parent.GetPDCIP(), "centos", keyPath);
 			sendBuild.SendFile(pdcBuildPath);
-			parent.ShowWarningDialog("File "+ pdcBuildPath + " was send to VM with IP:"+parent.GetPDCIP());
+			//parent.ShowWarningDialog("File "+ pdcBuildPath + " was send to VM with IP:"+parent.GetPDCIP());
 			
 			
 			
@@ -108,6 +108,7 @@ public class GUIEngine implements ActionListener {
 		            chooser.getSelectedFile().getName());
 		       parent.SetKeyPath(chooser.getSelectedFile().getAbsolutePath());
 		       keyPath=chooser.getSelectedFile().getAbsolutePath();
+		       parent.pack();
 		    }
 		}
 		

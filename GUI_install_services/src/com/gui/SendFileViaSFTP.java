@@ -66,8 +66,12 @@ public class SendFileViaSFTP {
 
             System.out.println("Changed the directory to "+channelSftp.pwd());
             File f = new File(filePath);
-           
-            channelSftp.put(new FileInputStream(f), f.getName(),new SystemOutProgressMonitor());
+            
+            SftpProgressMonitor monitor=new MyProgressMonitor();
+          
+            		
+           // channelSftp.put(new FileInputStream(f), f.getName(),monitor);
+            channelSftp.put(filePath, channelSftp.pwd(),monitor);
 
             //Return result of command ls
             Vector lsResult =channelSftp.ls(SFTPWORKINGDIR);
@@ -82,9 +86,9 @@ public class SendFileViaSFTP {
         } catch (SftpException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        } catch (IOException e) {
+        } /*catch (IOException e) {
             e.printStackTrace();
-        } finally{
+        }*/ finally{
             if(channelSftp!=null){
                 channelSftp.disconnect();
                 channelSftp.exit();
