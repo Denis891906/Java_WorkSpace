@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete resource &apos;Send_command_via_ssh&apos;" deleteContents="false" description="Delete resource &apos;Send_command_via_ssh&apos;" element1="/Send_command_via_ssh" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1465237359296"/>
+</session>

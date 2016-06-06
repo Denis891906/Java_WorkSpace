@@ -1,0 +1,27 @@
+package send_command_thread;
+import com.jcraft.jsch.*;
+import org.apache.commons.io.IOUtils;
+
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.StringWriter;
+public class executeThread {
+	public executeThread() {
+		// this.SFTPHOST = "10.35.204.56";
+        this.SFTPPORT = 22;
+        this.SFTPUSER = "centos";
+        // this file can be id_rsa or id_dsa based on which algorithm is used to create the key
+        this.privateKey = "D:\\denys_key.pem";
+        this.SFTPWORKINGDIR = "/home/centos/";
+	}
+	private String SFTPHOST;
+    private int SFTPPORT;
+    private String SFTPUSER;
+    private String privateKey;
+    private String SFTPWORKINGDIR;
+
+    public void CreateConnection(){
+    	
+    }
+
+}

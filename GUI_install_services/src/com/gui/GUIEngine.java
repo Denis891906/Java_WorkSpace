@@ -38,7 +38,10 @@ public class GUIEngine implements ActionListener {
 			SendFileViaSFTP sendBuild=new SendFileViaSFTP(parent.GetPDCIP(), "centos", keyPath);
 			sendBuild.SendFile(pdcBuildPath);
 			//parent.ShowWarningDialog("File "+ pdcBuildPath + " was send to VM with IP:"+parent.GetPDCIP());
-			
+			ExecuteCommandViaSSH executeCommand=new ExecuteCommandViaSSH(parent.GetPDCIP(), "centos", keyPath);
+			executeCommand.CreateConnection();
+			executeCommand.StartCommand("pwd");
+			executeCommand.CloseConnection();
 			
 			
 		}else if(clickedButton.getText()=="Select Build Folder"){

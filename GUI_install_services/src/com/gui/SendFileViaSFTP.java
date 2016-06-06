@@ -74,10 +74,10 @@ public class SendFileViaSFTP {
             channelSftp.put(filePath, channelSftp.pwd(),monitor);
 
             //Return result of command ls
-            Vector lsResult =channelSftp.ls(SFTPWORKINGDIR);
+            /*Vector lsResult =channelSftp.ls(SFTPWORKINGDIR);
             for (int i=0; i<lsResult.size(); i++){
                 System.out.println(lsResult.get(i));
-            }
+            }*/
 
 
         } catch(JSchException e) {

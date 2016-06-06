@@ -21,4 +21,7 @@
 <fullyQualifiedTypeName name="javax.swing.ProgressMonitor"/>
 <fullyQualifiedTypeName name="java.io.PrintStream"/>
 <fullyQualifiedTypeName name="java.awt.Graphics"/>
+<fullyQualifiedTypeName name="javax.sql.CommonDataSource"/>
+<fullyQualifiedTypeName name="send_command_thread.executeThread"/>
+<fullyQualifiedTypeName name="com.gui.ExecuteCommandViaSSH"/>
 </qualifiedTypeNameHistroy>

@@ -22,6 +22,7 @@ public class MainWindow extends JFrame{
 	public JLabel buildHistoranPathLable1;
 	public JLabel buildHistoranPathLable2;
 	private JTextField pdcIPText;
+	private JTextField pdcIPText2;
 	private JTextArea textArea;
 	
 	
@@ -44,10 +45,20 @@ public class MainWindow extends JFrame{
         
         JLabel pdcIPLable=new JLabel("1 IP");  
         pdcIPLable.setHorizontalAlignment(SwingConstants.LEFT);
+        JLabel pdcIPLable2=new JLabel("1-2 IP");
+        pdcIPLable.setHorizontalAlignment(SwingConstants.LEFT);
+        
         JLabel appIPLable=new JLabel("2 IP");
         appIPLable.setHorizontalAlignment(SwingConstants.LEFT);
+        JLabel appIPLable2=new JLabel("2-2 IP");
+        appIPLable.setHorizontalAlignment(SwingConstants.LEFT);
+        
+        
         JLabel histIPLable=new JLabel("3 IP");
         histIPLable.setHorizontalAlignment(SwingConstants.LEFT);
+        JLabel histIPLable2=new JLabel("3-2 IP");
+        histIPLable.setHorizontalAlignment(SwingConstants.LEFT);
+        
         buildPathLable=new JLabel();
         keyPathLable=new JLabel();
         buildPDCPathLable1 = new JLabel();
@@ -59,6 +70,7 @@ public class MainWindow extends JFrame{
         
         
         pdcIPText=new JTextField(16);
+        pdcIPText2=new JTextField(16);
         pdcIPText.setText("10.35.204.56");
         JTextField appIPText=new JTextField(16);
         JTextField histIPText=new JTextField(16);

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;ExecuteCommandViaSSH.java&apos; to &apos;GUI_install_services/src/com.gui&apos;&#x0D;&#x0A;- Original project: &apos;send_command_thread&apos;&#x0D;&#x0A;- Destination element: &apos;GUI_install_services/src/com.gui&apos;&#x0D;&#x0A;- Original element: &apos;send_command_thread.ExecuteCommandViaSSH.java&apos;" description="Copy compilation unit" destination="=GUI_install_services/src&lt;com.gui" element1="/src&lt;send_command_thread{ExecuteCommandViaSSH.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1465242063047" units="1" version="1.0"/>
+</session>
