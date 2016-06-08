@@ -1,0 +1,16 @@
+package com.gui;
+
+public class deployPDC implements Runnable {
+
+	public deployPDC(String host) {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public void run() {
+		
+		
+	}
+	
+	
+
+}

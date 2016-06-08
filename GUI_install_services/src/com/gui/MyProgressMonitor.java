@@ -35,37 +35,37 @@ public class MyProgressMonitor implements SftpProgressMonitor{
     	  MainWindow.setMessage("..."+percent+"%");
       }else if(percent==10){
     	  System.out.print("..."+percent+"%");
-    	  MainWindow.setMessage("..."+percent+"%");
+    	  MainWindow.setProgressMessage("..."+percent+"%");
       }
       else if(percent==20){
     	  System.out.print("..."+percent+"%");
-    	  MainWindow.setMessage("..."+percent+"%");
+    	  MainWindow.setProgressMessage("..."+percent+"%");
       }else if(percent==30){
     	  System.out.print("..."+percent+"%");
-    	  MainWindow.setMessage("..."+percent+"%");
+    	  MainWindow.setProgressMessage("..."+percent+"%");
       }else if(percent==40){
     	  System.out.print("..."+percent+"%");
-    	  MainWindow.setMessage("..."+percent+"%");
+    	  MainWindow.setProgressMessage("..."+percent+"%");
       }else if(percent==50){
     	  System.out.print("..."+percent+"%");
-    	  MainWindow.setMessage("..."+percent+"%");
+    	  MainWindow.setProgressMessage("..."+percent+"%");
     	  
       }else if(percent==60){
     	  System.out.print("..."+percent+"%");
-    	  MainWindow.setMessage("..."+percent+"%");
+    	  MainWindow.setProgressMessage("..."+percent+"%");
       }else if(percent==70){
     	  System.out.print("..."+percent+"%");
-    	  MainWindow.setMessage("..."+percent+"%");
+    	  MainWindow.setProgressMessage("..."+percent+"%");
       }else if(percent==80){
     	  System.out.print("..."+percent+"%");
-    	  MainWindow.setMessage("..."+percent+"%");
+    	  MainWindow.setProgressMessage("..."+percent+"%");
       }
       else if(percent==90){
     	  System.out.print("..."+percent+"%");
-    	  MainWindow.setMessage("..."+percent+"%");
+    	  MainWindow.setProgressMessage("..."+percent+"%");
       }else if(percent==100){
     	  System.out.print("..."+percent+"%");
-    	  MainWindow.setMessage("..."+percent+"%");
+    	  MainWindow.setProgressMessage("..."+percent+"%");
       }
       
 

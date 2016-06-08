@@ -29,12 +29,18 @@ public class MainWindow extends JFrame{
 	private JTextField internalHistIPText;
 	private JTextField externalHistIPText;
 	private PrintStream standardOut;
+	private JTextField usernameText;
+	private JTextField sudoPasswordText;
 	
 	public static void setMessage(String text){
 		textArea.setText(textArea.getText()+"\n"+text);
-		
 	}
-	
+	public static void setProgressMessage(String text){
+		textArea.setText(textArea.getText()+text);
+	}
+	public static void showErrorMessage(String text){
+		JOptionPane.showMessageDialog(new JFrame(), text, "Execption dialog", JOptionPane.ERROR_MESSAGE);
+	}
 	
 	
 	public MainWindow(){
@@ -67,6 +73,11 @@ public class MainWindow extends JFrame{
         JLabel histIPLable2=new JLabel("External Historian IP");
         histIPLable.setHorizontalAlignment(SwingConstants.LEFT);
         
+        JLabel usernameLable=new JLabel("username");  
+        pdcIPLable.setHorizontalAlignment(SwingConstants.LEFT);
+        JLabel rootPasswordIPLable=new JLabel("root password");  
+        rootPasswordIPLable.setHorizontalAlignment(SwingConstants.LEFT);
+        
         buildPathLable=new JLabel();
         keyPathLable=new JLabel();
         buildPDCPathLable1 = new JLabel();
@@ -91,10 +102,13 @@ public class MainWindow extends JFrame{
         internalHistIPText.setText("192.168.160.131");
         externalHistIPText=new JTextField(16);
         externalHistIPText.setText("10.35.204.167");
+        usernameText = new JTextField(16);
+        usernameText.setText("centos");
+        sudoPasswordText=new JTextField(16);
+        sudoPasswordText.setText("Alstom$123");
         
         JButton pdcInstallButton=new JButton("Install PDC, AppServer, Historian");
-        JButton appInstallButton=new JButton("Install 2");
-        JButton histInstallButton=new JButton("Install 3");
+        JButton appInstallButton=new JButton("Reinstall Three Services");
         JButton selectBuildFolderButton=new JButton("Select Build Folder");
         JButton selectKeyFileButton=new JButton("Select Key File");
         
@@ -129,6 +143,7 @@ public class MainWindow extends JFrame{
         
         selectBuildFolderButton.addActionListener(guiEngine);
         pdcInstallButton.addActionListener(guiEngine);
+        appInstallButton.addActionListener(guiEngine);
         selectKeyFileButton.addActionListener(guiEngine);
         
       
@@ -205,11 +220,11 @@ public class MainWindow extends JFrame{
         this.add(histIPLable, c);
         c.gridx=1;
         this.add(internalHistIPText, c);
-        c.gridx=2;
+       /* c.gridx=2;
         c.fill=GridBagConstraints.HORIZONTAL;
         c.insets=new Insets(1, 200, 0, 0); // отступы компонентов ( top,left, bottom, right )
-        this.add(histInstallButton, c);
-        
+       // this.add(histInstallButton, c);
+*/        
       //Line 6 with Historian elements  
         
         c.insets=new Insets(0, 0, 0, 0); // отступы компонентов ( top,left, bottom, right )
@@ -281,9 +296,41 @@ public class MainWindow extends JFrame{
         c.gridwidth=7;
         this.add(keyPathLable,c);
         
+        
+        //Line with user name text box
+        
+        c.gridx=0;
+        c.gridy=11;
+        c.fill=GridBagConstraints.HORIZONTAL;
+        c.gridwidth=1;
+        this.add(usernameLable,c);
+
+        c.insets=new Insets(0, 0, 0, 0); // отступы компонентов ( top,left, bottom, right )
+        c.fill=GridBagConstraints.NONE;
+        c.gridy=11;
+        c.gridx=0;
+        c.gridx=1;
+        this.add(usernameText, c);
+        
+        
+        //Sudo password Line
+        c.gridx=0;
+        c.gridy=12;
+        c.fill=GridBagConstraints.HORIZONTAL;
+        c.gridwidth=1;
+        this.add(rootPasswordIPLable,c);
+        
+        c.insets=new Insets(0, 0, 0, 0); // отступы компонентов ( top,left, bottom, right )
+        c.fill=GridBagConstraints.NONE;
+        c.gridy=12;
+        c.gridx=0;
+        c.gridx=1;
+        this.add(sudoPasswordText, c);
+        
+        
         // text area
        c.gridx=0;
-        c.gridy=11;
+        c.gridy=13;
         c.fill=GridBagConstraints.BOTH;
         c.gridwidth=7;
         c.gridheight=60;//сколько клеток занимает элемент в высоту
@@ -340,6 +387,14 @@ public class MainWindow extends JFrame{
 	public String GetInternalHistorianIP(){
 		return internalHistIPText.getText();
 	}
+	public String getUserName(){
+		return usernameText.getText();
+	}
+	public String getSudoPassword(){
+		return sudoPasswordText.getText();
+		
+	}
+	
     public static void main(String[] args)
     {
     	MainWindow flt = new MainWindow();

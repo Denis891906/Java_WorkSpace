@@ -36,6 +36,7 @@ public class Find {
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+			MainWindow.showErrorMessage(e1.getMessage());
 		}
 	     
 	     return finder.done();

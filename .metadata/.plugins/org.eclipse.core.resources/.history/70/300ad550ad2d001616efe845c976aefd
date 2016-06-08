@@ -1,0 +1,25 @@
+package com.gui;
+
+public class deployPDC implements Runnable {
+	
+	private String externalPpcIP;
+	private String userName;
+	private String keyPath;
+	private String pdcBuildPath; 
+		
+	public deployPDC(String externalPpcIP,String userName,String keyPath,String pdcBuildPath) {
+		this.externalPpcIP=externalPpcIP;
+		this.userName=userName;
+		this.keyPath=keyPath;
+		this.pdcBuildPath=pdcBuildPath;
+	}
+	
+	public void run() {
+		SendFileViaSFTP sendBuildToPDC=new SendFileViaSFTP(externalPpcIP, userName, keyPath);
+		sendBuildToPDC.SendFile(pdcBuildPath);
+		
+	}
+	
+	
+
+}

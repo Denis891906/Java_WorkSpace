@@ -5,9 +5,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.gui.Find.Finder;
@@ -18,6 +21,12 @@ public class GUIEngine implements ActionListener {
 	String appServerBuildPath;
 	String historianBuildPath;
 	String keyPath;
+	String [] pdcCommands={"echo Hello 1",
+			"cat /etc/phasorpoint-pdc/security.properties",
+			"sudo service phasorpoint-pdc restart"};
+	String [] appServerCommands={"echo Hello 1"};
+	String [] historainCommands={"echo Hello 1"};
+	
 	
 	GUIEngine(MainWindow parent){
 		 this.parent = parent;
@@ -32,36 +41,29 @@ public class GUIEngine implements ActionListener {
 		}
 		
 		if (clickedButton.getText()=="Install PDC, AppServer, Historian"){
+			//PDC Installation
+			System.out.println("Installetion process for PDC with external IP "+parent.GetExternalPDCIP());	
+			Thread pdcInstall=new Thread(new deployService(parent.GetExternalPDCIP(), parent.getUserName(), parent.getSudoPassword() ,keyPath, pdcBuildPath,pdcCommands));
+			pdcInstall.start();
 			
-			//Copy file to PDC VM
-			SendFileViaSFTP sendBuildToPDC=new SendFileViaSFTP(parent.GetExternalPDCIP(), "centos", keyPath);
-			sendBuildToPDC.SendFile(pdcBuildPath);
-			//Execute commands on the PDC VM
-			ExecuteCommandViaSSH executeCommandOnPDC=new ExecuteCommandViaSSH(parent.GetExternalPDCIP(), "centos", keyPath);
-			executeCommandOnPDC.CreateConnection();
-			executeCommandOnPDC.StartCommand("ls");
-			//System.out.println("Before Close");
-			executeCommandOnPDC.CloseConnection();
+			//AppServer Installation
+			System.out.println("Installetion process for AppServer with external IP "+parent.GetExternalAppServerIP());	
+			Thread appServerInstall=new Thread(new deployService(parent.GetExternalAppServerIP(), parent.getUserName(), parent.getSudoPassword(), keyPath, appServerBuildPath,appServerCommands));
+			appServerInstall.start();
 			
-			//Copy file to the AppServer VM
-			SendFileViaSFTP sendBuildToApp=new SendFileViaSFTP(parent.GetExternalAppServerIP(), "centos", keyPath);
-			sendBuildToApp.SendFile(appServerBuildPath);
+			//Historian Installation
+			System.out.println("Installetion process for Historian with external IP "+parent.GetExternalHistorianIP());	
+			Thread histServerInstall=new Thread(new deployService(parent.GetExternalHistorianIP(), parent.getUserName(), parent.getSudoPassword(), keyPath, historianBuildPath,historainCommands));
+			histServerInstall.start();
 			
-			//Execute commands on the AppServer VM
-			ExecuteCommandViaSSH executeCommandOnApp=new ExecuteCommandViaSSH(parent.GetExternalAppServerIP(), "centos", keyPath);
-			executeCommandOnApp.CreateConnection();
-			executeCommandOnApp.StartCommand("pwd");
-			executeCommandOnApp.CloseConnection();
-					
-			//Copy file to the Historian VM
-			SendFileViaSFTP sendBuildToHist=new SendFileViaSFTP(parent.GetExternalHistorianIP(), "centos", keyPath);
-			sendBuildToHist.SendFile(historianBuildPath);
-			//Execute commands on the Historian VM
-			ExecuteCommandViaSSH executeCommandOnHist=new ExecuteCommandViaSSH(parent.GetExternalHistorianIP(), "centos", keyPath);
-			executeCommandOnHist.CreateConnection();
-			executeCommandOnHist.StartCommand("pwd");
-			executeCommandOnHist.CloseConnection();
+		
+		
 			parent.pack();
+		}else if (clickedButton.getText()=="Reinstall Three Services"){
+			MainWindow.setMessage("Button "+clickedButton.getText()+" was clicked");
+			//parent.setMessage("Button "+clickedButton.getText()+" was clicked");
+			//JOptionPane.showMessageDialog(new JFrame(), "My text", "Execption dialog", JOptionPane.ERROR_MESSAGE);
+			
 		}else if(clickedButton.getText()=="Select Build Folder"){
 			
 			JFileChooser chooser;	         
@@ -86,7 +88,7 @@ public class GUIEngine implements ActionListener {
 		      
 		      System.out.println("Returned: " + temp.returnFilePath(directPath,"*pdc*").toString());
 		      
-		      if ((temp.returnFilePath(directPath,"*pdc*").toString()).matches("NONE") ){
+		      if ((temp.returnFilePath(directPath,"*pdc.rpm*").toString()).matches("NONE") ){
 		    	  parent.ShowWarningDialog("PDC install rpm file wasn't found in the directory "+directPath + " . \nPlease specify directory again.");
 		      }else if((temp.returnFilePath(directPath,"*app*").toString()).matches("NONE") ){
 		    	  parent.ShowWarningDialog("AppServer install rpm file wasn't found in the directory "+directPath + " . \nPlease specify directory again.");

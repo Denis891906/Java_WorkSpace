@@ -11,13 +11,14 @@ import java.io.StringWriter;
 public class ExecuteCommandViaSSH {
 	
 
-	ExecuteCommandViaSSH(String host,String user, String keyPath){
+	ExecuteCommandViaSSH(String host,String user, String keyPath, String sudo_pass){
 		this.SFTPHOST = host;
         this.SFTPPORT = 22;
         this.SFTPUSER = user;
         // this file can be id_rsa or id_dsa based on which algorithm is used to create the key
         this.privateKey = keyPath;
-        this.SFTPWORKINGDIR = "/home/centos/";
+        this.SFTPWORKINGDIR = "/home/"+user+"/";
+        this.sudo_pass=sudo_pass;
 	}
 	private String SFTPHOST;
     private int SFTPPORT;
@@ -26,6 +27,7 @@ public class ExecuteCommandViaSSH {
     private String SFTPWORKINGDIR;
     private Channel channel = null;
     private Session session= null;
+    private String sudo_pass;
     
     public void CreateConnection() {
     	JSch jSch = new JSch();
@@ -51,15 +53,18 @@ public class ExecuteCommandViaSSH {
         
         }catch(Exception e){
             System.out.println(e);
+            MainWindow.showErrorMessage(e.getMessage());
         }
     }
         
      public void StartCommand(String command){
+    	 
     	 try {
  			channel = session.openChannel("exec");
  		} catch (JSchException e1) {
  			// TODO Auto-generated catch block
  			e1.printStackTrace();
+ 			MainWindow.showErrorMessage(e1.getMessage());
  		}
 
           channel.setInputStream(null);
@@ -77,8 +82,9 @@ public class ExecuteCommandViaSSH {
  		} catch (JSchException e) {
  			// TODO Auto-generated catch block
  			e.printStackTrace();
+ 			MainWindow.showErrorMessage(e.getMessage());
  		}
-          String sudo_pass="Alstom$123";
+          
           out.write((sudo_pass+"\n").getBytes());
           out.flush();
           out.close();
@@ -88,10 +94,12 @@ public class ExecuteCommandViaSSH {
           String theString = writer.toString();
           result=theString;
           System.out.println(result);
+          MainWindow.setMessage("Command was sent: "+command);
           MainWindow.setMessage(result);
  		} catch (IOException e) {
  			// TODO Auto-generated catch block
  			e.printStackTrace();
+ 			MainWindow.showErrorMessage(e.getMessage());
  		}
      } 
      public void CloseConnection(){

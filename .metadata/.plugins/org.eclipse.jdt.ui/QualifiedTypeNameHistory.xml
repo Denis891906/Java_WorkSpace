@@ -11,11 +11,9 @@
 <fullyQualifiedTypeName name="com.gui.GUIEngine"/>
 <fullyQualifiedTypeName name="javax.swing.JButton"/>
 <fullyQualifiedTypeName name="javax.swing.filechooser.FileNameExtensionFilter"/>
-<fullyQualifiedTypeName name="com.gui.MainWindow"/>
 <fullyQualifiedTypeName name="com.gui.Find.Finder"/>
 <fullyQualifiedTypeName name="java.nio.file.Paths"/>
 <fullyQualifiedTypeName name="java.nio.file.Path"/>
-<fullyQualifiedTypeName name="javax.swing.JLabel"/>
 <fullyQualifiedTypeName name="com.ssh_connect.SendFileViaSFTP"/>
 <fullyQualifiedTypeName name="com.jcraft.jsch.SftpProgressMonitor"/>
 <fullyQualifiedTypeName name="javax.swing.ProgressMonitor"/>
@@ -24,4 +22,16 @@
 <fullyQualifiedTypeName name="javax.sql.CommonDataSource"/>
 <fullyQualifiedTypeName name="send_command_thread.executeThread"/>
 <fullyQualifiedTypeName name="com.gui.ExecuteCommandViaSSH"/>
+<fullyQualifiedTypeName name="java.awt.TextArea"/>
+<fullyQualifiedTypeName name="javax.swing.JTextArea"/>
+<fullyQualifiedTypeName name="java.awt.GridBagLayout"/>
+<fullyQualifiedTypeName name="javax.swing.JLabel"/>
+<fullyQualifiedTypeName name="javax.swing.JScrollPane"/>
+<fullyQualifiedTypeName name="java.awt.Component"/>
+<fullyQualifiedTypeName name="java.lang.Runnable"/>
+<fullyQualifiedTypeName name="java.lang.Thread"/>
+<fullyQualifiedTypeName name="com.gui.deployPDC"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="javax.swing.JTextField"/>
+<fullyQualifiedTypeName name="com.gui.MainWindow"/>
 </qualifiedTypeNameHistroy>

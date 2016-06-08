@@ -84,9 +84,12 @@ public class SendFileViaSFTP {
         } catch(JSchException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+            MainWindow.showErrorMessage(e.getMessage()+"\n Verify connection to the host "+SFTPHOST);
+            
         } catch (SftpException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+            MainWindow.showErrorMessage(e.getMessage());
         } /*catch (IOException e) {
             e.printStackTrace();
         }*/ finally{

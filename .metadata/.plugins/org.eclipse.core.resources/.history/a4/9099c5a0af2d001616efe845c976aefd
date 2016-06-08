@@ -1,0 +1,38 @@
+package com.gui;
+
+public class deployPDC implements Runnable {
+	
+	private String externalPpcIP;
+	private String userName;
+	private String keyPath;
+	private String pdcBuildPath; 
+		
+	public deployPDC(String externalPpcIP,String userName,String keyPath,String pdcBuildPath, List<String> commandList) {
+		this.externalPpcIP=externalPpcIP;
+		this.userName=userName;
+		this.keyPath=keyPath;
+		this.pdcBuildPath=pdcBuildPath;
+	}
+	
+	public void run() {
+		//Copy file to PDC VM
+		SendFileViaSFTP sendBuildToPDC=new SendFileViaSFTP(externalPpcIP, userName, keyPath);
+		sendBuildToPDC.SendFile(pdcBuildPath);
+		
+		
+		//Execute commands on the PDC VM
+		ExecuteCommandViaSSH executeCommandOnPDC=new ExecuteCommandViaSSH(externalPpcIP, userName, keyPath);
+		executeCommandOnPDC.CreateConnection();
+		executeCommandOnPDC.StartCommand("ls");
+		executeCommandOnPDC.StartCommand("echo 'Hello1'");
+		executeCommandOnPDC.StartCommand("echo 'Hello2'");
+		executeCommandOnPDC.StartCommand("echo 'Hello3'");
+		
+		//System.out.println("Before Close");
+		executeCommandOnPDC.CloseConnection();
+		
+	}
+	
+	
+
+}
