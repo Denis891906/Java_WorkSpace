@@ -49,9 +49,10 @@ public class SendFileViaSFTP {
         ChannelSftp channelSftp = null;
         try {
             jSch.addIdentity(privateKey);
-            System.out.println("Private Key Added.");
+            //System.out.println("Private Key Added.");
             session = jSch.getSession(SFTPUSER,SFTPHOST,SFTPPORT);
-            System.out.println("session created.");
+            System.out.println("Session for sending file to host "+SFTPHOST+"  was created" );
+            MainWindow.setMessage("Session for sending file to host "+SFTPHOST+"  was created" );
 
             java.util.Properties config = new java.util.Properties();
             config.put("StrictHostKeyChecking", "no");
@@ -60,11 +61,11 @@ public class SendFileViaSFTP {
             channel = session.openChannel("sftp");
             channel.connect();
 
-            System.out.println("shell channel connected....");
+            //System.out.println("shell channel connected....");
             channelSftp = (ChannelSftp)channel;
             channelSftp.cd(SFTPWORKINGDIR);
 
-            System.out.println("Changed the directory to "+channelSftp.pwd());
+            //System.out.println("Changed the directory to "+channelSftp.pwd());
             File f = new File(filePath);
             
             SftpProgressMonitor monitor=new MyProgressMonitor();
@@ -94,7 +95,10 @@ public class SendFileViaSFTP {
                 channelSftp.exit();
             }
             if(channel!=null) channel.disconnect();
-            if(session!=null) session.disconnect();
+            if(session!=null) {session.disconnect();
+            System.out.println("Session for sending file to host: "+SFTPHOST+" was closed");
+            MainWindow.setMessage("Session for sending file to host: "+SFTPHOST+" was closed");
+            }
         }
     }
 }

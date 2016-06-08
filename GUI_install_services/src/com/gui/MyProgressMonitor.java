@@ -21,6 +21,7 @@ public class MyProgressMonitor implements SftpProgressMonitor{
       monitor.setProgress((int)this.count);
       monitor.setMillisToDecideToPopup(1000);*/
       System.out.println("Uploading file ...");
+      MainWindow.setMessage("Uploading file ");
     }
     private long percent=-1;
     public boolean count(long count){
@@ -31,28 +32,40 @@ public class MyProgressMonitor implements SftpProgressMonitor{
       if (percent==0){
     	  
     	  System.out.print("..."+percent+"%");  
+    	  MainWindow.setMessage("..."+percent+"%");
       }else if(percent==10){
     	  System.out.print("..."+percent+"%");
+    	  MainWindow.setMessage("..."+percent+"%");
       }
       else if(percent==20){
     	  System.out.print("..."+percent+"%");
+    	  MainWindow.setMessage("..."+percent+"%");
       }else if(percent==30){
     	  System.out.print("..."+percent+"%");
+    	  MainWindow.setMessage("..."+percent+"%");
       }else if(percent==40){
     	  System.out.print("..."+percent+"%");
+    	  MainWindow.setMessage("..."+percent+"%");
       }else if(percent==50){
     	  System.out.print("..."+percent+"%");
+    	  MainWindow.setMessage("..."+percent+"%");
+    	  
       }else if(percent==60){
     	  System.out.print("..."+percent+"%");
+    	  MainWindow.setMessage("..."+percent+"%");
       }else if(percent==70){
     	  System.out.print("..."+percent+"%");
+    	  MainWindow.setMessage("..."+percent+"%");
       }else if(percent==80){
     	  System.out.print("..."+percent+"%");
+    	  MainWindow.setMessage("..."+percent+"%");
       }
       else if(percent==90){
     	  System.out.print("..."+percent+"%");
+    	  MainWindow.setMessage("..."+percent+"%");
       }else if(percent==100){
     	  System.out.print("..."+percent+"%");
+    	  MainWindow.setMessage("..."+percent+"%");
       }
       
 
@@ -64,6 +77,7 @@ public class MyProgressMonitor implements SftpProgressMonitor{
     }
     public void end(){
     	System.out.println("\nUploading was finished");
+    	MainWindow.setMessage("Uploading was finished");
 //      monitor.close();
     }
   }

@@ -31,19 +31,37 @@ public class GUIEngine implements ActionListener {
 			clickedButton=(JButton) src;
 		}
 		
-		if (clickedButton.getText()=="Install 1"){
-			System.out.println("Button "+clickedButton.getText().toString()+ " was clicked");
-			//parent.ShowWarningDialog("File "+ pdcBuildPath + " was send to VM with IP:"+parent.GetPDCIP());
+		if (clickedButton.getText()=="Install PDC, AppServer, Historian"){
 			
-			SendFileViaSFTP sendBuild=new SendFileViaSFTP(parent.GetPDCIP(), "centos", keyPath);
-			sendBuild.SendFile(pdcBuildPath);
-			//parent.ShowWarningDialog("File "+ pdcBuildPath + " was send to VM with IP:"+parent.GetPDCIP());
-			ExecuteCommandViaSSH executeCommand=new ExecuteCommandViaSSH(parent.GetPDCIP(), "centos", keyPath);
-			executeCommand.CreateConnection();
-			executeCommand.StartCommand("pwd");
-			executeCommand.CloseConnection();
+			//Copy file to PDC VM
+			SendFileViaSFTP sendBuildToPDC=new SendFileViaSFTP(parent.GetExternalPDCIP(), "centos", keyPath);
+			sendBuildToPDC.SendFile(pdcBuildPath);
+			//Execute commands on the PDC VM
+			ExecuteCommandViaSSH executeCommandOnPDC=new ExecuteCommandViaSSH(parent.GetExternalPDCIP(), "centos", keyPath);
+			executeCommandOnPDC.CreateConnection();
+			executeCommandOnPDC.StartCommand("ls");
+			//System.out.println("Before Close");
+			executeCommandOnPDC.CloseConnection();
 			
+			//Copy file to the AppServer VM
+			SendFileViaSFTP sendBuildToApp=new SendFileViaSFTP(parent.GetExternalAppServerIP(), "centos", keyPath);
+			sendBuildToApp.SendFile(appServerBuildPath);
 			
+			//Execute commands on the AppServer VM
+			ExecuteCommandViaSSH executeCommandOnApp=new ExecuteCommandViaSSH(parent.GetExternalAppServerIP(), "centos", keyPath);
+			executeCommandOnApp.CreateConnection();
+			executeCommandOnApp.StartCommand("pwd");
+			executeCommandOnApp.CloseConnection();
+					
+			//Copy file to the Historian VM
+			SendFileViaSFTP sendBuildToHist=new SendFileViaSFTP(parent.GetExternalHistorianIP(), "centos", keyPath);
+			sendBuildToHist.SendFile(historianBuildPath);
+			//Execute commands on the Historian VM
+			ExecuteCommandViaSSH executeCommandOnHist=new ExecuteCommandViaSSH(parent.GetExternalHistorianIP(), "centos", keyPath);
+			executeCommandOnHist.CreateConnection();
+			executeCommandOnHist.StartCommand("pwd");
+			executeCommandOnHist.CloseConnection();
+			parent.pack();
 		}else if(clickedButton.getText()=="Select Build Folder"){
 			
 			JFileChooser chooser;	         
@@ -86,15 +104,7 @@ public class GUIEngine implements ActionListener {
 		    	  
 		      }
 		      
-
 		      parent.pack();
-		      
-		      
-		      
-		      
-		      
-		      
-		      
 		      }
 		    else {
 		      System.out.println("No Selection ");

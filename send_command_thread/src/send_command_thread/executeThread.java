@@ -93,6 +93,7 @@ public class executeThread {
      public void CloseConnection(){
     	 channel.disconnect();
          session.disconnect();
+         System.out.println("Finish");
 		}
 
 }

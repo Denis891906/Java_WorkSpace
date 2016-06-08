@@ -16,7 +16,7 @@ public class test {
 	run.StartCommand("pwd");
 	System.out.println("I executed the 2 command:");
 	run.StartCommand("ls -la");
-	System.out.println("I executed the 3 command:");
+	/*System.out.println("I executed the 3 command:");
 	run.StartCommand("ls /etc/phasorpoint-pdc/");
 	System.out.println("I executed the 4 command:");
 	run.StartCommand("cat /etc/phasorpoint-pdc/security.properties");
@@ -28,7 +28,7 @@ public class test {
 	
 	System.out.println("I executed the 6 command:");
 	run.StartCommand("grep -e 'authentication group'  /etc/phasorpoint-pdc/security.properties");
-	
+	*/
 	
 	run.CloseConnection();	
 		
