@@ -24,8 +24,8 @@ public class GUIEngine implements ActionListener {
 	String [] pdcCommands={"echo Hello 1",
 			"cat /etc/phasorpoint-pdc/security.properties",
 			"sudo service phasorpoint-pdc restart"};
-	String [] appServerCommands={"echo Hello 1"};
-	String [] historainCommands={"echo Hello 1"};
+	String [] appServerCommands={"echo Hello 2"};
+	String [] historainCommands={"echo Hello 3"};
 	
 	
 	GUIEngine(MainWindow parent){
@@ -43,26 +43,39 @@ public class GUIEngine implements ActionListener {
 		if (clickedButton.getText()=="Install PDC, AppServer, Historian"){
 			//PDC Installation
 			System.out.println("Installetion process for PDC with external IP "+parent.GetExternalPDCIP());	
-			Thread pdcInstall=new Thread(new deployService(parent.GetExternalPDCIP(), parent.getUserName(), parent.getSudoPassword() ,keyPath, pdcBuildPath,pdcCommands));
+			Thread pdcInstall=new Thread(new deployService(parent.GetExternalPDCIP(), parent.getUserName(), parent.getSudoPassword() ,keyPath, pdcBuildPath,"pdc" ,pdcCommands));
 			pdcInstall.start();
 			
 			//AppServer Installation
 			System.out.println("Installetion process for AppServer with external IP "+parent.GetExternalAppServerIP());	
-			Thread appServerInstall=new Thread(new deployService(parent.GetExternalAppServerIP(), parent.getUserName(), parent.getSudoPassword(), keyPath, appServerBuildPath,appServerCommands));
+			Thread appServerInstall=new Thread(new deployService(parent.GetExternalAppServerIP(), parent.getUserName(), parent.getSudoPassword(), keyPath, appServerBuildPath,"app",appServerCommands));
 			appServerInstall.start();
 			
 			//Historian Installation
 			System.out.println("Installetion process for Historian with external IP "+parent.GetExternalHistorianIP());	
-			Thread histServerInstall=new Thread(new deployService(parent.GetExternalHistorianIP(), parent.getUserName(), parent.getSudoPassword(), keyPath, historianBuildPath,historainCommands));
+			Thread histServerInstall=new Thread(new deployService(parent.GetExternalHistorianIP(), parent.getUserName(), parent.getSudoPassword(), keyPath, historianBuildPath,"hist",historainCommands));
 			histServerInstall.start();
 			
 		
 		
 			parent.pack();
 		}else if (clickedButton.getText()=="Reinstall Three Services"){
-			MainWindow.setMessage("Button "+clickedButton.getText()+" was clicked");
-			//parent.setMessage("Button "+clickedButton.getText()+" was clicked");
-			//JOptionPane.showMessageDialog(new JFrame(), "My text", "Execption dialog", JOptionPane.ERROR_MESSAGE);
+			
+			
+			/*//PDC Installation
+			System.out.println("Installetion process for PDC with external IP "+parent.GetExternalPDCIP());	
+			Thread pdcInstall=new Thread(new deployService(parent.GetExternalPDCIP(), parent.getUserName(), parent.getSudoPassword() ,keyPath, pdcBuildPath,"pdc" ,pdcCommands));
+			pdcInstall.start();
+			
+			//AppServer Installation
+			System.out.println("Installetion process for AppServer with external IP "+parent.GetExternalAppServerIP());	
+			Thread appServerInstall=new Thread(new deployService(parent.GetExternalAppServerIP(), parent.getUserName(), parent.getSudoPassword(), keyPath, appServerBuildPath,"app",appServerCommands));
+			appServerInstall.start();
+			
+			//Historian Installation
+			System.out.println("Installetion process for Historian with external IP "+parent.GetExternalHistorianIP());	
+			Thread histServerInstall=new Thread(new deployService(parent.GetExternalHistorianIP(), parent.getUserName(), parent.getSudoPassword(), keyPath, historianBuildPath,"hist",historainCommands));
+			histServerInstall.start();*/
 			
 		}else if(clickedButton.getText()=="Select Build Folder"){
 			

@@ -6,7 +6,9 @@ import com.jcraft.jsch.SftpProgressMonitor;
 
 public class MyProgressMonitor implements SftpProgressMonitor{
 	
-	
+	MyProgressMonitor(String serverType){
+		this.serverType=serverType;
+	}
 	//ProgressMonitor monitor;
     long count=0;
     long max=0;
@@ -21,9 +23,10 @@ public class MyProgressMonitor implements SftpProgressMonitor{
       monitor.setProgress((int)this.count);
       monitor.setMillisToDecideToPopup(1000);*/
       System.out.println("Uploading file ...");
-      MainWindow.setMessage("Uploading file ");
+      MainWindow.setMessage("Uploading file ",serverType);
     }
     private long percent=-1;
+    private String serverType;
     public boolean count(long count){
       this.count+=count;
 
@@ -32,40 +35,40 @@ public class MyProgressMonitor implements SftpProgressMonitor{
       if (percent==0){
     	  
     	  System.out.print("..."+percent+"%");  
-    	  MainWindow.setMessage("..."+percent+"%");
+    	  MainWindow.setMessage("..."+percent+"%",serverType);
       }else if(percent==10){
     	  System.out.print("..."+percent+"%");
-    	  MainWindow.setProgressMessage("..."+percent+"%");
+    	  MainWindow.setProgressMessage("..."+percent+"%",serverType);
       }
       else if(percent==20){
     	  System.out.print("..."+percent+"%");
-    	  MainWindow.setProgressMessage("..."+percent+"%");
+    	  MainWindow.setProgressMessage("..."+percent+"%",serverType);
       }else if(percent==30){
     	  System.out.print("..."+percent+"%");
-    	  MainWindow.setProgressMessage("..."+percent+"%");
+    	  MainWindow.setProgressMessage("..."+percent+"%",serverType);
       }else if(percent==40){
     	  System.out.print("..."+percent+"%");
-    	  MainWindow.setProgressMessage("..."+percent+"%");
+    	  MainWindow.setProgressMessage("..."+percent+"%",serverType);
       }else if(percent==50){
     	  System.out.print("..."+percent+"%");
-    	  MainWindow.setProgressMessage("..."+percent+"%");
+    	  MainWindow.setProgressMessage("..."+percent+"%",serverType);
     	  
       }else if(percent==60){
     	  System.out.print("..."+percent+"%");
-    	  MainWindow.setProgressMessage("..."+percent+"%");
+    	  MainWindow.setProgressMessage("..."+percent+"%",serverType);
       }else if(percent==70){
     	  System.out.print("..."+percent+"%");
-    	  MainWindow.setProgressMessage("..."+percent+"%");
+    	  MainWindow.setProgressMessage("..."+percent+"%",serverType);
       }else if(percent==80){
     	  System.out.print("..."+percent+"%");
-    	  MainWindow.setProgressMessage("..."+percent+"%");
+    	  MainWindow.setProgressMessage("..."+percent+"%",serverType);
       }
       else if(percent==90){
     	  System.out.print("..."+percent+"%");
-    	  MainWindow.setProgressMessage("..."+percent+"%");
+    	  MainWindow.setProgressMessage("..."+percent+"%",serverType);
       }else if(percent==100){
     	  System.out.print("..."+percent+"%");
-    	  MainWindow.setProgressMessage("..."+percent+"%");
+    	  MainWindow.setProgressMessage("..."+percent+"%",serverType);
       }
       
 
@@ -77,7 +80,7 @@ public class MyProgressMonitor implements SftpProgressMonitor{
     }
     public void end(){
     	System.out.println("\nUploading was finished");
-    	MainWindow.setMessage("Uploading was finished");
+    	MainWindow.setMessage("Uploading was finished",serverType);
 //      monitor.close();
     }
   }

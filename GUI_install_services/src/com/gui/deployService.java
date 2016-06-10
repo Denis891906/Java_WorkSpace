@@ -10,35 +10,37 @@ public class deployService implements Runnable {
 	private String pdcBuildPath; 
 	String[] commandList;
 	private String sudoPassword;
+	private String serverType;
 		
-	public deployService(String externalPpcIP,String userName,String sudoPassword,String keyPath,String pdcBuildPath, String[] commandList) {
+	public deployService(String externalPpcIP,String userName,String sudoPassword,String keyPath,String pdcBuildPath, String serverType, String[] commandList) {
 		this.externalPpcIP=externalPpcIP;
 		this.userName=userName;
 		this.keyPath=keyPath;
 		this.pdcBuildPath=pdcBuildPath;
 		this.commandList=commandList;
 		this.sudoPassword=sudoPassword;
+		this.serverType=serverType;
 	}
 	
 	public void run() {
-		//Copy file to PDC VM
-		SendFileViaSFTP sendBuildToPDC=new SendFileViaSFTP(externalPpcIP, userName, keyPath);
-		sendBuildToPDC.SendFile(pdcBuildPath);
+		//Copy file to VM
+		SendFileViaSFTP sendBuildToVM=new SendFileViaSFTP(externalPpcIP, userName, keyPath,serverType);
+		sendBuildToVM.SendFile(pdcBuildPath);
 		
 		
-		//Execute commands on the PDC VM
-		ExecuteCommandViaSSH executeCommandOnPDC=new ExecuteCommandViaSSH(externalPpcIP, userName, keyPath,sudoPassword);
-		executeCommandOnPDC.CreateConnection();
+		//Execute commands on the VM
+		ExecuteCommandViaSSH executeCommandOnVM=new ExecuteCommandViaSSH(externalPpcIP, userName, keyPath,sudoPassword,serverType);
+		executeCommandOnVM.CreateConnection();
 		
 		for (int i=0; i< this.commandList.length; i++){
-			executeCommandOnPDC.StartCommand(this.commandList[i]);	
+			executeCommandOnVM.StartCommand(this.commandList[i]);	
 			
 		}
 		
 		
 		
 		//System.out.println("Before Close");
-		executeCommandOnPDC.CloseConnection();
+		executeCommandOnVM.CloseConnection();
 		
 	}
 	

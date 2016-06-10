@@ -1,0 +1,47 @@
+package com.gui;
+
+import java.util.List;
+
+public class deployService implements Runnable {
+	
+	private String externalPpcIP;
+	private String userName;
+	private String keyPath;
+	private String pdcBuildPath; 
+	String[] commandList;
+	private String sudoPassword;
+		
+	public deployService(String externalPpcIP,String userName,String sudoPassword,String keyPath,String pdcBuildPath, String[] commandList) {
+		this.externalPpcIP=externalPpcIP;
+		this.userName=userName;
+		this.keyPath=keyPath;
+		this.pdcBuildPath=pdcBuildPath;
+		this.commandList=commandList;
+		this.sudoPassword=sudoPassword;
+	}
+	
+	public void run() {
+		//Copy file to VM
+		SendFileViaSFTP sendBuildToVM=new SendFileViaSFTP(externalPpcIP, userName, keyPath);
+		sendBuildToVM.SendFile(pdcBuildPath);
+		
+		
+		//Execute commands on the VM
+		ExecuteCommandViaSSH executeCommandOnVM=new ExecuteCommandViaSSH(externalPpcIP, userName, keyPath,sudoPassword,"pdc");
+		executeCommandOnVM.CreateConnection();
+		
+		for (int i=0; i< this.commandList.length; i++){
+			executeCommandOnVM.StartCommand(this.commandList[i]);	
+			
+		}
+		
+		
+		
+		//System.out.println("Before Close");
+		executeCommandOnPDC.CloseConnection();
+		
+	}
+	
+	
+
+}

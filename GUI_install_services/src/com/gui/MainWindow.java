@@ -23,7 +23,9 @@ public class MainWindow extends JFrame{
 	public JLabel buildHistoranPathLable2;
 	private JTextField internalPdcIPText;
 	private JTextField externalPdcIPText;
-	private static JTextArea textArea;
+	private static JTextArea pdcTextArea;
+	private static JTextArea appServerTextArea;
+	private static JTextArea histTextArea;
 	private JTextField internalAppIPText;
 	private JTextField externalAppIPText;
 	private JTextField internalHistIPText;
@@ -32,11 +34,23 @@ public class MainWindow extends JFrame{
 	private JTextField usernameText;
 	private JTextField sudoPasswordText;
 	
-	public static void setMessage(String text){
-		textArea.setText(textArea.getText()+"\n"+text);
+	public static void setMessage(String text,String serverType){
+		if (serverType=="pdc"){
+		pdcTextArea.setText(pdcTextArea.getText()+"\n"+text);
+		}else if(serverType=="app"){
+			appServerTextArea.setText(appServerTextArea.getText()+"\n"+text);
+		}else if (serverType=="hist"){
+			histTextArea.setText(histTextArea.getText()+"\n"+text);
+		}
 	}
-	public static void setProgressMessage(String text){
-		textArea.setText(textArea.getText()+text);
+	public static void setProgressMessage(String text,String serverType){
+		if (serverType=="pdc"){
+			pdcTextArea.setText(pdcTextArea.getText()+text);
+			}else if(serverType=="app"){
+				appServerTextArea.setText(appServerTextArea.getText()+text);
+			}else if (serverType=="hist"){
+				histTextArea.setText(histTextArea.getText()+text);
+			}
 	}
 	public static void showErrorMessage(String text){
 		JOptionPane.showMessageDialog(new JFrame(), text, "Execption dialog", JOptionPane.ERROR_MESSAGE);
@@ -112,18 +126,43 @@ public class MainWindow extends JFrame{
         JButton selectBuildFolderButton=new JButton("Select Build Folder");
         JButton selectKeyFileButton=new JButton("Select Key File");
         
+        pdcTextArea = new JTextArea(23,65);
+        pdcTextArea.isMaximumSizeSet();
+        pdcTextArea.setEditable(false);
+        
+        appServerTextArea = new JTextArea(23,65);
+        appServerTextArea.isMaximumSizeSet();
+        appServerTextArea.setEditable(false);
+        
+        histTextArea = new JTextArea(23,65);
+        histTextArea.isMaximumSizeSet();
+        histTextArea.setEditable(false);
+        
+        JTabbedPane tabPanel = new JTabbedPane();
+        
+        JPanel pdcTab = new JPanel();
+        JPanel appTab = new JPanel();
+        JPanel histTab = new JPanel();
+        
+        JScrollPane pdcScrollPane=new JScrollPane(pdcTextArea);
+        JScrollPane appServerScrollPane=new JScrollPane(appServerTextArea);
+        JScrollPane histScrollPane=new JScrollPane(histTextArea);
+        tabPanel.add("PDC logs", pdcScrollPane);
+        tabPanel.add("AppServer logs", appServerScrollPane);
+        tabPanel.add("Historian logs", histScrollPane);
+        
+       
+
         
         
-        
+       
         
         
         
         
         //
         
-        textArea = new JTextArea(23,1);
-        textArea.isMaximumSizeSet();
-        textArea.setEditable(false);
+       
         //PrintStream printStream = new PrintStream(new CustomOutputStream(textArea));
          
         // keeps reference of standard output stream
@@ -337,9 +376,9 @@ public class MainWindow extends JFrame{
         //c.ipady=10;
         //c.weighty=22;
         //c.anchor=GridBagConstraints.CENTER;
-       JScrollPane pane=new JScrollPane(textArea);
+       
        //pane.setPreferredSize(getMaximumSize());
-        this.add(pane, c);
+        this.add(tabPanel, c);
         
         
         
@@ -394,6 +433,15 @@ public class MainWindow extends JFrame{
 		return sudoPasswordText.getText();
 		
 	}
+	
+	public void clearTextAreas(){
+		pdcTextArea.setText("");
+		appServerTextArea.setText("");
+		histTextArea.setText("");
+	}
+	
+	
+	
 	
     public static void main(String[] args)
     {

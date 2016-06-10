@@ -19,7 +19,7 @@ public class SendFileViaSFTP {
     this.SFTPWORKINGDIR = "/home/centos/";
 }
 
-    public SendFileViaSFTP(String remoteHost, String remoteUser, String privateKeyPath) {
+    public SendFileViaSFTP(String remoteHost, String remoteUser, String privateKeyPath,String serverType) {
             this.SFTPHOST = remoteHost;
             this.SFTPPORT = 22;
             this.SFTPUSER =remoteUser;
@@ -28,6 +28,7 @@ public class SendFileViaSFTP {
             this.SFTPWORKINGDIR = "/home/"+remoteUser+"/";
             //File myFile = new File("E:\\denys_key.pem");
             //this.fileStream = null;
+            this.serverType=serverType;
 
     }
     private String SFTPHOST;
@@ -35,6 +36,7 @@ public class SendFileViaSFTP {
     private  String SFTPUSER;
     private String privateKey;
     private String SFTPWORKINGDIR;
+    private String serverType;
 
 
 
@@ -52,7 +54,7 @@ public class SendFileViaSFTP {
             //System.out.println("Private Key Added.");
             session = jSch.getSession(SFTPUSER,SFTPHOST,SFTPPORT);
             System.out.println("Session for sending file to host "+SFTPHOST+"  was created" );
-            MainWindow.setMessage("Session for sending file to host "+SFTPHOST+"  was created" );
+            MainWindow.setMessage("Session for sending file to host "+SFTPHOST+"  was created",serverType );
 
             java.util.Properties config = new java.util.Properties();
             config.put("StrictHostKeyChecking", "no");
@@ -68,7 +70,7 @@ public class SendFileViaSFTP {
             //System.out.println("Changed the directory to "+channelSftp.pwd());
             File f = new File(filePath);
             
-            SftpProgressMonitor monitor=new MyProgressMonitor();
+            SftpProgressMonitor monitor=new MyProgressMonitor(serverType);
           
             		
            // channelSftp.put(new FileInputStream(f), f.getName(),monitor);
@@ -100,7 +102,7 @@ public class SendFileViaSFTP {
             if(channel!=null) channel.disconnect();
             if(session!=null) {session.disconnect();
             System.out.println("Session for sending file to host: "+SFTPHOST+" was closed");
-            MainWindow.setMessage("Session for sending file to host: "+SFTPHOST+" was closed");
+            MainWindow.setMessage("Session for sending file to host: "+SFTPHOST+" was closed",serverType);
             }
         }
     }
