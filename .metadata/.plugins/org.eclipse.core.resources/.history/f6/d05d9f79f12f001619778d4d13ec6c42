@@ -9,6 +9,8 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.gui.Find.Finder;
@@ -22,8 +24,12 @@ public class GUIEngine implements ActionListener {
 	String [] pdcCommands={"echo Hello 1",
 			"cat /etc/phasorpoint-pdc/security.properties",
 			"sudo service phasorpoint-pdc restart"};
-	String [] appServerCommands={"echo Hello 1"};
-	String [] historainCommands={"echo Hello 1"};
+	String [] appServerCommands={"echo Hello 2"};
+	String [] historainCommands={"echo Hello 3"};
+	
+	String[] pdcRemoveCommands={"echo Hellow 1","echo command 2","echo Hey Guys"};
+	String[] appServerRemoveCommands={"echo Hellow 2"};
+	String[] histRemoveCommands={"echo Hellow 3"};
 	
 	
 	GUIEngine(MainWindow parent){
@@ -41,22 +47,46 @@ public class GUIEngine implements ActionListener {
 		if (clickedButton.getText()=="Install PDC, AppServer, Historian"){
 			//PDC Installation
 			System.out.println("Installetion process for PDC with external IP "+parent.GetExternalPDCIP());	
-			Thread pdcInstall=new Thread(new deployService(parent.GetExternalPDCIP(), "centos", keyPath, pdcBuildPath,pdcCommands));
+			Thread pdcInstall=new Thread(new deployService(parent.GetExternalPDCIP(), parent.getUserName(), parent.getSudoPassword() ,keyPath, pdcBuildPath,"pdc" ,pdcCommands));
 			pdcInstall.start();
 			
 			//AppServer Installation
 			System.out.println("Installetion process for AppServer with external IP "+parent.GetExternalAppServerIP());	
-			Thread appServerInstall=new Thread(new deployService(parent.GetExternalAppServerIP(), "centos", keyPath, appServerBuildPath,appServerCommands));
+			Thread appServerInstall=new Thread(new deployService(parent.GetExternalAppServerIP(), parent.getUserName(), parent.getSudoPassword(), keyPath, appServerBuildPath,"app",appServerCommands));
 			appServerInstall.start();
 			
 			//Historian Installation
 			System.out.println("Installetion process for Historian with external IP "+parent.GetExternalHistorianIP());	
-			Thread histServerInstall=new Thread(new deployService(parent.GetExternalHistorianIP(), "centos", keyPath, historianBuildPath,historainCommands));
+			Thread histServerInstall=new Thread(new deployService(parent.GetExternalHistorianIP(), parent.getUserName(), parent.getSudoPassword(), keyPath, historianBuildPath,"hist",historainCommands));
 			histServerInstall.start();
 			
 		
 		
 			parent.pack();
+		}else if (clickedButton.getText()=="Reinstall Three Services"){
+			
+			
+			ExecuteCommandViaSSH pdcRemove=new ExecuteCommandViaSSH(parent.GetExternalPDCIP(), parent.getUserName(), keyPath, parent.getSudoPassword(), "pdc");
+			pdcRemove.CreateConnection();
+			pdcRemove.StartCommand(pdcRemoveCommands);
+			pdcRemove.CloseConnection();
+			
+			
+			/*//PDC Installation
+			System.out.println("Installetion process for PDC with external IP "+parent.GetExternalPDCIP());	
+			
+			pdcInstall.start();
+			
+			//AppServer Installation
+			System.out.println("Installetion process for AppServer with external IP "+parent.GetExternalAppServerIP());	
+			Thread appServerInstall=new Thread(new deployService(parent.GetExternalAppServerIP(), parent.getUserName(), parent.getSudoPassword(), keyPath, appServerBuildPath,"app",appServerCommands));
+			appServerInstall.start();
+			
+			//Historian Installation
+			System.out.println("Installetion process for Historian with external IP "+parent.GetExternalHistorianIP());	
+			Thread histServerInstall=new Thread(new deployService(parent.GetExternalHistorianIP(), parent.getUserName(), parent.getSudoPassword(), keyPath, historianBuildPath,"hist",historainCommands));
+			histServerInstall.start();*/
+			
 		}else if(clickedButton.getText()=="Select Build Folder"){
 			
 			JFileChooser chooser;	         
@@ -126,4 +156,5 @@ public class GUIEngine implements ActionListener {
 		
 	}
 	}
+
 

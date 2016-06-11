@@ -27,6 +27,10 @@ public class GUIEngine implements ActionListener {
 	String [] appServerCommands={"echo Hello 2"};
 	String [] historainCommands={"echo Hello 3"};
 	
+	String[] pdcRemoveCommands={"echo Reinstall command"};
+	String[] appServerRemoveCommands={"echo Reinstall command"};
+	String[] histRemoveCommands={"echo Reinstall command"};
+	
 	
 	GUIEngine(MainWindow parent){
 		 this.parent = parent;
@@ -60,22 +64,46 @@ public class GUIEngine implements ActionListener {
 		
 			parent.pack();
 		}else if (clickedButton.getText()=="Reinstall Three Services"){
+			parent.clearTextAreas();
 			
 			
-			/*//PDC Installation
+			//Execute remove commands in the PDC VM
+			ExecuteCommandViaSSH pdcRemove=new ExecuteCommandViaSSH(parent.GetExternalPDCIP(), parent.getUserName(), keyPath, parent.getSudoPassword(), "pdc");
+			pdcRemove.CreateConnection();
+			pdcRemove.StartCommand(pdcRemoveCommands);
+			pdcRemove.CloseConnection();
+			
+			//PDC Installation
 			System.out.println("Installetion process for PDC with external IP "+parent.GetExternalPDCIP());	
 			Thread pdcInstall=new Thread(new deployService(parent.GetExternalPDCIP(), parent.getUserName(), parent.getSudoPassword() ,keyPath, pdcBuildPath,"pdc" ,pdcCommands));
 			pdcInstall.start();
+			
+			//Execute remove commands in the AppServer VM
+			ExecuteCommandViaSSH appRemove=new ExecuteCommandViaSSH(parent.GetExternalAppServerIP(), parent.getUserName(), keyPath, parent.getSudoPassword(), "app");
+			appRemove.CreateConnection();
+			appRemove.StartCommand(appServerRemoveCommands);
+			appRemove.CloseConnection();
 			
 			//AppServer Installation
 			System.out.println("Installetion process for AppServer with external IP "+parent.GetExternalAppServerIP());	
 			Thread appServerInstall=new Thread(new deployService(parent.GetExternalAppServerIP(), parent.getUserName(), parent.getSudoPassword(), keyPath, appServerBuildPath,"app",appServerCommands));
 			appServerInstall.start();
 			
+			//Execute remove commands in the Historian VM
+			ExecuteCommandViaSSH histRemove=new ExecuteCommandViaSSH(parent.GetExternalHistorianIP(), parent.getUserName(), keyPath, parent.getSudoPassword(), "hist");
+			histRemove.CreateConnection();
+			histRemove.StartCommand(histRemoveCommands);
+			histRemove.CloseConnection();
+					
 			//Historian Installation
 			System.out.println("Installetion process for Historian with external IP "+parent.GetExternalHistorianIP());	
 			Thread histServerInstall=new Thread(new deployService(parent.GetExternalHistorianIP(), parent.getUserName(), parent.getSudoPassword(), keyPath, historianBuildPath,"hist",historainCommands));
-			histServerInstall.start();*/
+			histServerInstall.start();
+			
+			
+			
+			
+			
 			
 		}else if(clickedButton.getText()=="Select Build Folder"){
 			
@@ -146,4 +174,5 @@ public class GUIEngine implements ActionListener {
 		
 	}
 	}
+
 

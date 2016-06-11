@@ -61,6 +61,7 @@ public class MainWindow extends JFrame{
 		
 		
 		setSize(950, 1500);
+		setTitle("Install tool v 0.1");
 		
 		GridBagLayout gridbag = new GridBagLayout();
         GridBagConstraints c = new GridBagConstraints();

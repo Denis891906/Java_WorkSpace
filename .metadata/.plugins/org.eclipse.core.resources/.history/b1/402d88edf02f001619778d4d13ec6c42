@@ -120,56 +120,6 @@ public class ExecuteCommandViaSSH {
  			MainWindow.showErrorMessage(e.getMessage());
  		}
      } 
-     
-     
- public void StartCommand(String[] commands){
-    	 for (int i=0; i<commands.length;i++){
-    	 try {
- 			channel = session.openChannel("exec");
- 		} catch (JSchException e1) {
- 			// TODO Auto-generated catch block
- 			e1.printStackTrace();
- 			MainWindow.showErrorMessage(e1.getMessage());
- 		}
-
-          channel.setInputStream(null);
-     	 String result=" ";
-     	 ((ChannelExec)channel).setCommand("sudo -S -p '' "+ commands[i]);
-          ((ChannelExec)channel).setErrStream(System.err);
-          InputStream in;
- 		try {
- 			in = channel.getInputStream();
- 		
-          OutputStream out=channel.getOutputStream();
-          ((ChannelExec)channel).setPty(true);
-          try {
- 			channel.connect();
- 		} catch (JSchException e) {
- 			// TODO Auto-generated catch block
- 			e.printStackTrace();
- 			MainWindow.showErrorMessage(e.getMessage());
- 		}
-          
-          out.write((sudo_pass+"\n").getBytes());
-          out.flush();
-          out.close();
-
-          StringWriter writer = new StringWriter();
-          IOUtils.copy(in, writer);
-          String theString = writer.toString();
-          result=theString;
-          System.out.println(result);
-          MainWindow.setMessage("Command was sent: "+commands[i],serverType);
-          MainWindow.setMessage(result,serverType);
- 		} catch (IOException e) {
- 			// TODO Auto-generated catch block
- 			e.printStackTrace();
- 			MainWindow.showErrorMessage(e.getMessage());
- 		}
-    	 }
-     } 
-     
-     
      public void CloseConnection(){
     	 channel.disconnect();
          session.disconnect();
