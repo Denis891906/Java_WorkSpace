@@ -86,12 +86,29 @@ public class SendFileViaSFTP {
         } catch(JSchException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-            MainWindow.showErrorMessage(e.getMessage()+"\n Verify connection to the host "+SFTPHOST);
             
+            if (e.getMessage().toString().contains("java.net.UnknownHostException:")){
+            	MainWindow.showErrorMessage(e.getMessage().toString()+"\n Verify connection to the host "+SFTPHOST);
+            }else if (e.getMessage().toString()=="Auth fail"){
+            	 MainWindow.showErrorMessage(e.getMessage()+"\n Username is wrong");
+            }else if (e.getMessage().toString().contains("invalid privatekey")){
+            	MainWindow.showErrorMessage(e.getMessage().toString()+"\n Authentication key (.pem file) is wrong");
+            }else if(e.getMessage().toString().contains("Software caused connection abort: recv failed")){
+            	MainWindow.showErrorMessage("Connection with "+this.SFTPHOST+" was interrapted \n "+e.getMessage().toString());
+            }else{
+            	MainWindow.showErrorMessage(e.getMessage().toString());
+            }
+            
+            System.out.println("Error is "+e.getMessage().toString());
         } catch (SftpException e) {
             // TODO Auto-generated catch block
+        	
             e.printStackTrace();
-            MainWindow.showErrorMessage(e.getMessage());
+            if (e.getMessage().toString().contains("Connection reset by peer: socket write error")){
+            	MainWindow.showErrorMessage("Connection with host"+this.SFTPHOST+" was interupted \n "+e.getMessage().toString());
+            }else{
+            	MainWindow.showErrorMessage("Hello "+e.getMessage().toString());
+            }
         } /*catch (IOException e) {
             e.printStackTrace();
         }*/ finally{

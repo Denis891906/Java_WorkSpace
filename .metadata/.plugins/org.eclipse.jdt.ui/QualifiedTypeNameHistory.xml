@@ -32,7 +32,7 @@
 <fullyQualifiedTypeName name="javax.swing.JTextField"/>
 <fullyQualifiedTypeName name="javax.swing.JButton"/>
 <fullyQualifiedTypeName name="java.awt.ComponentOrientation"/>
-<fullyQualifiedTypeName name="com.gui.MainWindow"/>
 <fullyQualifiedTypeName name="java.lang.Thread"/>
 <fullyQualifiedTypeName name="com.gui.ExecuteCommandViaSSH"/>
+<fullyQualifiedTypeName name="com.gui.MainWindow"/>
 </qualifiedTypeNameHistroy>

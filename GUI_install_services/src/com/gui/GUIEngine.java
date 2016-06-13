@@ -17,9 +17,9 @@ import com.gui.Find.Finder;
 
 public class GUIEngine implements ActionListener {
 	MainWindow parent;
-	String pdcBuildPath;
-	String appServerBuildPath;
-	String historianBuildPath;
+	String pdcBuildPath=null;
+	String appServerBuildPath=null;
+	String historianBuildPath=null;
 	String keyPath;
 	String [] pdcCommands={"echo Hello 1",
 			"cat /etc/phasorpoint-pdc/security.properties",
@@ -45,6 +45,29 @@ public class GUIEngine implements ActionListener {
 		}
 		
 		if (clickedButton.getText()=="Install PDC, AppServer, Historian"){
+			//Verifications that all data were entered.
+			if(keyPath==null){
+				parent.ShowWarningDialog("Please select key file.");
+			}else if(parent.GetInternalPDCIP().toString().isEmpty()){
+				parent.ShowWarningDialog("Please eneter Internal PDC IP.");
+			}else if(parent.GetExternalPDCIP().toString().isEmpty()){
+				parent.ShowWarningDialog("Please eneter External PDC IP.");
+			}else if(parent.GetInternalAppServerIP().toString().isEmpty()){
+				parent.ShowWarningDialog("Please eneter Internal AppServer IP.");
+			}else if(parent.GetExternalAppServerIP().toString().isEmpty()){
+				parent.ShowWarningDialog("Please eneter External AppServer IP.");
+			}else if(parent.GetInternalHistorianIP().toString().isEmpty()){
+				parent.ShowWarningDialog("Please eneter Internal Historian IP.");
+			}else if(parent.GetExternalHistorianIP().toString().isEmpty()){
+				parent.ShowWarningDialog("Please eneter External Historian IP.");
+			}else if(parent.GetBuildPath().toString().isEmpty()){
+				parent.ShowWarningDialog("Please select folder with URTDSM build.");
+			}else if(parent.getSudoPassword().toString().isEmpty()){
+				parent.ShowWarningDialog("Please enter 'sudo' password for VM's.");
+			}else if(parent.getUserName().toString().isEmpty()){
+				parent.ShowWarningDialog("Please enter user name.");
+			}else{
+						
 			//PDC Installation
 			System.out.println("Installetion process for PDC with external IP "+parent.GetExternalPDCIP());	
 			Thread pdcInstall=new Thread(new deployService(parent.GetExternalPDCIP(), parent.getUserName(), parent.getSudoPassword() ,keyPath, pdcBuildPath,"pdc" ,pdcCommands));
@@ -59,13 +82,35 @@ public class GUIEngine implements ActionListener {
 			System.out.println("Installetion process for Historian with external IP "+parent.GetExternalHistorianIP());	
 			Thread histServerInstall=new Thread(new deployService(parent.GetExternalHistorianIP(), parent.getUserName(), parent.getSudoPassword(), keyPath, historianBuildPath,"hist",historainCommands));
 			histServerInstall.start();
-			
-		
-		
+					
 			parent.pack();
+			}
 		}else if (clickedButton.getText()=="Reinstall Three Services"){
-			parent.clearTextAreas();
 			
+			//Verifications that all data were entered.
+			if(keyPath==null){
+				parent.ShowWarningDialog("Please select key file.");
+			}else if(parent.GetInternalPDCIP().toString().isEmpty()){
+				parent.ShowWarningDialog("Please eneter Internal PDC IP.");
+			}else if(parent.GetExternalPDCIP().toString().isEmpty()){
+				parent.ShowWarningDialog("Please eneter External PDC IP.");
+			}else if(parent.GetInternalAppServerIP().toString().isEmpty()){
+				parent.ShowWarningDialog("Please eneter Internal AppServer IP.");
+			}else if(parent.GetExternalAppServerIP().toString().isEmpty()){
+				parent.ShowWarningDialog("Please eneter External AppServer IP.");
+			}else if(parent.GetInternalHistorianIP().toString().isEmpty()){
+				parent.ShowWarningDialog("Please eneter Internal Historian IP.");
+			}else if(parent.GetExternalHistorianIP().toString().isEmpty()){
+				parent.ShowWarningDialog("Please eneter External Historian IP.");
+			}else if(parent.GetBuildPath().toString().isEmpty()){
+				parent.ShowWarningDialog("Please select folder with URTDSM build.");
+			}else if(parent.getSudoPassword().toString().isEmpty()){
+				parent.ShowWarningDialog("Please enter 'sudo' password for VM's.");
+			}else if(parent.getUserName().toString().isEmpty()){
+				parent.ShowWarningDialog("Please enter user name.");
+			}else{
+			
+			parent.clearTextAreas();
 			
 			//Execute remove commands in the PDC VM
 			ExecuteCommandViaSSH pdcRemove=new ExecuteCommandViaSSH(parent.GetExternalPDCIP(), parent.getUserName(), keyPath, parent.getSudoPassword(), "pdc");
@@ -100,10 +145,7 @@ public class GUIEngine implements ActionListener {
 			Thread histServerInstall=new Thread(new deployService(parent.GetExternalHistorianIP(), parent.getUserName(), parent.getSudoPassword(), keyPath, historianBuildPath,"hist",historainCommands));
 			histServerInstall.start();
 			
-			
-			
-			
-			
+			}
 			
 		}else if(clickedButton.getText()=="Select Build Folder"){
 			
@@ -111,7 +153,8 @@ public class GUIEngine implements ActionListener {
 		    chooser = new JFileChooser(); 
 		    chooser.setCurrentDirectory(new java.io.File("."));
 		    chooser.setDialogTitle("Dialog");
-		    chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		    chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+		    
 		    //
 		    // disable the "All files" option.
 		    //
@@ -158,6 +201,7 @@ public class GUIEngine implements ActionListener {
 		    FileNameExtensionFilter filter = new FileNameExtensionFilter(
 		        "PEM","pem");
 		    chooser.setFileFilter(filter);
+		    chooser.setCurrentDirectory(new java.io.File("."));
 		    int returnVal = chooser.showOpenDialog(parent);
 		    if(returnVal == JFileChooser.APPROVE_OPTION) {
 		       System.out.println("You chose to open this file: " +

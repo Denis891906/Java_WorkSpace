@@ -71,7 +71,7 @@ public class ExecuteCommandViaSSH {
         
         }catch(Exception e){
             System.out.println(e);
-            MainWindow.showErrorMessage(e.getMessage());
+            MainWindow.showErrorMessage(e.getMessage().toString());
         }
     }
         
@@ -82,7 +82,13 @@ public class ExecuteCommandViaSSH {
  		} catch (JSchException e1) {
  			// TODO Auto-generated catch block
  			e1.printStackTrace();
- 			MainWindow.showErrorMessage(e1.getMessage());
+ 			if (e1.getMessage().toString().contains("session is down")){
+ 				MainWindow.showErrorMessage("Connection with host "+this.SFTPHOST+" was interupted \n"+e1.getMessage().toString());
+ 				
+ 			}
+ 			else{
+ 			MainWindow.showErrorMessage(e1.getMessage().toString());
+ 			}
  		}
 
           channel.setInputStream(null);
@@ -100,7 +106,7 @@ public class ExecuteCommandViaSSH {
  		} catch (JSchException e) {
  			// TODO Auto-generated catch block
  			e.printStackTrace();
- 			MainWindow.showErrorMessage(e.getMessage());
+ 			MainWindow.showErrorMessage(e.getMessage().toString());
  		}
           
           out.write((sudo_pass+"\n").getBytes());
@@ -117,7 +123,7 @@ public class ExecuteCommandViaSSH {
  		} catch (IOException e) {
  			// TODO Auto-generated catch block
  			e.printStackTrace();
- 			MainWindow.showErrorMessage(e.getMessage());
+ 			MainWindow.showErrorMessage(e.getMessage().toString());
  		}
      } 
      

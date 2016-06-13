@@ -410,7 +410,11 @@ public class MainWindow extends JFrame{
 	} 
 	
 	public String GetExternalPDCIP(){
-		return externalPdcIPText.getText();
+		
+			
+			return externalPdcIPText.getText();
+		
+		
 	}
 	public String GetInternalPDCIP(){
 		return internalPdcIPText.getText();
