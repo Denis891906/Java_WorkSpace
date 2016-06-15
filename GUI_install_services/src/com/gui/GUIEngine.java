@@ -46,6 +46,9 @@ public class GUIEngine implements ActionListener {
 	GUIEngine(MainWindow parent){
 		 this.parent = parent;
 		 }
+	public void componentResized(ComponentEvent e) {
+        parent.pack();          
+    }
 	
 	public void actionPerformed (ActionEvent e){
 		Object src=e.getSource();
@@ -253,13 +256,20 @@ public class GUIEngine implements ActionListener {
 		    	  parent.ShowWarningDialog("AppServer install rpm file wasn't found in the directory "+directPath + " . \nPlease specify directory again.");
 		      }else if((temp.returnFilePath(directPath,"*hist*").toString()).matches("NONE")){
 		    	  parent.ShowWarningDialog("Historian install rpm file wasn't found in the directory "+directPath + " . \nPlease specify directory again.");
-		    	  }else {
+		    	  }else if(chooser.getSelectedFile().toString().length()>81 ){
+		    		  parent.SetBuildPath("..."+chooser.getSelectedFile().getName().toString(),
+			    			  temp.returnFilePath(directPath,"*pdc*").toString(),
+			    			  temp.returnFilePath(directPath,"*app*").toString(),
+			    			  temp.returnFilePath(directPath,"*hist*").toString()
+			    			  );
+		    	  }
+		      else {
 		    	  parent.SetBuildPath(chooser.getSelectedFile().getAbsolutePath(),
 		    			  temp.returnFilePath(directPath,"*pdc*").toString(),
 		    			  temp.returnFilePath(directPath,"*app*").toString(),
 		    			  temp.returnFilePath(directPath,"*hist*").toString()
 		    			  );
-		    	  pdcBuildPath= chooser.getSelectedFile().getAbsolutePath()+"\\" + temp.returnFilePath(directPath,"*phasorpoint-pdc*").toString() ;
+		    	  pdcBuildPath= chooser.getSelectedFile().getAbsolutePath()+"\\" + temp.returnFilePath(directPath,"*pdc*").toString() ;
 		    	  appServerBuildPath=chooser.getSelectedFile().getAbsolutePath()+"\\" + temp.returnFilePath(directPath,"*app*").toString();
 		    	  historianBuildPath=chooser.getSelectedFile().getAbsolutePath()+"\\" + temp.returnFilePath(directPath,"*hist*").toString();
 		    	  
