@@ -1,0 +1,14 @@
+package com.gui;
+
+public class executeCommandService extends deployService implements Runnable{
+
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+
+}

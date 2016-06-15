@@ -16,20 +16,31 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import com.gui.Find.Finder;
 
 public class GUIEngine implements ActionListener {
+	
 	MainWindow parent;
 	String pdcBuildPath=null;
 	String appServerBuildPath=null;
 	String historianBuildPath=null;
 	String keyPath;
-	String [] pdcCommands={"echo Hello 1",
-			"cat /etc/phasorpoint-pdc/security.properties",
-			"sudo service phasorpoint-pdc restart"};
-	String [] appServerCommands={"echo Hello 2"};
-	String [] historainCommands={"echo Hello 3"};
+	//pdcCommands=new String[4];
+	/*String[] appServerCommands;
+	String[] historainCommands;*/
 	
-	String[] pdcRemoveCommands={"echo Reinstall command"};
-	String[] appServerRemoveCommands={"echo Reinstall command"};
-	String[] histRemoveCommands={"echo Reinstall command"};
+	
+	//Commands which should be executed to remove PDC service and pdc rmp file
+	String[] pdcRemoveCommands={"sudo rpm -e phasorpoint-pdc",
+			"sudo rm -r *pdc*"			
+	};
+	
+	//Commands which should be executed to remove AppServer service and pdc rmp file
+	String[] appServerRemoveCommands={"sudo rpm -e phasorpoint-appserver",
+			"sudo rm -r *appserver*"
+	};
+	
+	//Commands which should be executed to remove Historian service and pdc rmp file
+	String[] histRemoveCommands={"sudo rpm -e phasorpoint-historian",
+			"sudo rm -r *historian*"
+	};
 	
 	
 	GUIEngine(MainWindow parent){
@@ -67,6 +78,38 @@ public class GUIEngine implements ActionListener {
 			}else if(parent.getUserName().toString().isEmpty()){
 				parent.ShowWarningDialog("Please enter user name.");
 			}else{
+				
+				//Commands which should be executed to install PDC service
+				String[] pdcCommands={"sudo rpm -i *pdc*",
+						"sudo /opt/phasorpoint-pdc/bin/createdb -u postgres -p P0stgres -d",
+						"sudo /opt/phasorpoint-pdc/bin/upgradedb -u postgres -p P0stgres",
+						"sudo service phasorpoint-pdc start"};
+				
+				//Commands which should be executed to install AppServer service	
+				String [] appServerCommands={"sudo rpm -i *appserver*",
+						"sudo sh -c \"echo 'infrastructure.input.addresses="+parent.GetInternalPDCIP().toString()+"' >> /etc/phasorpoint-appserver/appserver.properties\"",
+						"sudo sh -c \"echo 'naming.strategy=urtdsm' >> /etc/phasorpoint-appserver/appserver.properties\"",
+						"sudo sh -c \"echo 'pdc.1.host="+parent.GetInternalPDCIP().toString()+"' >> /etc/phasorpoint-appserver/appserver.properties\"",
+						"sudo sh -c \"echo 'db.1.host="+parent.GetInternalHistorianIP().toString()+"' >> /etc/phasorpoint-appserver/appserver.properties\"",
+						"sudo service phasorpoint-appserver start"
+				};
+				
+				//Commands which should be executed to install Historian service
+				String [] historainCommands={"sudo rpm -i *historian*",			
+						"sudo /opt/phasorpoint-historian/bin/createdb -u postgres -p P0stgres -d",
+						"sudo /opt/phasorpoint-historian/bin/upgradedb -u postgres -p P0stgres",
+						"sudo sed -i.bak \"s/#listen_addresses = 'localhost'/listen_addresses = '*'/\" /var/lib/pgsql/9.4/data/postgresql.conf",
+						"sudo sh -c \"echo 'host all all "+parent.GetInternalAppServerIP().toString()+"/32 md5' >> /var/lib/pgsql/9.4/data/pg_hba.conf\"",
+						"sudo service postgresql-9.4 restart",
+						"sudo sh -c \"echo  'infrastructure.input.addresses="+parent.GetInternalPDCIP().toString()+"' >> /etc/phasorpoint-historian/historian.properties\"",
+						"sudo sh -c \"echo 'appserver.1.host="+parent.GetInternalAppServerIP().toString()+"' >> /etc/phasorpoint-historian/historian.properties\"",
+						"sudo sh -c \"echo 'repository.dir=/var/phasorpoint-historian/data' >> /etc/phasorpoint-historian/historian.properties\"",
+						"sudo sh -c \"echo 'summary.repository.dir=/var/phasorpoint-historian/summary' >> /etc/phasorpoint-historian/historian.properties\"",
+						"sudo sh -c \"echo 'repository.size.limit=100000' >> /etc/phasorpoint-historian/historian.properties\"",
+						"sudo sh -c \"echo 'summary.size.limit=50' >> /etc/phasorpoint-historian/historian.properties\"",
+						"sudo service phasorpoint-historian start"
+				};	
+				
 						
 			//PDC Installation
 			System.out.println("Installetion process for PDC with external IP "+parent.GetExternalPDCIP());	
@@ -82,6 +125,7 @@ public class GUIEngine implements ActionListener {
 			System.out.println("Installetion process for Historian with external IP "+parent.GetExternalHistorianIP());	
 			Thread histServerInstall=new Thread(new deployService(parent.GetExternalHistorianIP(), parent.getUserName(), parent.getSudoPassword(), keyPath, historianBuildPath,"hist",historainCommands));
 			histServerInstall.start();
+			
 					
 			parent.pack();
 			}
@@ -111,6 +155,37 @@ public class GUIEngine implements ActionListener {
 			}else{
 			
 			parent.clearTextAreas();
+			
+			//Commands which should be executed to install PDC service
+			String[] pdcCommands={"sudo rpm -i *pdc*",
+					"sudo /opt/phasorpoint-pdc/bin/createdb -u postgres -p P0stgres -d",
+					"sudo /opt/phasorpoint-pdc/bin/upgradedb -u postgres -p P0stgres",
+					"sudo service phasorpoint-pdc start"};
+			
+			//Commands which should be executed to install AppServer service	
+			String [] appServerCommands={"sudo rpm -i *appserver*",
+					"sudo sh -c \"echo 'infrastructure.input.addresses="+parent.GetInternalPDCIP().toString()+"' >> /etc/phasorpoint-appserver/appserver.properties\"",
+					"sudo sh -c \"echo 'naming.strategy=urtdsm' >> /etc/phasorpoint-appserver/appserver.properties\"",
+					"sudo sh -c \"echo 'pdc.1.host="+parent.GetInternalPDCIP().toString()+"' >> /etc/phasorpoint-appserver/appserver.properties\"",
+					"sudo sh -c \"echo 'db.1.host="+parent.GetInternalHistorianIP().toString()+"' >> /etc/phasorpoint-appserver/appserver.properties\"",
+					"sudo service phasorpoint-appserver start"
+			};
+			
+			//Commands which should be executed to install Historian service
+			String [] historainCommands={"sudo rpm -i *historian*",			
+					"sudo /opt/phasorpoint-historian/bin/createdb -u postgres -p P0stgres -d",
+					"sudo /opt/phasorpoint-historian/bin/upgradedb -u postgres -p P0stgres",
+					"sudo sed -i.bak \"s/#listen_addresses = 'localhost'/listen_addresses = '*'/\" /var/lib/pgsql/9.4/data/postgresql.conf",
+					"sudo sh -c \"echo 'host all all "+parent.GetInternalAppServerIP().toString()+"/32 md5' >> /var/lib/pgsql/9.4/data/pg_hba.conf\"",
+					"sudo service postgresql-9.4 restart",
+					"sudo sh -c \"echo  'infrastructure.input.addresses="+parent.GetInternalPDCIP().toString()+"' >> /etc/phasorpoint-historian/historian.properties\"",
+					"sudo sh -c \"echo 'appserver.1.host="+parent.GetInternalAppServerIP().toString()+"' >> /etc/phasorpoint-historian/historian.properties\"",
+					"sudo sh -c \"echo 'repository.dir=/var/phasorpoint-historian/data' >> /etc/phasorpoint-historian/historian.properties\"",
+					"sudo sh -c \"echo 'summary.repository.dir=/var/phasorpoint-historian/summary' >> /etc/phasorpoint-historian/historian.properties\"",
+					"sudo sh -c \"echo 'repository.size.limit=100000' >> /etc/phasorpoint-historian/historian.properties\"",
+					"sudo sh -c \"echo 'summary.size.limit=50' >> /etc/phasorpoint-historian/historian.properties\"",
+					"sudo service phasorpoint-historian start"
+			};	
 			
 			//Execute remove commands in the PDC VM
 			ExecuteCommandViaSSH pdcRemove=new ExecuteCommandViaSSH(parent.GetExternalPDCIP(), parent.getUserName(), keyPath, parent.getSudoPassword(), "pdc");
@@ -172,7 +247,7 @@ public class GUIEngine implements ActionListener {
 		      
 		      System.out.println("Returned: " + temp.returnFilePath(directPath,"*pdc*").toString());
 		      
-		      if ((temp.returnFilePath(directPath,"*pdc.rpm*").toString()).matches("NONE") ){
+		      if ((temp.returnFilePath(directPath,"*pdc*").toString()).matches("NONE") ){
 		    	  parent.ShowWarningDialog("PDC install rpm file wasn't found in the directory "+directPath + " . \nPlease specify directory again.");
 		      }else if((temp.returnFilePath(directPath,"*app*").toString()).matches("NONE") ){
 		    	  parent.ShowWarningDialog("AppServer install rpm file wasn't found in the directory "+directPath + " . \nPlease specify directory again.");
@@ -184,7 +259,7 @@ public class GUIEngine implements ActionListener {
 		    			  temp.returnFilePath(directPath,"*app*").toString(),
 		    			  temp.returnFilePath(directPath,"*hist*").toString()
 		    			  );
-		    	  pdcBuildPath= chooser.getSelectedFile().getAbsolutePath()+"\\" + temp.returnFilePath(directPath,"*pdc*").toString() ;
+		    	  pdcBuildPath= chooser.getSelectedFile().getAbsolutePath()+"\\" + temp.returnFilePath(directPath,"*phasorpoint-pdc*").toString() ;
 		    	  appServerBuildPath=chooser.getSelectedFile().getAbsolutePath()+"\\" + temp.returnFilePath(directPath,"*app*").toString();
 		    	  historianBuildPath=chooser.getSelectedFile().getAbsolutePath()+"\\" + temp.returnFilePath(directPath,"*hist*").toString();
 		    	  
