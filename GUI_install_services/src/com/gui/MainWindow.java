@@ -66,30 +66,11 @@ public class MainWindow extends JFrame{
 	public MainWindow(){
 		
 		
-		setTitle("Install tool v 0.1");
+		setTitle("Tool for deploy URTDSM build to OpenStack (r0.1)");
 		
 		this.setSize(500, 600);
 		
-		JPanel openStackPane=new JPanel();
-		JPanel luxCloudPane=new JPanel();
-		
-		JTabbedPane tabbedPane = new JTabbedPane();
-		
-		
-		
-		tabbedPane.addTab("luxCloudPane",luxCloudPane );
-		tabbedPane.addTab("openStackPane",openStackPane );
-		this.setLayout(new GridLayout());
-		
-		//JScrollPane scrPanelMainFrame=new JScrollPane(tabbedPane);
-		this.add(tabbedPane);
-		
-		
-		
-		
-		
-		
-		
+				
 		
 		//////////////////////////////////////////////////////////////////////////////
 		//Section for OpenStack Vm install
@@ -98,7 +79,7 @@ public class MainWindow extends JFrame{
 	
 		GridBagLayout gridbag = new GridBagLayout();
         GridBagConstraints c = new GridBagConstraints();
-        openStackPane.setLayout(gridbag);
+        this.setLayout(gridbag);
        // this.setSize(MAXIMIZED_HORIZ, MAXIMIZED_HORIZ);
         
         
@@ -137,19 +118,19 @@ public class MainWindow extends JFrame{
         
         
     	internalPdcIPText=new JTextField(16);
-    	internalPdcIPText.setText("192.168.160.151");
-    	externalPdcIPText=new JTextField();
-    	externalPdcIPText.setText("10.35.204.56");
+    	internalPdcIPText.setText("192.168.160.145");
+    	externalPdcIPText=new JTextField(16);
+    	externalPdcIPText.setText("10.35.204.12");
     	
         internalAppIPText=new JTextField(16);
-        internalAppIPText.setText("192.168.160.130");
+        internalAppIPText.setText("192.168.160.146");
         externalAppIPText=new JTextField(16);
-        externalAppIPText.setText("10.35.204.166");
+        externalAppIPText.setText("10.35.204.14");
         
         internalHistIPText=new JTextField(16);
-        internalHistIPText.setText("192.168.160.131");
+        internalHistIPText.setText("192.168.160.150");
         externalHistIPText=new JTextField(16);
-        externalHistIPText.setText("10.35.204.167");
+        externalHistIPText.setText("10.35.204.119");
         usernameText = new JTextField(16);
         usernameText.setText("centos");
         sudoPasswordText=new JTextField(16);
@@ -229,19 +210,19 @@ public class MainWindow extends JFrame{
         
         
         
-        openStackPane.add(pdcIPLable, c);
+        this.add(pdcIPLable, c);
         
         
         c.gridx=1;
         c.gridwidth=3;
         c.weightx=0;
-        openStackPane.add(internalPdcIPText, c);
+        this.add(internalPdcIPText, c);
         
         c.gridwidth=1;
         c.gridx=2;
         c.fill=GridBagConstraints.HORIZONTAL;
         c.insets=new Insets(1, 200, 0, 0); // отступы компонентов ( top,left, bottom, right )
-        openStackPane.add(pdcInstallButton, c);
+        this.add(pdcInstallButton, c);
         
         //Line 2 with external PDC elements
         
@@ -249,9 +230,9 @@ public class MainWindow extends JFrame{
         c.fill=GridBagConstraints.NONE;
         c.gridx=0;
         c.gridy=1;
-        openStackPane.add(pdcIPLable2, c);
+        this.add(pdcIPLable2, c);
         c.gridx=1;
-        openStackPane.add(externalPdcIPText, c);
+        this.add(externalPdcIPText, c);
         
         
         
@@ -260,13 +241,13 @@ public class MainWindow extends JFrame{
         c.fill=GridBagConstraints.NONE;
         c.gridx=0;
         c.gridy=2;
-        openStackPane.add(appIPLable, c);
+        this.add(appIPLable, c);
         c.gridx=1;
-        openStackPane.add(internalAppIPText, c);
+        this.add(internalAppIPText, c);
         c.fill=GridBagConstraints.HORIZONTAL;
         c.insets=new Insets(1, 200, 0, 0); // отступы компонентов ( top,left, bottom, right )
         c.gridx=2;
-        openStackPane.add(appInstallButton, c);
+        this.add(appInstallButton, c);
         
         
         //Line 4 with AppServer elements
@@ -274,18 +255,18 @@ public class MainWindow extends JFrame{
         c.fill=GridBagConstraints.NONE;
         c.gridy=3;
         c.gridx=0;
-        openStackPane.add(appIPLable2, c);
+        this.add(appIPLable2, c);
         c.gridx=1;
-        openStackPane.add(externalAppIPText, c);
+        this.add(externalAppIPText, c);
         
       //Line 5 with Historian elements
         c.insets=new Insets(0, 0, 0, 0); // отступы компонентов ( top,left, bottom, right )
         c.fill=GridBagConstraints.NONE;
         c.gridy=4;
         c.gridx=0;
-        openStackPane.add(histIPLable, c);
+        this.add(histIPLable, c);
         c.gridx=1;
-        openStackPane.add(internalHistIPText, c);
+        this.add(internalHistIPText, c);
         c.gridx=2;
         c.fill=GridBagConstraints.HORIZONTAL;
         c.insets=new Insets(1, 200, 0, 0); // отступы компонентов ( top,left, bottom, right )
@@ -297,9 +278,9 @@ public class MainWindow extends JFrame{
         c.fill=GridBagConstraints.NONE;
         c.gridy=5;
         c.gridx=0;
-        openStackPane.add(histIPLable2, c);
+        this.add(histIPLable2, c);
         c.gridx=1;
-        openStackPane.add(externalHistIPText, c);
+        this.add(externalHistIPText, c);
         
         
         
@@ -310,7 +291,7 @@ public class MainWindow extends JFrame{
         c.gridy=6;
         c.fill=GridBagConstraints.HORIZONTAL;
         c.insets=new Insets(0, 0, 0, 0); // отступы компонентов ( top,left, bottom, right )
-        openStackPane.add(selectBuildFolderButton, c);
+        this.add(selectBuildFolderButton, c);
         
         c.gridx=1;
         c.gridy=6;
@@ -319,38 +300,38 @@ public class MainWindow extends JFrame{
         c.gridheight=1;
         c.fill=GridBagConstraints.HORIZONTAL;;
         
-        openStackPane.add(buildPathLable, c);   
+        this.add(buildPathLable, c);   
     	
         c.gridx=0;
         c.gridy=7;
         c.gridwidth=1;
-        openStackPane.add(buildPDCPathLable1,c);
+        this.add(buildPDCPathLable1,c);
         
         
         c.gridx=1;
         c.gridy=7;
         c.gridwidth=5;
-        openStackPane.add(buildPDCPathLable2,c);
+        this.add(buildPDCPathLable2,c);
         
         c.gridx=0;
         c.gridy=8;
         c.gridwidth=1;
-        openStackPane.add(buildAppServerPathLable1, c);
+        this.add(buildAppServerPathLable1, c);
         
         c.gridx=1;
         c.gridy=8;
         c.gridwidth=5;
-        openStackPane.add(buildAppServerPathLable2, c);
+        this.add(buildAppServerPathLable2, c);
     	
         c.gridx=0;
         c.gridy=9;
         c.gridwidth=1;
-        openStackPane.add(buildHistoranPathLable1, c);
+        this.add(buildHistoranPathLable1, c);
     	
         c.gridx=1;
         c.gridy=9;
         c.gridwidth=5;
-        openStackPane.add(buildHistoranPathLable2, c);
+        this.add(buildHistoranPathLable2, c);
         
          
       //key path elements       
@@ -358,11 +339,11 @@ public class MainWindow extends JFrame{
         c.gridy=10;
         c.fill=GridBagConstraints.HORIZONTAL;
         c.gridwidth=1;
-        openStackPane.add(selectKeyFileButton,c);
+        this.add(selectKeyFileButton,c);
         
         c.gridx=1;
         c.gridwidth=7;
-        openStackPane.add(keyPathLable,c);
+        this.add(keyPathLable,c);
         
         
         //Line with user name text box
@@ -371,14 +352,14 @@ public class MainWindow extends JFrame{
         c.gridy=11;
         c.fill=GridBagConstraints.HORIZONTAL;
         c.gridwidth=1;
-        openStackPane.add(usernameLable,c);
+        this.add(usernameLable,c);
 
         c.insets=new Insets(0, 0, 0, 0); // отступы компонентов ( top,left, bottom, right )
         c.fill=GridBagConstraints.NONE;
         c.gridy=11;
         c.gridx=0;
         c.gridx=1;
-        openStackPane.add(usernameText, c);
+        this.add(usernameText, c);
         
         
         //Sudo password Line
@@ -386,14 +367,14 @@ public class MainWindow extends JFrame{
         c.gridy=12;
         c.fill=GridBagConstraints.HORIZONTAL;
         c.gridwidth=1;
-        openStackPane.add(rootPasswordIPLable,c);
+        this.add(rootPasswordIPLable,c);
         
         c.insets=new Insets(0, 0, 0, 0); // отступы компонентов ( top,left, bottom, right )
         c.fill=GridBagConstraints.NONE;
         c.gridy=12;
         c.gridx=0;
         c.gridx=1;
-        openStackPane.add(sudoPasswordText, c);
+        this.add(sudoPasswordText, c);
         
         
         // Add main Scroll pane to the main window
@@ -403,7 +384,7 @@ public class MainWindow extends JFrame{
         c.gridwidth=23;
         c.gridheight=63;//сколько клеток занимает элемент в высоту
        
-        openStackPane.add(mainScrollPane, c);
+        this.add(mainScrollPane, c);
         
         
         
