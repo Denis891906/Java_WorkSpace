@@ -13,6 +13,8 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 public class MainWindow extends JFrame{
 	public JLabel buildPathLable;
@@ -64,12 +66,39 @@ public class MainWindow extends JFrame{
 	public MainWindow(){
 		
 		
-		setSize(950, 1500);
 		setTitle("Install tool v 0.1");
 		
+		this.setSize(500, 600);
+		
+		JPanel openStackPane=new JPanel();
+		JPanel luxCloudPane=new JPanel();
+		
+		JTabbedPane tabbedPane = new JTabbedPane();
+		
+		
+		
+		tabbedPane.addTab("luxCloudPane",luxCloudPane );
+		tabbedPane.addTab("openStackPane",openStackPane );
+		this.setLayout(new GridLayout());
+		
+		//JScrollPane scrPanelMainFrame=new JScrollPane(tabbedPane);
+		this.add(tabbedPane);
+		
+		
+		
+		
+		
+		
+		
+		
+		//////////////////////////////////////////////////////////////////////////////
+		//Section for OpenStack Vm install
+		//////////////////////////////////////////////////////
+		
+	
 		GridBagLayout gridbag = new GridBagLayout();
         GridBagConstraints c = new GridBagConstraints();
-        getContentPane().setLayout(gridbag);
+        openStackPane.setLayout(gridbag);
        // this.setSize(MAXIMIZED_HORIZ, MAXIMIZED_HORIZ);
         
         
@@ -108,8 +137,8 @@ public class MainWindow extends JFrame{
         
         
     	internalPdcIPText=new JTextField(16);
-    	internalPdcIPText.setText("192.168.160.129");
-    	externalPdcIPText=new JTextField(16);
+    	internalPdcIPText.setText("192.168.160.151");
+    	externalPdcIPText=new JTextField();
     	externalPdcIPText.setText("10.35.204.56");
     	
         internalAppIPText=new JTextField(16);
@@ -131,38 +160,29 @@ public class MainWindow extends JFrame{
         JButton selectBuildFolderButton=new JButton("Select Build Folder");
         JButton selectKeyFileButton=new JButton("Select Key File");
         
-        pdcTextArea = new JTextArea(23,65);
-        pdcTextArea.isMaximumSizeSet();
+        pdcTextArea = new JTextArea(23,63);
         pdcTextArea.setEditable(false);
         
-        appServerTextArea = new JTextArea(23,65);
-        appServerTextArea.isMaximumSizeSet();
+        appServerTextArea = new JTextArea(23,63);
         appServerTextArea.setEditable(false);
         
-        histTextArea = new JTextArea(23,65);
-        histTextArea.isMaximumSizeSet();
+        histTextArea = new JTextArea(23,63);
         histTextArea.setEditable(false);
+        
+        
+        
+        
+        //Create main Tab panel
         
         JTabbedPane tabPanel = new JTabbedPane();
         
-        JPanel pdcTab = new JPanel();
-        JPanel appTab = new JPanel();
-        JPanel histTab = new JPanel();
-        
-        JScrollPane pdcScrollPane=new JScrollPane(pdcTextArea);
-        JScrollPane appServerScrollPane=new JScrollPane(appServerTextArea);
-        JScrollPane histScrollPane=new JScrollPane(histTextArea);
-        tabPanel.add("PDC logs", pdcScrollPane);
-        tabPanel.add("AppServer logs", appServerScrollPane);
-        tabPanel.add("Historian logs", histScrollPane);
-        
+        // Add three tabs to the main tab panel
+        tabPanel.add("PDC logs", pdcTextArea);
+        tabPanel.add("AppServer logs", appServerTextArea);
+        tabPanel.add("Historian logs", histTextArea);
        
-
-        
-        
-       
-        
-        
+       //add Main tab panel to on scroll pane 
+        JScrollPane mainScrollPane=new JScrollPane(tabPanel);
         
         
         //
@@ -174,8 +194,7 @@ public class MainWindow extends JFrame{
         //standardOut = System.out;
          
         // re-assigns standard output stream and error output stream
-        /*System.setOut(printStream);
-        System.setErr(printStream);*/
+       
         
         
         
@@ -210,18 +229,19 @@ public class MainWindow extends JFrame{
         
         
         
-        this.add(pdcIPLable, c);
+        openStackPane.add(pdcIPLable, c);
         
         
         c.gridx=1;
-        c.gridwidth=1;
+        c.gridwidth=3;
         c.weightx=0;
-        this.add(internalPdcIPText, c);
+        openStackPane.add(internalPdcIPText, c);
         
+        c.gridwidth=1;
         c.gridx=2;
         c.fill=GridBagConstraints.HORIZONTAL;
         c.insets=new Insets(1, 200, 0, 0); // отступы компонентов ( top,left, bottom, right )
-        this.add(pdcInstallButton, c);
+        openStackPane.add(pdcInstallButton, c);
         
         //Line 2 with external PDC elements
         
@@ -229,9 +249,9 @@ public class MainWindow extends JFrame{
         c.fill=GridBagConstraints.NONE;
         c.gridx=0;
         c.gridy=1;
-        this.add(pdcIPLable2, c);
+        openStackPane.add(pdcIPLable2, c);
         c.gridx=1;
-        this.add(externalPdcIPText, c);
+        openStackPane.add(externalPdcIPText, c);
         
         
         
@@ -240,13 +260,13 @@ public class MainWindow extends JFrame{
         c.fill=GridBagConstraints.NONE;
         c.gridx=0;
         c.gridy=2;
-        this.add(appIPLable, c);
+        openStackPane.add(appIPLable, c);
         c.gridx=1;
-        this.add(internalAppIPText, c);
+        openStackPane.add(internalAppIPText, c);
         c.fill=GridBagConstraints.HORIZONTAL;
         c.insets=new Insets(1, 200, 0, 0); // отступы компонентов ( top,left, bottom, right )
         c.gridx=2;
-        this.add(appInstallButton, c);
+        openStackPane.add(appInstallButton, c);
         
         
         //Line 4 with AppServer elements
@@ -254,32 +274,32 @@ public class MainWindow extends JFrame{
         c.fill=GridBagConstraints.NONE;
         c.gridy=3;
         c.gridx=0;
-        this.add(appIPLable2, c);
+        openStackPane.add(appIPLable2, c);
         c.gridx=1;
-        this.add(externalAppIPText, c);
+        openStackPane.add(externalAppIPText, c);
         
       //Line 5 with Historian elements
         c.insets=new Insets(0, 0, 0, 0); // отступы компонентов ( top,left, bottom, right )
         c.fill=GridBagConstraints.NONE;
         c.gridy=4;
         c.gridx=0;
-        this.add(histIPLable, c);
+        openStackPane.add(histIPLable, c);
         c.gridx=1;
-        this.add(internalHistIPText, c);
-       /* c.gridx=2;
+        openStackPane.add(internalHistIPText, c);
+        c.gridx=2;
         c.fill=GridBagConstraints.HORIZONTAL;
         c.insets=new Insets(1, 200, 0, 0); // отступы компонентов ( top,left, bottom, right )
        // this.add(histInstallButton, c);
-*/        
+        
       //Line 6 with Historian elements  
         
         c.insets=new Insets(0, 0, 0, 0); // отступы компонентов ( top,left, bottom, right )
         c.fill=GridBagConstraints.NONE;
         c.gridy=5;
         c.gridx=0;
-        this.add(histIPLable2, c);
+        openStackPane.add(histIPLable2, c);
         c.gridx=1;
-        this.add(externalHistIPText, c);
+        openStackPane.add(externalHistIPText, c);
         
         
         
@@ -290,7 +310,7 @@ public class MainWindow extends JFrame{
         c.gridy=6;
         c.fill=GridBagConstraints.HORIZONTAL;
         c.insets=new Insets(0, 0, 0, 0); // отступы компонентов ( top,left, bottom, right )
-        this.add(selectBuildFolderButton, c);
+        openStackPane.add(selectBuildFolderButton, c);
         
         c.gridx=1;
         c.gridy=6;
@@ -299,50 +319,50 @@ public class MainWindow extends JFrame{
         c.gridheight=1;
         c.fill=GridBagConstraints.HORIZONTAL;;
         
-        this.add(buildPathLable, c);   
+        openStackPane.add(buildPathLable, c);   
     	
-        /*c.gridx=0;
+        c.gridx=0;
         c.gridy=7;
         c.gridwidth=1;
-        this.add(buildPDCPathLable1,c);
+        openStackPane.add(buildPDCPathLable1,c);
         
         
         c.gridx=1;
         c.gridy=7;
         c.gridwidth=5;
-        this.add(buildPDCPathLable2,c);
+        openStackPane.add(buildPDCPathLable2,c);
         
         c.gridx=0;
         c.gridy=8;
         c.gridwidth=1;
-        this.add(buildAppServerPathLable1, c);
+        openStackPane.add(buildAppServerPathLable1, c);
         
         c.gridx=1;
         c.gridy=8;
         c.gridwidth=5;
-        this.add(buildAppServerPathLable2, c);
+        openStackPane.add(buildAppServerPathLable2, c);
     	
         c.gridx=0;
         c.gridy=9;
         c.gridwidth=1;
-        this.add(buildHistoranPathLable1, c);
+        openStackPane.add(buildHistoranPathLable1, c);
     	
         c.gridx=1;
         c.gridy=9;
         c.gridwidth=5;
-        this.add(buildHistoranPathLable2, c);
-        */
+        openStackPane.add(buildHistoranPathLable2, c);
+        
          
       //key path elements       
         c.gridx=0;
         c.gridy=10;
         c.fill=GridBagConstraints.HORIZONTAL;
         c.gridwidth=1;
-        this.add(selectKeyFileButton,c);
+        openStackPane.add(selectKeyFileButton,c);
         
         c.gridx=1;
         c.gridwidth=7;
-        this.add(keyPathLable,c);
+        openStackPane.add(keyPathLable,c);
         
         
         //Line with user name text box
@@ -351,14 +371,14 @@ public class MainWindow extends JFrame{
         c.gridy=11;
         c.fill=GridBagConstraints.HORIZONTAL;
         c.gridwidth=1;
-        this.add(usernameLable,c);
+        openStackPane.add(usernameLable,c);
 
         c.insets=new Insets(0, 0, 0, 0); // отступы компонентов ( top,left, bottom, right )
         c.fill=GridBagConstraints.NONE;
         c.gridy=11;
         c.gridx=0;
         c.gridx=1;
-        this.add(usernameText, c);
+        openStackPane.add(usernameText, c);
         
         
         //Sudo password Line
@@ -366,34 +386,35 @@ public class MainWindow extends JFrame{
         c.gridy=12;
         c.fill=GridBagConstraints.HORIZONTAL;
         c.gridwidth=1;
-        this.add(rootPasswordIPLable,c);
+        openStackPane.add(rootPasswordIPLable,c);
         
         c.insets=new Insets(0, 0, 0, 0); // отступы компонентов ( top,left, bottom, right )
         c.fill=GridBagConstraints.NONE;
         c.gridy=12;
         c.gridx=0;
         c.gridx=1;
-        this.add(sudoPasswordText, c);
+        openStackPane.add(sudoPasswordText, c);
         
         
-        // text area
+        // Add main Scroll pane to the main window
        c.gridx=0;
         c.gridy=13;
         c.fill=GridBagConstraints.BOTH;
-        c.gridwidth=7;
-        c.gridheight=60;//сколько клеток занимает элемент в высоту
-        //c.ipady=10;
-        //c.weighty=22;
-        //c.anchor=GridBagConstraints.CENTER;
+        c.gridwidth=23;
+        c.gridheight=63;//сколько клеток занимает элемент в высоту
        
-       //pane.setPreferredSize(getMaximumSize());
-        this.add(tabPanel, c);
+        openStackPane.add(mainScrollPane, c);
+        
         
         
         
         
         this.pack(); // delete empty space from window
 	}
+	
+	/////////////////////////////////////////////////
+		
+		
 	public void SetBuildPath(String path, String pdcPath,String appPath,String histPath){
 		buildPathLable.setText(path);
 		buildPDCPathLable1.setText("PDC rpm file path:");

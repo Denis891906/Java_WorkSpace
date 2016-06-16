@@ -83,22 +83,37 @@ public class GUIEngine implements ActionListener {
 			}else{
 				
 				//Commands which should be executed to install PDC service
-				String[] pdcCommands={"sudo rpm -i *pdc*",
+				String[] pdcCommands={
+						
+						"echo 'Hello'",
+						"echo 'Hello'",
+						"echo 'Hello'",
+						"echo 'Hello'",
+						"echo 'Hello'",
+						"echo 'hello 1hello 1hello 1hello 1hello 1hello 1hello 1hello 1hello 1hello 1hello 1hello 1hello 1hello 1hello 1hello 1hello 1hello 1hello 1hello 1hello 1hello 1hello 1'"
+						
+						/*"sudo rpm -i *pdc*",
 						"sudo /opt/phasorpoint-pdc/bin/createdb -u postgres -p P0stgres -d",
 						"sudo /opt/phasorpoint-pdc/bin/upgradedb -u postgres -p P0stgres",
-						"sudo service phasorpoint-pdc start"};
+						"sudo service phasorpoint-pdc start"*/
+						
+				};
 				
 				//Commands which should be executed to install AppServer service	
-				String [] appServerCommands={"sudo rpm -i *appserver*",
+				String [] appServerCommands={
+						
+						/*"sudo rpm -i *appserver*",
 						"sudo sh -c \"echo 'infrastructure.input.addresses="+parent.GetInternalPDCIP().toString()+"' >> /etc/phasorpoint-appserver/appserver.properties\"",
 						"sudo sh -c \"echo 'naming.strategy=urtdsm' >> /etc/phasorpoint-appserver/appserver.properties\"",
 						"sudo sh -c \"echo 'pdc.1.host="+parent.GetInternalPDCIP().toString()+"' >> /etc/phasorpoint-appserver/appserver.properties\"",
 						"sudo sh -c \"echo 'db.1.host="+parent.GetInternalHistorianIP().toString()+"' >> /etc/phasorpoint-appserver/appserver.properties\"",
-						"sudo service phasorpoint-appserver start"
+						"sudo service phasorpoint-appserver start"*/
 				};
 				
 				//Commands which should be executed to install Historian service
-				String [] historainCommands={"sudo rpm -i *historian*",			
+				String [] historainCommands={
+						
+						/*"sudo rpm -i *historian*",			
 						"sudo /opt/phasorpoint-historian/bin/createdb -u postgres -p P0stgres -d",
 						"sudo /opt/phasorpoint-historian/bin/upgradedb -u postgres -p P0stgres",
 						"sudo sed -i.bak \"s/#listen_addresses = 'localhost'/listen_addresses = '*'/\" /var/lib/pgsql/9.4/data/postgresql.conf",
@@ -110,7 +125,7 @@ public class GUIEngine implements ActionListener {
 						"sudo sh -c \"echo 'summary.repository.dir=/var/phasorpoint-historian/summary' >> /etc/phasorpoint-historian/historian.properties\"",
 						"sudo sh -c \"echo 'repository.size.limit=100000' >> /etc/phasorpoint-historian/historian.properties\"",
 						"sudo sh -c \"echo 'summary.size.limit=50' >> /etc/phasorpoint-historian/historian.properties\"",
-						"sudo service phasorpoint-historian start"
+						"sudo service phasorpoint-historian start"*/
 				};	
 				
 						
@@ -119,7 +134,7 @@ public class GUIEngine implements ActionListener {
 			Thread pdcInstall=new Thread(new deployService(parent.GetExternalPDCIP(), parent.getUserName(), parent.getSudoPassword() ,keyPath, pdcBuildPath,"pdc" ,pdcCommands));
 			pdcInstall.start();
 			
-			//AppServer Installation
+			/*//AppServer Installation
 			System.out.println("Installetion process for AppServer with external IP "+parent.GetExternalAppServerIP());	
 			Thread appServerInstall=new Thread(new deployService(parent.GetExternalAppServerIP(), parent.getUserName(), parent.getSudoPassword(), keyPath, appServerBuildPath,"app",appServerCommands));
 			appServerInstall.start();
@@ -127,7 +142,7 @@ public class GUIEngine implements ActionListener {
 			//Historian Installation
 			System.out.println("Installetion process for Historian with external IP "+parent.GetExternalHistorianIP());	
 			Thread histServerInstall=new Thread(new deployService(parent.GetExternalHistorianIP(), parent.getUserName(), parent.getSudoPassword(), keyPath, historianBuildPath,"hist",historainCommands));
-			histServerInstall.start();
+			histServerInstall.start();*/
 			
 					
 			parent.pack();
@@ -262,6 +277,9 @@ public class GUIEngine implements ActionListener {
 			    			  temp.returnFilePath(directPath,"*app*").toString(),
 			    			  temp.returnFilePath(directPath,"*hist*").toString()
 			    			  );
+		    		  pdcBuildPath= chooser.getSelectedFile().getAbsolutePath()+"\\" + temp.returnFilePath(directPath,"*pdc*").toString() ;
+			    	  appServerBuildPath=chooser.getSelectedFile().getAbsolutePath()+"\\" + temp.returnFilePath(directPath,"*app*").toString();
+			    	  historianBuildPath=chooser.getSelectedFile().getAbsolutePath()+"\\" + temp.returnFilePath(directPath,"*hist*").toString();
 		    	  }
 		      else {
 		    	  parent.SetBuildPath(chooser.getSelectedFile().getAbsolutePath(),
