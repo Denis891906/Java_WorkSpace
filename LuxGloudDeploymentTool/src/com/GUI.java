@@ -18,7 +18,7 @@ import javax.swing.SwingConstants;
 
 
 
-public class GUI extends Frame{
+public class GUI extends JFrame{
 	public JLabel buildPathLable;
 	public JLabel keyPathLable;
 	public JLabel buildPDCPathLable1;
@@ -68,7 +68,7 @@ public class GUI extends Frame{
 	public GUI(){
 		
 		
-		setTitle("Tool for deploy URTDSM build to OpenStack (r0.1)");
+		setTitle("Tool for deploy URTDSM build to LuxCloud (r0.1)");
 		
 		this.setSize(500, 600);
 		
@@ -90,19 +90,16 @@ public class GUI extends Frame{
         
         JLabel pdcIPLable=new JLabel("Internal PDC IP");  
         pdcIPLable.setHorizontalAlignment(SwingConstants.LEFT);
-        JLabel pdcIPLable2=new JLabel("External PDC IP");
-        pdcIPLable.setHorizontalAlignment(SwingConstants.LEFT);
+        
         
         JLabel appIPLable=new JLabel("Internal AppServer IP");
         appIPLable.setHorizontalAlignment(SwingConstants.LEFT);
-        JLabel appIPLable2=new JLabel("External AppServer IP");
-        appIPLable.setHorizontalAlignment(SwingConstants.LEFT);
+       
         
         
         JLabel histIPLable=new JLabel("Internal Historian IP");
         histIPLable.setHorizontalAlignment(SwingConstants.LEFT);
-        JLabel histIPLable2=new JLabel("External Historian IP");
-        histIPLable.setHorizontalAlignment(SwingConstants.LEFT);
+      
         
         JLabel usernameLable=new JLabel("username");  
         pdcIPLable.setHorizontalAlignment(SwingConstants.LEFT);
@@ -206,9 +203,6 @@ public class GUI extends Frame{
         c.insets=new Insets(0, 0, 0, 0); // отступы компонентов ( top,left, bottom, right )
         c.ipadx=1; // на сколько увеличиваеться минимальная ширина элемента
         c.ipady=1; // на сколько увеличиваеться минимальная высота элемента       
-        
-        
-        
         this.add(pdcIPLable, c);
         
         
@@ -223,13 +217,9 @@ public class GUI extends Frame{
         c.insets=new Insets(1, 200, 0, 0); // отступы компонентов ( top,left, bottom, right )
         this.add(pdcInstallButton, c);
         
-        //Line 2 with external PDC elements
         
-        c.insets=new Insets(0, 0, 0, 0); // отступы компонентов ( top,left, bottom, right )
-        c.fill=GridBagConstraints.NONE;
-        c.gridx=0;
-        c.gridy=1;
-        this.add(pdcIPLable2, c);
+        
+      
         
        
         
@@ -239,7 +229,7 @@ public class GUI extends Frame{
         c.insets=new Insets(0, 0, 0, 0); // отступы компонентов ( top,left, bottom, right )
         c.fill=GridBagConstraints.NONE;
         c.gridx=0;
-        c.gridy=2;
+        c.gridy=1;
         this.add(appIPLable, c);
         c.gridx=1;
         this.add(internalAppIPText, c);
@@ -249,33 +239,21 @@ public class GUI extends Frame{
         this.add(appInstallButton, c);
         
         
-        //Line 4 with AppServer elements
-        c.insets=new Insets(0, 0, 0, 0); // отступы компонентов ( top,left, bottom, right )
-        c.fill=GridBagConstraints.NONE;
-        c.gridy=3;
-        c.gridx=0;
-        this.add(appIPLable2, c);
+       
         
       //Line 5 with Historian elements
         c.insets=new Insets(0, 0, 0, 0); // отступы компонентов ( top,left, bottom, right )
         c.fill=GridBagConstraints.NONE;
-        c.gridy=4;
+        c.gridy=3;
         c.gridx=0;
         this.add(histIPLable, c);
         c.gridx=1;
         this.add(internalHistIPText, c);
-        c.gridx=2;
-        c.fill=GridBagConstraints.HORIZONTAL;
-        c.insets=new Insets(1, 200, 0, 0); // отступы компонентов ( top,left, bottom, right )
-       // this.add(histInstallButton, c);
+       
         
       //Line 6 with Historian elements  
         
-        c.insets=new Insets(0, 0, 0, 0); // отступы компонентов ( top,left, bottom, right )
-        c.fill=GridBagConstraints.NONE;
-        c.gridy=5;
-        c.gridx=0;
-        this.add(histIPLable2, c);
+       
        
         
         
@@ -284,13 +262,13 @@ public class GUI extends Frame{
              
         //Builds path elements
         c.gridx=0;
-        c.gridy=6;
+        c.gridy=4;
         c.fill=GridBagConstraints.HORIZONTAL;
         c.insets=new Insets(0, 0, 0, 0); // отступы компонентов ( top,left, bottom, right )
         this.add(selectBuildFolderButton, c);
         
         c.gridx=1;
-        c.gridy=6;
+        c.gridy=5;
         c.insets=new Insets(0, 0, 0, 0); // отступы компонентов ( top,left, bottom, right )
         c.gridwidth=5;
         c.gridheight=1;
@@ -299,60 +277,51 @@ public class GUI extends Frame{
         this.add(buildPathLable, c);   
     	
         c.gridx=0;
-        c.gridy=7;
+        c.gridy=6;
         c.gridwidth=1;
         this.add(buildPDCPathLable1,c);
         
         
         c.gridx=1;
-        c.gridy=7;
+        c.gridy=6;
         c.gridwidth=5;
         this.add(buildPDCPathLable2,c);
         
         c.gridx=0;
-        c.gridy=8;
+        c.gridy=7;
         c.gridwidth=1;
         this.add(buildAppServerPathLable1, c);
         
         c.gridx=1;
-        c.gridy=8;
+        c.gridy=7;
         c.gridwidth=5;
         this.add(buildAppServerPathLable2, c);
     	
         c.gridx=0;
-        c.gridy=9;
+        c.gridy=8;
         c.gridwidth=1;
         this.add(buildHistoranPathLable1, c);
     	
         c.gridx=1;
-        c.gridy=9;
+        c.gridy=8;
         c.gridwidth=5;
         this.add(buildHistoranPathLable2, c);
         
          
-      //key path elements       
-        c.gridx=0;
-        c.gridy=10;
-        c.fill=GridBagConstraints.HORIZONTAL;
-        c.gridwidth=1;
-        this.add(selectKeyFileButton,c);
-        
-        c.gridx=1;
-        c.gridwidth=7;
-        this.add(keyPathLable,c);
+     
         
         
         //Line with user name text box
         
         c.gridx=0;
-        c.gridy=11;
+        c.gridy=9;
         c.fill=GridBagConstraints.HORIZONTAL;
         c.gridwidth=1;
         this.add(usernameLable,c);
 
         c.insets=new Insets(0, 0, 0, 0); // отступы компонентов ( top,left, bottom, right )
         c.fill=GridBagConstraints.NONE;
-        c.gridy=11;
+        c.gridy=9;
         c.gridx=0;
         c.gridx=1;
         this.add(usernameText, c);
@@ -360,14 +329,14 @@ public class GUI extends Frame{
         
         //Sudo password Line
         c.gridx=0;
-        c.gridy=12;
+        c.gridy=10;
         c.fill=GridBagConstraints.HORIZONTAL;
         c.gridwidth=1;
         this.add(rootPasswordIPLable,c);
         
         c.insets=new Insets(0, 0, 0, 0); // отступы компонентов ( top,left, bottom, right )
         c.fill=GridBagConstraints.NONE;
-        c.gridy=12;
+        c.gridy=10;
         c.gridx=0;
         c.gridx=1;
         this.add(sudoPasswordText, c);
@@ -375,7 +344,7 @@ public class GUI extends Frame{
         
         // Add main Scroll pane to the main window
        c.gridx=0;
-        c.gridy=13;
+        c.gridy=11;
         c.fill=GridBagConstraints.BOTH;
         c.gridwidth=23;
         c.gridheight=63;//сколько клеток занимает элемент в высоту
