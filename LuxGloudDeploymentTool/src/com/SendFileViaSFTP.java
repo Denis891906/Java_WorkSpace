@@ -10,14 +10,14 @@ import java.util.Vector;
  * Created by dolebedev on 24.11.2015.
  */
 public class SendFileViaSFTP {
-    public SendFileViaSFTP() {
+   /* public SendFileViaSFTP() {
     this.SFTPHOST = "10.35.204.50";
     this.SFTPPORT = 22;
     this.SFTPUSER = "centos";
     // this file can be id_rsa or id_dsa based on which algorithm is used to create the key
     this.privateKey = "E:\\Backup_from_laptop_Edinburht\\Keys\\URTDSM_CentOS_6\\dl_urtdsm_centos_6.pem";
     this.SFTPWORKINGDIR = "/home/centos/";
-}
+}*/
 
     public SendFileViaSFTP(String remoteHost, String remoteUser, String password,String serverType) {
             this.SFTPHOST = remoteHost;
@@ -29,6 +29,7 @@ public class SendFileViaSFTP {
             //File myFile = new File("E:\\denys_key.pem");
             //this.fileStream = null;
             this.serverType=serverType;
+            this.password=password;
 
     }
     private String SFTPHOST;
@@ -51,10 +52,11 @@ public class SendFileViaSFTP {
         Channel channel     = null;
         ChannelSftp channelSftp = null;
         try {
-            jSch.addIdentity(privateKey);
+            //jSch.addIdentity(privateKey);
             //System.out.println("Private Key Added.");
             session = jSch.getSession(SFTPUSER,SFTPHOST,SFTPPORT);
             session.setPassword(password);
+            
             System.out.println("Session for sending file to host "+SFTPHOST+"  was created" );
             GUI.setMessage("Session for sending file to host "+SFTPHOST+"  was created",serverType );
 

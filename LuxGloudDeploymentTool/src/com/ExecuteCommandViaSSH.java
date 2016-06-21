@@ -9,7 +9,14 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.StringWriter;
 public class ExecuteCommandViaSSH {
-	
+	private String SFTPHOST;
+    private int SFTPPORT;
+    private String SFTPUSER;
+    private String password;
+    private String SFTPWORKINGDIR;
+    private Channel channel = null;
+    private Session session= null;
+    private String serverType;
 
 	ExecuteCommandViaSSH(String host,String user, String password, String serverType){
 		this.SFTPHOST = host;
@@ -20,7 +27,7 @@ public class ExecuteCommandViaSSH {
         this.SFTPWORKINGDIR = "/home/"+user+"/";
         this.serverType=serverType;
 	}
-	ExecuteCommandViaSSH(String host,String user, String password, String serverType,String command){
+	ExecuteCommandViaSSH(String host,String user, String password, String serverType, String command){
 		this.SFTPHOST = host;
         this.SFTPPORT = 22;
         this.SFTPUSER = user;
@@ -34,15 +41,7 @@ public class ExecuteCommandViaSSH {
         
 	}
 	
-	private String SFTPHOST;
-    private int SFTPPORT;
-    private String SFTPUSER;
-    private String password;
-    private String SFTPWORKINGDIR;
-    private Channel channel = null;
-    private Session session= null;
-
-    private String serverType;
+	
     
     public void CreateConnection() {
     	JSch jSch = new JSch();
@@ -53,7 +52,7 @@ public class ExecuteCommandViaSSH {
         
         try {
         
-        System.out.println("Private Key Added.");
+        //System.out.println("Private Key Added.");
         session = jSch.getSession(SFTPUSER, SFTPHOST, SFTPPORT);
         session.setPassword(password);
         System.out.println("session created.");

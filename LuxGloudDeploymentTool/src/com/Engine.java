@@ -1,8 +1,12 @@
 package com;
 
+import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -60,9 +64,7 @@ public class Engine implements ActionListener{
 		
 		if (clickedButton.getText()=="Install PDC, AppServer, Historian"){
 			//Verifications that all data were entered.
-			if(keyPath==null){
-				parent.ShowWarningDialog("Please select key file.");
-			}else if(parent.GetInternalPDCIP().toString().isEmpty()){
+			if(parent.GetInternalPDCIP().toString().isEmpty()){
 				parent.ShowWarningDialog("Please eneter Internal PDC IP.");
 			}else if(parent.GetInternalAppServerIP().toString().isEmpty()){
 				parent.ShowWarningDialog("Please eneter Internal AppServer IP.");
@@ -81,8 +83,8 @@ public class Engine implements ActionListener{
 				String[] pdcCommands={
 						
 						"sudo rpm -i *pdc*",
-						"sudo /opt/phasorpoint-pdc/bin/createdb -u postgres -p P0stgres -d",
-						"sudo service phasorpoint-pdc start"
+						"sudo /opt/phasorpoint-pdc/bin/createdb -u postgres -p P0stgres -d"
+						
 						
 				};
 				
@@ -92,8 +94,8 @@ public class Engine implements ActionListener{
 						"sudo sh -c \"echo 'infrastructure.input.addresses="+parent.GetInternalPDCIP().toString()+"' >> /etc/phasorpoint-appserver/appserver.properties\"",
 						"sudo sh -c \"echo 'naming.strategy=urtdsm' >> /etc/phasorpoint-appserver/appserver.properties\"",
 						"sudo sh -c \"echo 'pdc.1.host="+parent.GetInternalPDCIP().toString()+"' >> /etc/phasorpoint-appserver/appserver.properties\"",
-						"sudo sh -c \"echo 'db.1.host="+parent.GetInternalHistorianIP().toString()+"' >> /etc/phasorpoint-appserver/appserver.properties\"",
-						"sudo service phasorpoint-appserver start"
+						"sudo sh -c \"echo 'db.1.host="+parent.GetInternalHistorianIP().toString()+"' >> /etc/phasorpoint-appserver/appserver.properties\""
+						
 				};
 				
 				//Commands which should be executed to install Historian service
@@ -109,26 +111,29 @@ public class Engine implements ActionListener{
 						"sudo sh -c \"echo 'repository.dir=/var/phasorpoint-historian/data' >> /etc/phasorpoint-historian/historian.properties\"",
 						"sudo sh -c \"echo 'summary.repository.dir=/var/phasorpoint-historian/summary' >> /etc/phasorpoint-historian/historian.properties\"",
 						"sudo sh -c \"echo 'repository.size.limit=100000' >> /etc/phasorpoint-historian/historian.properties\"",
-						"sudo sh -c \"echo 'summary.size.limit=50' >> /etc/phasorpoint-historian/historian.properties\"",
-						"sudo service phasorpoint-historian start"
+						"sudo sh -c \"echo 'summary.size.limit=50' >> /etc/phasorpoint-historian/historian.properties\""
+						
 				};	
 				
 						
 			
 			//PDC Installation
-			System.out.println("Installetion process for PDC with external IP "+parent.GetExternalPDCIP());	
-			Thread pdcInstall=new Thread(new deployService(parent.GetExternalPDCIP(), parent.getUserName(), parent.getSudoPassword() ,keyPath, pdcBuildPath,"pdc" ,pdcCommands));
+			System.out.println("Installetion process for PDC with external IP "+parent.GetInternalPDCIP());	
+			Thread pdcInstall=new Thread(new deployService(parent.GetInternalPDCIP(), parent.getUserName(), parent.getSudoPassword() ,pdcBuildPath,"pdc" ,pdcCommands));
 			pdcInstall.start();
 			
 			//AppServer Installation
-			System.out.println("Installetion process for AppServer with external IP "+parent.GetExternalAppServerIP());	
-			Thread appServerInstall=new Thread(new deployService(parent.GetExternalAppServerIP(), parent.getUserName(), parent.getSudoPassword(), keyPath, appServerBuildPath,"app",appServerCommands));
+			System.out.println("Installetion process for AppServer with external IP "+parent.GetInternalAppServerIP());	
+			Thread appServerInstall=new Thread(new deployService(parent.GetInternalAppServerIP(), parent.getUserName(), parent.getSudoPassword(),  appServerBuildPath,"app",appServerCommands));
 			appServerInstall.start();
 			
 			//Historian Installation
-			System.out.println("Installetion process for Historian with external IP "+parent.GetExternalHistorianIP());	
-			Thread histServerInstall=new Thread(new deployService(parent.GetExternalHistorianIP(), parent.getUserName(), parent.getSudoPassword(), keyPath, historianBuildPath,"hist",historainCommands));
+			System.out.println("Installetion process for Historian with external IP "+parent.GetInternalHistorianIP());	
+			Thread histServerInstall=new Thread(new deployService(parent.GetInternalHistorianIP(), parent.getUserName(), parent.getSudoPassword(), historianBuildPath,"hist",historainCommands));
 			histServerInstall.start();
+			
+			Thread startAllServices=new Thread(new waitFinishAppAndHistServicesDeploy(pdcInstall, appServerInstall, histServerInstall, parent.GetInternalPDCIP(), parent.GetInternalAppServerIP(), parent.GetInternalHistorianIP(), parent.getUserName(), parent.getSudoPassword()));
+			startAllServices.start();
 			
 					
 			parent.pack();
@@ -136,9 +141,7 @@ public class Engine implements ActionListener{
 		}else if (clickedButton.getText()=="Reinstall Three Services"){
 			
 			//Verifications that all data were entered.
-			if(keyPath==null){
-				parent.ShowWarningDialog("Please select key file.");
-			}else if(parent.GetInternalPDCIP().toString().isEmpty()){
+			if(parent.GetInternalPDCIP().toString().isEmpty()){
 				parent.ShowWarningDialog("Please eneter Internal PDC IP.");
 			}else if(parent.GetInternalAppServerIP().toString().isEmpty()){
 				parent.ShowWarningDialog("Please eneter Internal AppServer IP.");
@@ -158,8 +161,9 @@ public class Engine implements ActionListener{
 			String[] pdcCommands={
 					
 					"sudo rpm -i *pdc*",
-					"sudo /opt/phasorpoint-pdc/bin/createdb -u postgres -p P0stgres -d",
-					"sudo service phasorpoint-pdc start"
+					"sudo /opt/phasorpoint-pdc/bin/createdb -u postgres -p P0stgres -d"
+					
+					
 					
 			};
 			
@@ -170,8 +174,8 @@ public class Engine implements ActionListener{
 					"sudo sh -c \"echo 'infrastructure.input.addresses="+parent.GetInternalPDCIP().toString()+"' >> /etc/phasorpoint-appserver/appserver.properties\"",
 					"sudo sh -c \"echo 'naming.strategy=urtdsm' >> /etc/phasorpoint-appserver/appserver.properties\"",
 					"sudo sh -c \"echo 'pdc.1.host="+parent.GetInternalPDCIP().toString()+"' >> /etc/phasorpoint-appserver/appserver.properties\"",
-					"sudo sh -c \"echo 'db.1.host="+parent.GetInternalHistorianIP().toString()+"' >> /etc/phasorpoint-appserver/appserver.properties\"",
-					"sudo service phasorpoint-appserver start"
+					"sudo sh -c \"echo 'db.1.host="+parent.GetInternalHistorianIP().toString()+"' >> /etc/phasorpoint-appserver/appserver.properties\""
+					
 			};
 			
 			//Commands which should be executed to install Historian service
@@ -187,42 +191,47 @@ public class Engine implements ActionListener{
 					"sudo sh -c \"echo 'repository.dir=/var/phasorpoint-historian/data' >> /etc/phasorpoint-historian/historian.properties\"",
 					"sudo sh -c \"echo 'summary.repository.dir=/var/phasorpoint-historian/summary' >> /etc/phasorpoint-historian/historian.properties\"",
 					"sudo sh -c \"echo 'repository.size.limit=100000' >> /etc/phasorpoint-historian/historian.properties\"",
-					"sudo sh -c \"echo 'summary.size.limit=50' >> /etc/phasorpoint-historian/historian.properties\"",
-					"sudo service phasorpoint-historian start"
+					"sudo sh -c \"echo 'summary.size.limit=50' >> /etc/phasorpoint-historian/historian.properties\""
+					
 			};	
 			
 			//Execute remove commands in the PDC VM
-			ExecuteCommandViaSSH pdcRemove=new ExecuteCommandViaSSH(parent.GetExternalPDCIP(), parent.getUserName(), keyPath, parent.getSudoPassword(), "pdc");
+			ExecuteCommandViaSSH pdcRemove=new ExecuteCommandViaSSH(parent.GetInternalPDCIP(), parent.getUserName(), parent.getSudoPassword(), "pdc");
 			pdcRemove.CreateConnection();
 			pdcRemove.StartCommand(pdcRemoveCommands);
 			pdcRemove.CloseConnection();
 			
 			//PDC Installation
-			System.out.println("Installetion process for PDC with external IP "+parent.GetExternalPDCIP());	
-			Thread pdcInstall=new Thread(new deployService(parent.GetExternalPDCIP(), parent.getUserName(), parent.getSudoPassword() ,keyPath, pdcBuildPath,"pdc" ,pdcCommands));
+			System.out.println("Installetion process for PDC with external IP "+parent.GetInternalPDCIP());	
+			Thread pdcInstall=new Thread(new deployService(parent.GetInternalPDCIP(), parent.getUserName(), parent.getSudoPassword() ,pdcBuildPath,"pdc" ,pdcCommands));
 			pdcInstall.start();
+						
 			
 			//Execute remove commands in the AppServer VM
-			ExecuteCommandViaSSH appRemove=new ExecuteCommandViaSSH(parent.GetExternalAppServerIP(), parent.getUserName(), keyPath, parent.getSudoPassword(), "app");
+			ExecuteCommandViaSSH appRemove=new ExecuteCommandViaSSH(parent.GetInternalAppServerIP(), parent.getUserName(),parent.getSudoPassword(), "app");
 			appRemove.CreateConnection();
 			appRemove.StartCommand(appServerRemoveCommands);
 			appRemove.CloseConnection();
 			
 			//AppServer Installation
-			System.out.println("Installetion process for AppServer with external IP "+parent.GetExternalAppServerIP());	
-			Thread appServerInstall=new Thread(new deployService(parent.GetExternalAppServerIP(), parent.getUserName(), parent.getSudoPassword(), keyPath, appServerBuildPath,"app",appServerCommands));
+			System.out.println("Installetion process for AppServer with external IP "+parent.GetInternalAppServerIP());	
+			Thread appServerInstall=new Thread(new deployService(parent.GetInternalAppServerIP(), parent.getUserName(), parent.getSudoPassword(), appServerBuildPath,"app",appServerCommands));
 			appServerInstall.start();
 			
 			//Execute remove commands in the Historian VM
-			ExecuteCommandViaSSH histRemove=new ExecuteCommandViaSSH(parent.GetExternalHistorianIP(), parent.getUserName(), keyPath, parent.getSudoPassword(), "hist");
+			ExecuteCommandViaSSH histRemove=new ExecuteCommandViaSSH(parent.GetInternalHistorianIP(), parent.getUserName(),  parent.getSudoPassword(), "hist");
 			histRemove.CreateConnection();
 			histRemove.StartCommand(histRemoveCommands);
 			histRemove.CloseConnection();
 					
 			//Historian Installation
-			System.out.println("Installetion process for Historian with external IP "+parent.GetExternalHistorianIP());	
-			Thread histServerInstall=new Thread(new deployService(parent.GetExternalHistorianIP(), parent.getUserName(), parent.getSudoPassword(), keyPath, historianBuildPath,"hist",historainCommands));
+			System.out.println("Installetion process for Historian with external IP "+parent.GetInternalHistorianIP());	
+			Thread histServerInstall=new Thread(new deployService(parent.GetInternalHistorianIP(), parent.getUserName(), parent.getSudoPassword(),  historianBuildPath,"hist",historainCommands));
 			histServerInstall.start();
+			
+			Thread startAllServices=new Thread(new waitFinishAppAndHistServicesDeploy(pdcInstall, appServerInstall, histServerInstall, parent.GetInternalPDCIP(), parent.GetInternalAppServerIP(), parent.GetInternalHistorianIP(), parent.getUserName(), parent.getSudoPassword()));
+			startAllServices.start();
+			
 			
 			}
 			
@@ -257,7 +266,7 @@ public class Engine implements ActionListener{
 		    	  parent.ShowWarningDialog("AppServer install rpm file wasn't found in the directory "+directPath + " . \nPlease specify directory again.");
 		      }else if((temp.returnFilePath(directPath,"*hist*").toString()).matches("NONE")){
 		    	  parent.ShowWarningDialog("Historian install rpm file wasn't found in the directory "+directPath + " . \nPlease specify directory again.");
-		    	  }else if(chooser.getSelectedFile().toString().length()>81 ){
+		    	  }else if(chooser.getSelectedFile().toString().length()>61 ){
 		    		  parent.SetBuildPath("..."+chooser.getSelectedFile().getName().toString(),
 			    			  temp.returnFilePath(directPath,"*pdc*").toString(),
 			    			  temp.returnFilePath(directPath,"*app*").toString(),
@@ -266,6 +275,7 @@ public class Engine implements ActionListener{
 		    		  pdcBuildPath= chooser.getSelectedFile().getAbsolutePath()+"\\" + temp.returnFilePath(directPath,"*pdc*").toString() ;
 			    	  appServerBuildPath=chooser.getSelectedFile().getAbsolutePath()+"\\" + temp.returnFilePath(directPath,"*app*").toString();
 			    	  historianBuildPath=chooser.getSelectedFile().getAbsolutePath()+"\\" + temp.returnFilePath(directPath,"*hist*").toString();
+			    	  
 		    	  }
 		      else {
 		    	  parent.SetBuildPath(chooser.getSelectedFile().getAbsolutePath(),
@@ -279,12 +289,18 @@ public class Engine implements ActionListener{
 		    	  
 		      }
 		      
-		      parent.pack();
+		      
 		      }
 		    else {
 		      System.out.println("No Selection ");
 		      }
+		    //parent.pack();
 		
+		
+			
+			
+		        
+		    
 		}
 		
 		

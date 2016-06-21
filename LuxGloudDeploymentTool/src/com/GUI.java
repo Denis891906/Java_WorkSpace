@@ -117,25 +117,26 @@ public class GUI extends JFrame{
         
         
     	internalPdcIPText=new JTextField(16);
-    	internalPdcIPText.setText("192.168.160.145");
+    	internalPdcIPText.setText("172.26.128.221");
     	
     	
         internalAppIPText=new JTextField(16);
-        internalAppIPText.setText("192.168.160.146");
+        internalAppIPText.setText("172.26.128.222");
         
         
         internalHistIPText=new JTextField(16);
-        internalHistIPText.setText("192.168.160.150");
+        internalHistIPText.setText("172.26.128.223");
         
         usernameText = new JTextField(16);
-        usernameText.setText("centos");
+        usernameText.setText("tempuser");
         sudoPasswordText=new JTextField(16);
-        sudoPasswordText.setText("Alstom$123");
+        sudoPasswordText.setText("1qaz@WSX");
         
         JButton pdcInstallButton=new JButton("Install PDC, AppServer, Historian");
         JButton appInstallButton=new JButton("Reinstall Three Services");
         JButton selectBuildFolderButton=new JButton("Select Build Folder");
         JButton selectKeyFileButton=new JButton("Select Key File");
+        //JButton openIE=new JButton("Open Internet Expolorer");
         
         pdcTextArea = new JTextArea(23,63);
         pdcTextArea.setEditable(false);
@@ -179,12 +180,13 @@ public class GUI extends JFrame{
         
         //Add listener for button selectBuildFolder
         
-        //GUIEngine guiEngine=new GUIEngine(this);
+        Engine guiEngine=new Engine(this);
         
-        /*selectBuildFolderButton.addActionListener(guiEngine);
+        selectBuildFolderButton.addActionListener(guiEngine);
         pdcInstallButton.addActionListener(guiEngine);
         appInstallButton.addActionListener(guiEngine);
-        selectKeyFileButton.addActionListener(guiEngine);*/
+        selectKeyFileButton.addActionListener(guiEngine);
+       // openIE.addActionListener(guiEngine);
         
       //  this.addComponentListener(new resizeWindow(this));
         
@@ -253,7 +255,10 @@ public class GUI extends JFrame{
         
       //Line 6 with Historian elements  
         
-       
+       /* c.fill=GridBagConstraints.HORIZONTAL;
+        c.insets=new Insets(1, 200, 0, 0); // отступы компонентов ( top,left, bottom, right )
+        c.gridx=2;
+        this.add(openIE, c);*/
        
         
         
@@ -268,7 +273,7 @@ public class GUI extends JFrame{
         this.add(selectBuildFolderButton, c);
         
         c.gridx=1;
-        c.gridy=5;
+        c.gridy=4;
         c.insets=new Insets(0, 0, 0, 0); // отступы компонентов ( top,left, bottom, right )
         c.gridwidth=5;
         c.gridheight=1;
@@ -277,33 +282,33 @@ public class GUI extends JFrame{
         this.add(buildPathLable, c);   
     	
         c.gridx=0;
-        c.gridy=6;
+        c.gridy=5;
         c.gridwidth=1;
         this.add(buildPDCPathLable1,c);
         
         
         c.gridx=1;
-        c.gridy=6;
+        c.gridy=5;
         c.gridwidth=5;
         this.add(buildPDCPathLable2,c);
         
         c.gridx=0;
-        c.gridy=7;
+        c.gridy=6;
         c.gridwidth=1;
         this.add(buildAppServerPathLable1, c);
         
         c.gridx=1;
-        c.gridy=7;
+        c.gridy=6;
         c.gridwidth=5;
         this.add(buildAppServerPathLable2, c);
     	
         c.gridx=0;
-        c.gridy=8;
+        c.gridy=7;
         c.gridwidth=1;
         this.add(buildHistoranPathLable1, c);
     	
         c.gridx=1;
-        c.gridy=8;
+        c.gridy=7;
         c.gridwidth=5;
         this.add(buildHistoranPathLable2, c);
         
@@ -352,8 +357,9 @@ public class GUI extends JFrame{
         this.add(mainScrollPane, c);
         
         
-        
-        
+		buildPDCPathLable1.setText("PDC rpm file path:");
+		buildAppServerPathLable1.setText("AppServer rpm file path:");
+		buildHistoranPathLable1.setText("Historian rpm file path:");
         
         this.pack(); // delete empty space from window
 	}
@@ -362,13 +368,17 @@ public class GUI extends JFrame{
 		
 		
 	public void SetBuildPath(String path, String pdcPath,String appPath,String histPath){
-		buildPathLable.setText(path);
-		buildPDCPathLable1.setText("PDC rpm file path:");
+		this.clearTextAreas();
+		
+		
+		buildPathLable.setText(path);	
+
 		buildPDCPathLable2.setText(pdcPath);
-		buildAppServerPathLable1.setText("AppServer rpm file path:");
+		
 		buildAppServerPathLable2.setText(appPath);
-		buildHistoranPathLable1.setText("Historian rpm file path:");
+		
 		buildHistoranPathLable2.setText(histPath);
+		//this.pack();
 	}
 	
 	public String GetBuildPath(){
@@ -382,6 +392,11 @@ public class GUI extends JFrame{
 
 	public void ShowWarningDialog (String text){
 		JOptionPane.showMessageDialog(new JFrame(), text, "Dialog", JOptionPane.ERROR_MESSAGE);
+	} 
+	
+	
+	public static void showInfoMessage (String text){
+		JOptionPane.showMessageDialog(new JFrame(), text, "Dialog", JOptionPane.INFORMATION_MESSAGE);
 	} 
 	
 	
@@ -400,7 +415,7 @@ public class GUI extends JFrame{
 		return usernameText.getText();
 	}
 	public String getSudoPassword(){
-		return sudoPasswordText.getText();
+		return sudoPasswordText.getText().toString();
 		
 	}
 	
