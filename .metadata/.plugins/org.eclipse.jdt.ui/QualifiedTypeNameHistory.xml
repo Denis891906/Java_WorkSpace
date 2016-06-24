@@ -44,4 +44,5 @@
 <fullyQualifiedTypeName name="javax.swing.event.ChangeListener"/>
 <fullyQualifiedTypeName name="java.awt.Frame"/>
 <fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
+<fullyQualifiedTypeName name="Customer"/>
 </qualifiedTypeNameHistroy>

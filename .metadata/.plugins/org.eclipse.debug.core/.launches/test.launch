@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
-<listEntry value="/send_command_thread/src/send_command_thread/test.java"/>
+<listEntry value="/lesson14/src/Test.java"/>
 </listAttribute>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
 <listEntry value="1"/>
 </listAttribute>
-<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="send_command_thread.test"/>
-<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="send_command_thread"/>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="Test"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="lesson14"/>
 </launchConfiguration>
