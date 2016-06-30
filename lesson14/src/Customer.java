@@ -1,4 +1,11 @@
 
 public class Customer {
-    public Customer (String a, String b){}
+	String firstName;
+	String lastName;
+	
+    public Customer (String a, String b){
+    	firstName=a;
+    	lastName=b;
+    	
+    }
 }

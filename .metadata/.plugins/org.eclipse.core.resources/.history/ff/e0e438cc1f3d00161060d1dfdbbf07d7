@@ -23,7 +23,7 @@ public class Test {
 		for (int i=0; i<totalElem; i++){
 			
 			Customer currentCustomer=(Customer) customers.get(i);
-			System.out.println("The current customer is "+ currentCustomer.lastName);
+			System.out.println("The current customer is "+ currentCast.lastName);
 		}
 		
 		
