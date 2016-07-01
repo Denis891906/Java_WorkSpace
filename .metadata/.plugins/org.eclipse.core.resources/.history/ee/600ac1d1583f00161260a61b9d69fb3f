@@ -1,0 +1,44 @@
+package com;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.ScrollPaneConstants;
+
+public class LogFrame extends JFrame{
+	
+
+    public LogFrame(String logMessage)
+    {   	
+        //setBounds(100, 100, 491, 310);
+        getContentPane().setLayout(null);
+
+        JTextArea textField = new JTextArea();
+        textField.setEditable(false);      
+        logMessage="Moves and resizes this component. The new location of the top-left corner is specified by x and y, and the new size is specified by width and height."
+        		+ "This method changes layout-related information, and therefore, invalidates the component hierarchy.The width or height values are automatically enlarged if either is less than the minimum size as specified by previous call to setMinimumSize."
+        		+ "The method changes the geometry-related data. Therefore, the native windowing system may ignore such requests, or it may modify the requested data, so that the Window object is placed and sized in a way that corresponds closely to the desktop settings.Overrides:";
+        textField.setText(logMessage);
+        
+        JScrollPane scroll = new JScrollPane(textField);
+        //scroll.setBounds(10, 11, 455, 249); 
+        // <-- THIS
+        scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+
+        getContentPane().add(scroll);
+        setLocationRelativeTo ( null );
+        
+        
+        
+        
+
+}
+    
+ 
+    
+    
+
+ 
+}

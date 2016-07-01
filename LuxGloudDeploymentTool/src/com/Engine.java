@@ -60,6 +60,7 @@ public class Engine implements ActionListener{
 		
 		if (src instanceof JButton){
 			clickedButton=(JButton) src;
+			  System.out.println("Button was clicked "+clickedButton.getText());
 		}
 		
 		if (clickedButton.getText()=="Install PDC, AppServer, Historian"){
@@ -301,7 +302,22 @@ public class Engine implements ActionListener{
 			
 		        
 		    
-		}
+		}else if (clickedButton.getText()=="PDC Install log"){
+	    	  			
+	    	  LogFrame my=new LogFrame(parent.pdcInstallLog,"PDC deployment log");
+	    	  	    	  
+	    	  
+	      }else if (clickedButton.getText()=="AppServer Install log"){
+	  			
+	    	  LogFrame my=new LogFrame(parent.appServerInstallLog,"AppServer deployment log");
+	  	    	  
+	  
+	      }else if (clickedButton.getText()=="Historian Install log"){
+	  			
+	    	  LogFrame my=new LogFrame(parent.historianInstallLog,"Historian deployment log");
+	  	    	  
+	  
+	      }
 		
 		
 		
@@ -310,3 +326,4 @@ public class Engine implements ActionListener{
 	}
 	
 }
+

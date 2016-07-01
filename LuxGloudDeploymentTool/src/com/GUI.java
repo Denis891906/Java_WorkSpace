@@ -26,12 +26,17 @@ public class GUI extends JFrame{
 	public JLabel buildAppServerPathLable1;
 	public JLabel buildAppServerPathLable2;
 	public JLabel buildHistoranPathLable1;
+	public static String pdcInstallLog="";
+	public static String appServerInstallLog="";
+	public static String historianInstallLog="";
+	
 	public JLabel buildHistoranPathLable2;
 	private JTextField internalPdcIPText;
 	
 	private static JTextArea pdcTextArea;
 	private static JTextArea appServerTextArea;
 	private static JTextArea histTextArea;
+	
 	private JTextField internalAppIPText;
 	
 	private JTextField internalHistIPText;
@@ -42,20 +47,28 @@ public class GUI extends JFrame{
 	
 	public static void setMessage(String text,String serverType){
 		if (serverType=="pdc"){
-		pdcTextArea.setText(pdcTextArea.getText()+"\n"+text);
+			pdcInstallLog=pdcInstallLog+"\n"+text;
+			
+		//pdcTextArea.setText(pdcTextArea.getText()+"\n"+text);
 		}else if(serverType=="app"){
-			appServerTextArea.setText(appServerTextArea.getText()+"\n"+text);
+			appServerInstallLog=appServerInstallLog+"\n"+text;
+			//appServerTextArea.setText(appServerTextArea.getText()+"\n"+text);
 		}else if (serverType=="hist"){
-			histTextArea.setText(histTextArea.getText()+"\n"+text);
+			historianInstallLog=historianInstallLog+"\n"+text;
+			
+		//histTextArea.setText(histTextArea.getText()+"\n"+text);
 		}
 	}
 	public static void setProgressMessage(String text,String serverType){
 		if (serverType=="pdc"){
-			pdcTextArea.setText(pdcTextArea.getText()+text);
+			pdcInstallLog=pdcInstallLog+"\n"+text;
+			//pdcTextArea.setText(pdcTextArea.getText()+text);
 			}else if(serverType=="app"){
-				appServerTextArea.setText(appServerTextArea.getText()+text);
+				appServerInstallLog=appServerInstallLog+"\n"+text;
+				//appServerTextArea.setText(appServerTextArea.getText()+text);
 			}else if (serverType=="hist"){
-				histTextArea.setText(histTextArea.getText()+text);
+				historianInstallLog=historianInstallLog+"\n"+text;
+				//histTextArea.setText(histTextArea.getText()+text);
 			}
 	}
 	public static void showErrorMessage(String text){
@@ -136,6 +149,9 @@ public class GUI extends JFrame{
         JButton appInstallButton=new JButton("Reinstall Three Services");
         JButton selectBuildFolderButton=new JButton("Select Build Folder");
         JButton selectKeyFileButton=new JButton("Select Key File");
+        JButton pdcInstallLogButton=new JButton("PDC Install log");
+        JButton appServerInstallLogButton=new JButton("AppServer Install log");
+        JButton histInstallLogButton=new JButton("Historian Install log");
         //JButton openIE=new JButton("Open Internet Expolorer");
         
         pdcTextArea = new JTextArea(23,63);
@@ -186,6 +202,9 @@ public class GUI extends JFrame{
         pdcInstallButton.addActionListener(guiEngine);
         appInstallButton.addActionListener(guiEngine);
         selectKeyFileButton.addActionListener(guiEngine);
+        pdcInstallLogButton.addActionListener(guiEngine);
+        appServerInstallLogButton.addActionListener(guiEngine);
+        histInstallLogButton.addActionListener(guiEngine);
        // openIE.addActionListener(guiEngine);
         
       //  this.addComponentListener(new resizeWindow(this));
@@ -346,16 +365,24 @@ public class GUI extends JFrame{
         c.gridx=1;
         this.add(sudoPasswordText, c);
         
-        
-        // Add main Scroll pane to the main window
-       c.gridx=0;
         c.gridy=11;
+        c.gridx=0;
+        this.add(pdcInstallLogButton,c);
+        c.gridx=1;
+        this.add(appServerInstallLogButton,c);
+        c.gridx=2;
+        this.add(histInstallLogButton,c);
+        
+        
+/*        // Add main Scroll pane to the main window
+       c.gridx=0;
+        c.gridy=12;
         c.fill=GridBagConstraints.BOTH;
         c.gridwidth=23;
         c.gridheight=63;//сколько клеток занимает элемент в высоту
        
         this.add(mainScrollPane, c);
-        
+*/        
         
 		buildPDCPathLable1.setText("PDC rpm file path:");
 		buildAppServerPathLable1.setText("AppServer rpm file path:");

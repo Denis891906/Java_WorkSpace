@@ -8,9 +8,10 @@
     <persistedState key="perspectiveBarVisible" value="true"/>
     <persistedState key="isRestored" value="true"/>
     <persistedState key="workingSets" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;workingSets/>"/>
-    <persistedState key="aggregateWorkingSetId"/>
+    <persistedState key="aggregateWorkingSetId" value="Aggregate for window 1467350715415"/>
     <persistedState key="show_in_time" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;show_in_time/>"/>
     <tags>topLevel</tags>
+    <tags>shellMaximized</tags>
     <children xsi:type="basic:PartSashContainer" xmi:id="_x0gkQiYoEeaal_qVnDIgFg" selectedElement="_x0hLUCYoEeaal_qVnDIgFg" horizontal="true">
       <children xsi:type="advanced:PerspectiveStack" xmi:id="_x0hLUCYoEeaal_qVnDIgFg" elementId="org.eclipse.ui.ide.perspectivestack" containerData="7500" selectedElement="_zKNy8CYoEeaal_qVnDIgFg">
         <children xsi:type="advanced:Perspective" xmi:id="_zKNy8CYoEeaal_qVnDIgFg" elementId="org.eclipse.jst.j2ee.J2EEPerspective" selectedElement="_zKNy8SYoEeaal_qVnDIgFg" label="Java EE" iconURI="platform:/plugin/org.eclipse.jst.j2ee.ui/icons/full/cview16/j2ee_perspective.gif">
@@ -133,7 +134,7 @@
       </children>
     </sharedElements>
     <sharedElements xsi:type="basic:Part" xmi:id="_zFkjgCYoEeaal_qVnDIgFg" elementId="org.eclipse.ui.navigator.ProjectExplorer" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" label="Project Explorer" iconURI="platform:/plugin/org.eclipse.ui.navigator.resources/icons/full/eview16/resource_persp.gif" tooltip="" closeable="true">
-      <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;view CommonNavigator.LINKING_ENABLED=&quot;0&quot; org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets=&quot;0&quot;/>"/>
+      <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;view CommonNavigator.LINKING_ENABLED=&quot;0&quot; currentWorkingSetName=&quot;Aggregate for window 1467350715415&quot; org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets=&quot;0&quot;/>"/>
       <tags>View</tags>
       <tags>categoryTag:General</tags>
       <tags>active</tags>
@@ -227,7 +228,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_yY0LMiYoEeaal_qVnDIgFg" elementId="org.eclipse.ui.workbench.file">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_yZGfECYoEeaal_qVnDIgFg" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" enabled="false" command="_wlX3xSYoEeaal_qVnDIgFg"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_JJ8akD9MEea4HvVEBkzFEQ" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_wlX3xSYoEeaal_qVnDIgFg"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_yY0LMyYoEeaal_qVnDIgFg" elementId="additions" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -254,7 +255,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_yY0LNyYoEeaal_qVnDIgFg" elementId="org.eclipse.ui.workbench.navigate">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_yZMlsSYoEeaal_qVnDIgFg" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_wlXQmiYoEeaal_qVnDIgFg"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_JKB6ID9MEea4HvVEBkzFEQ" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_wlXQmiYoEeaal_qVnDIgFg"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_yY0LOCYoEeaal_qVnDIgFg" elementId="group.editor" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -576,6 +577,8 @@
     <bindings xmi:id="_woJfFiYoEeaal_qVnDIgFg" keySequence="ALT+SHIFT+Q P" command="_wlWCniYoEeaal_qVnDIgFg">
       <parameters xmi:id="_woJfFyYoEeaal_qVnDIgFg" elementId="org.eclipse.ui.views.showView.viewId" name="org.eclipse.ui.views.showView.viewId" value="org.eclipse.jdt.ui.PackageExplorer"/>
     </bindings>
+    <bindings xmi:id="_IFIuoD9MEea4HvVEBkzFEQ" keySequence="CTRL+SHIFT+D" command="_IDVX0D9MEea4HvVEBkzFEQ"/>
+    <bindings xmi:id="_IFQqcD9MEea4HvVEBkzFEQ" keySequence="CTRL+SHIFT+V" command="_IDV-4D9MEea4HvVEBkzFEQ"/>
   </bindingTables>
   <bindingTables xmi:id="_wnbGEyYoEeaal_qVnDIgFg" elementId="org.eclipse.tm.terminal.EditContext" bindingContext="_wluc8CYoEeaal_qVnDIgFg">
     <bindings xmi:id="_wnbGFCYoEeaal_qVnDIgFg" keySequence="ALT+ARROW_RIGHT" command="_wlYe9iYoEeaal_qVnDIgFg"/>
@@ -834,6 +837,7 @@
   <bindingTables xmi:id="_zFSPuSYoEeaal_qVnDIgFg" bindingContext="_zFSPuCYoEeaal_qVnDIgFg"/>
   <bindingTables xmi:id="_zFSPuyYoEeaal_qVnDIgFg" bindingContext="_zFSPuiYoEeaal_qVnDIgFg"/>
   <bindingTables xmi:id="_zFSPvSYoEeaal_qVnDIgFg" bindingContext="_zFSPvCYoEeaal_qVnDIgFg"/>
+  <bindingTables xmi:id="_IrQ6gT9MEea4HvVEBkzFEQ" bindingContext="_IrQ6gD9MEea4HvVEBkzFEQ"/>
   <rootContext xmi:id="_wgafJCYoEeaal_qVnDIgFg" elementId="org.eclipse.ui.contexts.dialogAndWindow" contributorURI="platform:/plugin/org.eclipse.platform" name="In Dialogs and Windows" description="Either a dialog or a window is open">
     <children xmi:id="_wgafJSYoEeaal_qVnDIgFg" elementId="org.eclipse.ui.contexts.window" contributorURI="platform:/plugin/org.eclipse.platform" name="In Windows" description="A window is open">
       <children xmi:id="_wgafJiYoEeaal_qVnDIgFg" elementId="org.eclipse.e4.ui.contexts.views" contributorURI="platform:/plugin/org.eclipse.platform" name="%bindingcontext.name.bindingView"/>
@@ -951,6 +955,7 @@
   <rootContext xmi:id="_zFSPuCYoEeaal_qVnDIgFg" elementId="org.eclipse.wst.server.ui.internal.webbrowser.actionSet" name="Auto::org.eclipse.wst.server.ui.internal.webbrowser.actionSet"/>
   <rootContext xmi:id="_zFSPuiYoEeaal_qVnDIgFg" elementId="org.eclipse.wst.web.ui.wizardsActionSet" name="Auto::org.eclipse.wst.web.ui.wizardsActionSet"/>
   <rootContext xmi:id="_zFSPvCYoEeaal_qVnDIgFg" elementId="org.eclipse.wst.ws.explorer.explorer" name="Auto::org.eclipse.wst.ws.explorer.explorer"/>
+  <rootContext xmi:id="_IrQ6gD9MEea4HvVEBkzFEQ" elementId="com.jformdesigner.eclipse.actionSet" name="Auto::com.jformdesigner.eclipse.actionSet"/>
   <descriptors xmi:id="_wytwECYoEeaal_qVnDIgFg" elementId="org.eclipse.e4.ui.compatibility.editor" allowMultiple="true" category="org.eclipse.e4.primaryDataStack" closeable="true" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor">
     <tags>Editor</tags>
   </descriptors>
@@ -1317,6 +1322,14 @@
   <descriptors xmi:id="_w-BoMyYoEeaal_qVnDIgFg" elementId="org.eclipse.wst.xsl.ui.view.outline" label="Stylesheet Model" iconURI="platform:/plugin/org.eclipse.wst.xsl.ui/icons/full/hierarchy.gif" tooltip="" category="XML" closeable="true" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView">
     <tags>View</tags>
     <tags>categoryTag:XML</tags>
+  </descriptors>
+  <descriptors xmi:id="_IPj18D9MEea4HvVEBkzFEQ" elementId="com.jformdesigner.eclipse.ErrorLogView" label="JFormDesigner Error Log" iconURI="platform:/plugin/com.jformdesigner/icons/error_log.gif" tooltip="" category="JFormDesigner" closeable="true" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView">
+    <tags>View</tags>
+    <tags>categoryTag:JFormDesigner</tags>
+  </descriptors>
+  <descriptors xmi:id="_IPngUD9MEea4HvVEBkzFEQ" elementId="com.jformdesigner.eclipse.BindingsView" label="JFormDesigner Bindings" iconURI="platform:/plugin/com.jformdesigner/icons/bindings.gif" tooltip="" category="JFormDesigner" closeable="true" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView">
+    <tags>View</tags>
+    <tags>categoryTag:JFormDesigner</tags>
   </descriptors>
   <trimContributions xmi:id="_2r10UF9tEeO-yojH_y4TJA" elementId="org.eclipse.ui.ide.application.trimcontribution.QuickAccess" contributorURI="platform:/plugin/org.eclipse.ui.ide.application" toBeRendered="false" parentId="org.eclipse.ui.main.toolbar" positionInParent="last">
     <children xsi:type="menu:ToolControl" xmi:id="_76uUAF9tEeO-yojH_y4TJA" elementId="Spacer Glue" contributorURI="platform:/plugin/org.eclipse.ui.ide.application" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.renderers.swt/org.eclipse.e4.ui.workbench.renderers.swt.LayoutModifierToolControl">
@@ -2531,6 +2544,9 @@
   <commands xmi:id="_xzQAGCYoEeaal_qVnDIgFg" elementId="AUTOGEN:::variableViewActions/org.eclipse.wst.jsdt.debug.ui.variableview.show.this" commandName="Show 'this' variable" description="Show or hide the this variable" category="_wlDHriYoEeaal_qVnDIgFg"/>
   <commands xmi:id="_xzQAGSYoEeaal_qVnDIgFg" elementId="AUTOGEN:::variableViewActions/org.eclipse.wst.jsdt.debug.ui.variableview.show.prototypes" commandName="Show proto variables" description="Show or hide proto variables" category="_wlDHriYoEeaal_qVnDIgFg"/>
   <commands xmi:id="_xzQAGiYoEeaal_qVnDIgFg" elementId="AUTOGEN:::org.eclipse.ui.articles.action.contribution.view/org.eclipse.wst.wsi.ui.internal.actions.actionDelegates.ValidateWSIProfileActionDelegate" commandName="WS-I Profile Validator" description="Validate WS-I Message Log File" category="_wlDHriYoEeaal_qVnDIgFg"/>
+  <commands xmi:id="_IDVX0D9MEea4HvVEBkzFEQ" elementId="com.jformdesigner.eclipse.GotoJfdOrJavaAction" commandName="Go to JFormDesigner form / Java code" description="Go to JFormDesigner form / Java code editor" category="_IDUJsD9MEea4HvVEBkzFEQ"/>
+  <commands xmi:id="_IDV-4D9MEea4HvVEBkzFEQ" elementId="com.jformdesigner.eclipse.NewFormAction" commandName="New JFormDesigner Form" description="New JFormDesigner Form" category="_IDUJsD9MEea4HvVEBkzFEQ"/>
+  <commands xmi:id="_IDV-4T9MEea4HvVEBkzFEQ" elementId="com.jformdesigner.eclipse.ConvertFormsAction" commandName="Convert to JFormDesigner Form..." description="Convert forms to JFormDesigner forms" category="_IDUJsD9MEea4HvVEBkzFEQ"/>
   <addons xmi:id="_wgafKCYoEeaal_qVnDIgFg" elementId="org.eclipse.e4.core.commands.service" contributorURI="platform:/plugin/org.eclipse.platform" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
   <addons xmi:id="_wgafKSYoEeaal_qVnDIgFg" elementId="org.eclipse.e4.ui.contexts.service" contributorURI="platform:/plugin/org.eclipse.platform" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
   <addons xmi:id="_wgafKiYoEeaal_qVnDIgFg" elementId="org.eclipse.e4.ui.bindings.service" contributorURI="platform:/plugin/org.eclipse.platform" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>
@@ -2591,4 +2607,5 @@
   <categories xmi:id="_wlDHrSYoEeaal_qVnDIgFg" elementId="org.eclipse.oomph.commands" name="Oomph"/>
   <categories xmi:id="_wlDHriYoEeaal_qVnDIgFg" elementId="org.eclipse.core.commands.categories.autogenerated" name="Uncategorized" description="Commands that were either auto-generated or have no category"/>
   <categories xmi:id="_wlDHryYoEeaal_qVnDIgFg" elementId="org.eclipse.wst.jsdt.ui.category.refactoring" name="Refactor - JavaScript" description="JavaScript Refactoring Actions"/>
+  <categories xmi:id="_IDUJsD9MEea4HvVEBkzFEQ" elementId="com.jformdesigner.eclipse.commands.category" name="JFormDesigner"/>
 </application:Application>

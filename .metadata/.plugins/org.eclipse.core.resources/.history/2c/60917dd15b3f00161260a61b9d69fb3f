@@ -1,0 +1,46 @@
+package com;
+
+import java.awt.Rectangle;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.border.Border;
+
+public class LogFrame extends JFrame{
+	
+
+    public LogFrame(String logMessage)
+    {   	
+        //setBounds(100, 100, 491, 310);
+        getContentPane().setLayout(null);
+
+        JTextArea textField = new JTextArea();
+        textField.setEditable(false);      
+        
+        textField.setText(logMessage);
+        
+        JScrollPane scroll = new JScrollPane(textField);
+        scroll.setBounds(10, 11, 455, 249);
+               
+        // <-- THIS
+        scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+
+        getContentPane().add(scroll);
+        setLocationRelativeTo ( null );
+        
+        
+        
+        
+
+}
+    
+ 
+    
+    
+
+ 
+}

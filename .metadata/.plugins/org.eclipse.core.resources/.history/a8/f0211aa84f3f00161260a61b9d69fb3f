@@ -1,0 +1,20 @@
+package com;
+
+import javax.swing.JPanel;
+
+public class LogFrame {
+	
+	JPanel middlePanel = new JPanel ();
+    middlePanel.setBorder( new TitledBorder ( new EtchedBorder (), "Display Area" ) );
+
+    // create the middle panel components
+
+    JTextArea display = new JTextArea ( 16, 58 );
+    display.setEditable ( false ); // set textArea non-editable
+    JScrollPane scroll = new JScrollPane ( display );
+    scroll.setVerticalScrollBarPolicy ( ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS );
+
+    //Add Textarea in to middle panel
+    middlePanel.add ( scroll );
+
+}
