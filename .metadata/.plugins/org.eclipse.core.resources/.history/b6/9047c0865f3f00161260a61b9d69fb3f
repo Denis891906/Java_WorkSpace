@@ -130,15 +130,15 @@ public class GUI extends JFrame{
         
         
     	internalPdcIPText=new JTextField(16);
-    	internalPdcIPText.setText("172.26.128.0");
+    	internalPdcIPText.setText("172.26.128.221");
     	
     	
         internalAppIPText=new JTextField(16);
-        internalAppIPText.setText("172.26.128.0");
+        internalAppIPText.setText("172.26.128.222");
         
         
         internalHistIPText=new JTextField(16);
-        internalHistIPText.setText("172.26.128.0");
+        internalHistIPText.setText("172.26.128.223");
         
         usernameText = new JTextField(16);
         usernameText.setText("tempuser");

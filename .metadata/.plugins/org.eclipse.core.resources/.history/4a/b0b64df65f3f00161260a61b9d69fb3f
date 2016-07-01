@@ -42,8 +42,7 @@ public class Engine implements ActionListener{
 	//Commands which should be executed to remove Historian service and pdc rmp file
 	String[] histRemoveCommands={
 			"sudo rpm -e phasorpoint-historian",
-			"sudo rm -r *historian*",
-			"rm -rf /var/phasorpoint-historian/"
+			"sudo rm -r *historian*"
 	};
 	
 	
