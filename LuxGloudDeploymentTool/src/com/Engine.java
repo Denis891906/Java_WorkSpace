@@ -31,6 +31,11 @@ public class Engine implements ActionListener{
 	String appServerBuildPath=null;
 	String historianBuildPath=null;
 	String keyPath;
+	
+	public String getPDCBuildPath(){
+		return pdcBuildPath;		
+	}
+	
 		
 	//Commands which should be executed to remove PDC service and pdc rmp file
 	String[] pdcRemoveCommands={
@@ -85,7 +90,7 @@ public class Engine implements ActionListener{
 				parent.ShowWarningDialog("Please enter user name.");
 			}else{*/
 				//Clear text areases
-				parent.clearTextAreas();
+				
 				//Commands which should be executed to install PDC service
 				String[] pdcCommands={
 						

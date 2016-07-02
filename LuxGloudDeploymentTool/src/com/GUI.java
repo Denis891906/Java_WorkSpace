@@ -405,7 +405,17 @@ public class GUI extends JFrame{
 		buildAppServerPathLable2.setText(appPath);
 		
 		buildHistoranPathLable2.setText(histPath);
-		//this.pack();
+
+	}
+	
+	public String GetPDCBuildPath(){
+		return buildPDCPathLable2.getText();
+	}
+	public String GetAppServerBuildPath(){
+		return buildAppServerPathLable2.getText();
+	}
+	public String GetHistorianBuildPath(){
+		return buildHistoranPathLable2.getText();
 	}
 	
 	public String GetBuildPath(){
