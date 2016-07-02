@@ -1,6 +1,9 @@
 package com;
 
 import java.awt.Desktop;
+import java.awt.Dimension;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
@@ -13,6 +16,8 @@ import java.nio.file.Paths;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
+import org.omg.CORBA.Bounds;
 
 import com.ExecuteCommandViaSSH;
 import com.Find;
@@ -66,7 +71,7 @@ public class Engine implements ActionListener{
 		
 		if (clickedButton.getText()=="Install PDC, AppServer, Historian"){
 			//Verifications that all data were entered.
-			if(parent.GetInternalPDCIP().toString().isEmpty()){
+			/*if(parent.GetInternalPDCIP().toString().isEmpty()){
 				parent.ShowWarningDialog("Please eneter Internal PDC IP.");
 			}else if(parent.GetInternalAppServerIP().toString().isEmpty()){
 				parent.ShowWarningDialog("Please eneter Internal AppServer IP.");
@@ -78,7 +83,7 @@ public class Engine implements ActionListener{
 				parent.ShowWarningDialog("Please enter 'sudo' password for VM's.");
 			}else if(parent.getUserName().toString().isEmpty()){
 				parent.ShowWarningDialog("Please enter user name.");
-			}else{
+			}else{*/
 				//Clear text areases
 				parent.clearTextAreas();
 				//Commands which should be executed to install PDC service
@@ -116,10 +121,13 @@ public class Engine implements ActionListener{
 						"sudo sh -c \"echo 'summary.size.limit=50' >> /etc/phasorpoint-historian/historian.properties\""
 						
 				};	
-				
-						
 			
-			//PDC Installation
+			
+			
+				
+			ProgressWindow cancelWindow=new ProgressWindow(parent);
+			
+			/*//PDC Installation
 			System.out.println("Installetion process for PDC with external IP "+parent.GetInternalPDCIP());	
 			Thread pdcInstall=new Thread(new deployService(parent.GetInternalPDCIP(), parent.getUserName(), parent.getSudoPassword() ,pdcBuildPath,"pdc" ,pdcCommands));
 			pdcInstall.start();
@@ -136,10 +144,10 @@ public class Engine implements ActionListener{
 			
 			Thread startAllServices=new Thread(new waitFinishAppAndHistServicesDeploy(pdcInstall, appServerInstall, histServerInstall, parent.GetInternalPDCIP(), parent.GetInternalAppServerIP(), parent.GetInternalHistorianIP(), parent.getUserName(), parent.getSudoPassword()));
 			startAllServices.start();
-			
+			*/
 					
 			parent.pack();
-			}
+			//}
 		}else if (clickedButton.getText()=="Reinstall Three Services"){
 			
 			//Verifications that all data were entered.

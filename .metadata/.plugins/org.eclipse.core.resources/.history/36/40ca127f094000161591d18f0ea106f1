@@ -1,0 +1,23 @@
+package com;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+public class ProgressWindow extends JFrame {
+	
+	public ProgressWindow() {
+		// TODO Auto-generated constructor stub
+		setSize(100, 200);
+		setVisible(true);
+		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		JLabel message=new JLabel("Please wait till URTDSM services will be deploment.");
+		
+		JPanel p = new JPanel(); 
+        add(p);
+		setLayout(manager);
+		
+		
+	}	
+
+}

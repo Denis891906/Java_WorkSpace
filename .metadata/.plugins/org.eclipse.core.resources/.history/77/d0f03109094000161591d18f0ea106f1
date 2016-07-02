@@ -1,0 +1,15 @@
+package com;
+
+import javax.swing.JFrame;
+
+public class ProgressWindow extends JFrame {
+	
+	public ProgressWindow() {
+		// TODO Auto-generated constructor stub
+		setSize(100, 200);
+		setVisible(true);
+		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		
+	}	
+
+}
