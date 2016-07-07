@@ -1,0 +1,5 @@
+package com.openstack;
+
+public class WRITE_TO_CURRENT_WINDOW {
+
+}

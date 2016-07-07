@@ -1,0 +1,55 @@
+package com.mainwindow;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
+
+public class GUI {
+
+	private JRadioButton withSyrup;
+    private JRadioButton withoutSyrup;
+    private JFrame mainFrame;
+    private JLabel question;
+    
+    public GUI() {
+    	question = new JLabel("Please select type of cloud system for URTDSM deployment:");
+    	openStack = new JRadioButton("OpenStack");
+        withoutSyrup = new JRadioButton("Luxcloud");
+        ButtonGroup bgrp = new ButtonGroup();
+        
+        bgrp.add(openStack);
+        bgrp.add(withoutSyrup);
+        
+        JButton waterButton = new JButton("Next");
+        waterButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                String msg;
+                if ( openStack.isSelected() )
+                    msg = "Налить воды с сиропом";
+                else if ( withoutSyrup.isSelected() )
+                    msg = "Налить воды без сиропа";
+                else
+                    msg = "Please select one of the of cloud system type.";
+                JOptionPane.showMessageDialog(mainFrame, msg);
+            }
+        });
+        
+        mainFrame = new JFrame("URTDSM deployment tool");
+        mainFrame.setSize(400, 150);
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.setLayout(new BoxLayout(mainFrame.getContentPane(), BoxLayout.PAGE_AXIS));
+        mainFrame.add(question);
+        mainFrame.add(withSyrup);
+        mainFrame.add(withoutSyrup);
+        mainFrame.add(waterButton);
+        
+        mainFrame.setVisible(true);
+    }
+}

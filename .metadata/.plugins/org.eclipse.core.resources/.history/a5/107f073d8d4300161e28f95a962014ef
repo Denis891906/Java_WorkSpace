@@ -1,0 +1,57 @@
+package com.gui;
+
+public class waitFinishAppAndHistServicesDeploy implements Runnable {
+	waitFinishAppAndHistServicesDeploy(Thread server1,Thread server2, Thread server3,String pdcIP, String appIP,String histIP, String userName,String password, String publicKeyPath){
+		this.server1=server1;
+		this.server2=server2;
+		this.appIP=appIP;
+		this.userName=userName;
+		this.password=password;
+	
+		this.server3=server3;
+		this.pdcIP=pdcIP;
+		this.histIP=histIP;
+		this.publicKeyPath=publicKeyPath;
+	}
+	
+	Thread server1;
+	Thread server2;
+	Thread server3;
+	String pdcIP;
+	String appIP;
+	String histIP;
+	String userName;
+	String password;
+	String serverType;
+	String publicKeyPath;
+	
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		String StartAppServer= "sudo service phasorpoint-appserver start";
+		String StartPDCServer= "sudo service phasorpoint-pdc start";
+		String StartHistServer= "sudo service phasorpoint-historian start";
+		while (true){
+			if (server1.isAlive()==false && server2.isAlive()==false && server3.isAlive()==false ){
+			ExecuteCommandViaSSH pdcStart=new ExecuteCommandViaSSH(pdcIP, userName,publicKeyPath, password , "pdc");
+			pdcStart.CreateConnection();
+			pdcStart.StartCommand(StartPDCServer);
+			pdcStart.CloseConnection();
+			
+			ExecuteCommandViaSSH appStart=new ExecuteCommandViaSSH(appIP, userName,publicKeyPath,password , "app");
+			appStart.CreateConnection();
+			appStart.StartCommand(StartAppServer);
+			appStart.CloseConnection();
+			
+			ExecuteCommandViaSSH histStart=new ExecuteCommandViaSSH(histIP, userName,password,publicKeyPath , "hist");
+			histStart.CreateConnection();
+			histStart.StartCommand(StartHistServer);
+			histStart.CloseConnection();
+			MainWindow.showInfoMessage("URTDSM servises were installed and started.\nPlease enjoy!");
+			break;
+			}
+			
+		}
+		
+}
+}
