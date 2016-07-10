@@ -23,16 +23,18 @@ public class deployService implements Runnable {
 		this.serverType = serverType;
 	}
 
-	public void run() {
+	public void run(){
 		// Copy file to VM
+		try {
 		SendFileViaSFTP sendBuildToVM = new SendFileViaSFTP(externalPpcIP, userName, keyPath, serverType);
 		sendBuildToVM.SendFile(pdcBuildPath);
 
 		// Execute commands on the VM
 		ExecuteCommandViaSSH executeCommandOnVM = new ExecuteCommandViaSSH(externalPpcIP, userName, keyPath,
 				sudoPassword, serverType);
-		executeCommandOnVM.CreateConnection();
-
+		
+			executeCommandOnVM.CreateConnection();
+		
 		for (int i = 0; i < this.commandList.length; i++) {
 			executeCommandOnVM.StartCommand(this.commandList[i]);
 
@@ -40,6 +42,20 @@ public class deployService implements Runnable {
 
 		// System.out.println("Before Close");
 		executeCommandOnVM.CloseConnection();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			//MainWindow.showInfoMessage("Thread for install " +serverType+" was finished");
+			if (serverType=="pdc"){
+				GUIEngine.setPDCFailConnection();
+			}else if (serverType=="app"){
+				GUIEngine.setAppFailConnection();
+			}else if(serverType=="hist"){
+				GUIEngine.setHistFailConnection();
+			}
+			return;
+		}
+
 
 	}
 

@@ -43,6 +43,19 @@ public class MainWindow extends JFrame {
 	private JButton pdcInstallLogButton;
 	private JButton appServerInstallLogButton;
 	private JButton histInstallLogButton;
+	private JCheckBox pdcCheckBox;
+	private JCheckBox appCheckBox;
+	private JCheckBox histCheckBox;
+	
+	public boolean getPDCCheckBoxValue(){
+		return pdcCheckBox.isSelected();
+	}
+	public boolean getAppCheckBoxValue(){
+		return appCheckBox.isSelected();
+	}
+	public boolean getHistCheckBoxValue(){
+		return histCheckBox.isSelected();
+	}
 
 	public void enableLogsButtons() {
 		pdcInstallLogButton.setEnabled(true);
@@ -108,7 +121,7 @@ public class MainWindow extends JFrame {
 		GridBagConstraints c = new GridBagConstraints();
 		this.setLayout(gridbag);
 		// this.setSize(MAXIMIZED_HORIZ, MAXIMIZED_HORIZ);
-
+		
 		JLabel pdcIPLable = new JLabel("Internal PDC IP");
 		pdcIPLable.setHorizontalAlignment(SwingConstants.LEFT);
 		JLabel pdcIPLable2 = new JLabel("External PDC IP");
@@ -128,6 +141,16 @@ public class MainWindow extends JFrame {
 		pdcIPLable.setHorizontalAlignment(SwingConstants.LEFT);
 		JLabel rootPasswordIPLable = new JLabel("root password");
 		rootPasswordIPLable.setHorizontalAlignment(SwingConstants.LEFT);
+		
+		pdcCheckBox = new JCheckBox("PDC",true);
+		appCheckBox = new JCheckBox("AppServer",true);
+		histCheckBox = new JCheckBox("Historian",true);
+		
+		
+		pdcCheckBox.setEnabled(false); ;
+		appCheckBox.setEnabled(false);
+		histCheckBox.setEnabled(false);
+		
 
 		buildPathLable = new JLabel();
 		keyPathLable = new JLabel();
@@ -157,8 +180,8 @@ public class MainWindow extends JFrame {
 		sudoPasswordText = new JTextField(16);
 		sudoPasswordText.setText("Alstom$123");
 
-		JButton pdcInstallButton = new JButton("Install PDC, AppServer, Historian");
-		JButton appInstallButton = new JButton("Reinstall Three Services");
+		JButton pdcInstallButton = new JButton("Install selected services");
+		JButton appInstallButton = new JButton("Reinstall selected services");
 		JButton selectBuildFolderButton = new JButton("Select Build Folder");
 		JButton selectKeyFileButton = new JButton("Select Key File");
 		pdcInstallLogButton = new JButton("PDC Install log");
@@ -233,12 +256,28 @@ public class MainWindow extends JFrame {
 		c.ipady = 1; // на сколько увеличиваеться минимальная высота элемента
 
 		this.add(pdcIPLable, c);
+		
+		
 
 		c.gridx = 1;
 		c.gridwidth = 3;
 		c.weightx = 0;
 		this.add(internalPdcIPText, c);
-
+		
+		//CheckBoxes Line 1
+		c.gridy = 0;
+		c.gridx=2;
+		c.insets = new Insets(1, 200, 1, 1);
+		this.add(pdcCheckBox,c);
+		//c.fill = GridBagConstraints.HORIZONTAL;
+		c.insets = new Insets(1, 250, 1, 1);
+		c.gridx=2;
+		this.add(appCheckBox,c);
+		c.insets = new Insets(1, 350, 1, 1);
+		c.gridx=2;
+		this.add(histCheckBox,c);
+		
+		c.gridy=1;
 		c.gridwidth = 1;
 		c.gridx = 2;
 		c.fill = GridBagConstraints.HORIZONTAL;
@@ -256,6 +295,10 @@ public class MainWindow extends JFrame {
 		this.add(pdcIPLable2, c);
 		c.gridx = 1;
 		this.add(externalPdcIPText, c);
+		
+		
+		
+		
 
 		// Line 3 with AppServer elements
 		c.insets = new Insets(0, 0, 0, 0); // отступы компонентов ( top,left,
@@ -267,8 +310,8 @@ public class MainWindow extends JFrame {
 		c.gridx = 1;
 		this.add(internalAppIPText, c);
 		c.fill = GridBagConstraints.HORIZONTAL;
-		c.insets = new Insets(1, 200, 0, 0); // отступы компонентов ( top,left,
-												// bottom, right )
+		c.insets = new Insets(0, 200, 0, 0); // отступы компонентов ( top,left,
+		c.gridy = 2;										// bottom, right )
 		c.gridx = 2;
 		this.add(appInstallButton, c);
 
@@ -281,7 +324,9 @@ public class MainWindow extends JFrame {
 		this.add(appIPLable2, c);
 		c.gridx = 1;
 		this.add(externalAppIPText, c);
-
+		
+		
+		
 		// Line 5 with Historian elements
 		c.insets = new Insets(0, 0, 0, 0); // отступы компонентов ( top,left,
 											// bottom, right )

@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -21,25 +22,32 @@ public class ProgressWindow extends JFrame implements Runnable {
 	// Cunstructor for method which show window with "Cancel" button.
 	public ProgressWindow(MainWindow parent) {
 		this.parent = parent;
-
-	}
-
-	public void openProgessWindow() {
-		setSize(550, 100);
-		parent.setEnabled(false);
-		setLocationRelativeTo(parent);
-		setFocusable(true);
-		setResizable(false);
-		setVisible(true);
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-
+		setSize(550, 100);
 		JLabel message = new JLabel("Please wait till URTDSM services will be installed and configured.");
 		JPanel p = new JPanel();
 		add(p);
 		p.setLayout(new FlowLayout());
-
 		p.add(message);
+		pack();
+	
+		
+		
 
+	}
+
+	public void openProgessWindow() {
+		
+		parent.setEnabled(false);
+		setLocationRelativeTo(parent);
+		setResizable(false);
+		setVisible(true);
+		this.repaint();
+		
+		//JOptionPane.showMessageDialog(parent, "Please wait till URTDSM services will be installed and configured.");
+		
+
+		
 	}
 
 	public void closeProgressWindow() {
@@ -54,11 +62,12 @@ public class ProgressWindow extends JFrame implements Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		this.openProgessWindow();
+		openProgessWindow();
+		
 		while (Thread.currentThread().isInterrupted() == false) {
 
 		}
-		this.closeProgressWindow();
+		closeProgressWindow();
 
 	}
 

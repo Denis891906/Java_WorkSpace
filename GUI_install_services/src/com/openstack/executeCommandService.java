@@ -24,8 +24,9 @@ public class executeCommandService implements Runnable {
 		// TODO Auto-generated method stub
 		ExecuteCommandViaSSH executeCommandOnVM = new ExecuteCommandViaSSH(externalPpcIP, userName, keyPath,
 				sudoPassword, serverType);
-		executeCommandOnVM.CreateConnection();
-
+		try {
+			executeCommandOnVM.CreateConnection();
+		
 		for (int i = 0; i < this.commandList.length; i++) {
 			executeCommandOnVM.StartCommand(this.commandList[i]);
 
@@ -33,6 +34,12 @@ public class executeCommandService implements Runnable {
 
 		// System.out.println("Before Close");
 		executeCommandOnVM.CloseConnection();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return;
+		}
+
 	}
 
 }

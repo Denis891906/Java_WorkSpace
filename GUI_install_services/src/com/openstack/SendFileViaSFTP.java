@@ -47,7 +47,7 @@ public class SendFileViaSFTP {
 	 * private key from where you will make connection
 	 */
 
-	public void SendFile(String filePath) {
+	public void SendFile(String filePath) throws Exception {
 
 		JSch jSch = new JSch();
 		Session session = null;
@@ -89,8 +89,9 @@ public class SendFileViaSFTP {
 		} catch (JSchException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			
 
-			if (e.getMessage().toString().contains("java.net.UnknownHostException:")) {
+			if (e.getMessage().toString().contains("java.net.UnknownHostException:") || e.getMessage().toString().contains("Connection timed out: connect")) {
 				MainWindow.showErrorMessage(e.getMessage().toString() + "\n Verify connection to the host " + SFTPHOST);
 			} else if (e.getMessage().toString() == "Auth fail") {
 				MainWindow.showErrorMessage(e.getMessage() + "\n Username is wrong");
@@ -104,6 +105,7 @@ public class SendFileViaSFTP {
 			}
 
 			System.out.println("Error is " + e.getMessage().toString());
+			throw new Exception(e);
 		} catch (SftpException e) {
 			// TODO Auto-generated catch block
 

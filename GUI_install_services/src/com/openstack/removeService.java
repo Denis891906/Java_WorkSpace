@@ -26,7 +26,9 @@ public class removeService implements Runnable {
 		// Execute commands on the VM
 		ExecuteCommandViaSSH executeCommandOnVM = new ExecuteCommandViaSSH(externalPpcIP, userName, keyPath,
 				sudoPassword, serverType);
-		executeCommandOnVM.CreateConnection();
+		try {
+			executeCommandOnVM.CreateConnection();
+		
 
 		for (int i = 0; i < this.commandList.length; i++) {
 			executeCommandOnVM.StartCommand(this.commandList[i]);
@@ -35,6 +37,11 @@ public class removeService implements Runnable {
 
 		// System.out.println("Before Close");
 		executeCommandOnVM.CloseConnection();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return;
+		}
 
 	}
 

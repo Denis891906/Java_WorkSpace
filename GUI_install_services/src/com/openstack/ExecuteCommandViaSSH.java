@@ -23,7 +23,7 @@ public class ExecuteCommandViaSSH {
 	}
 
 	ExecuteCommandViaSSH(String host, String user, String keyPath, String sudo_pass, String serverType,
-			String command) {
+			String command) throws Exception {
 		this.SFTPHOST = host;
 		this.SFTPPORT = 22;
 		this.SFTPUSER = user;
@@ -49,7 +49,7 @@ public class ExecuteCommandViaSSH {
 	private String sudo_pass;
 	private String serverType;
 
-	public void CreateConnection() {
+	public void CreateConnection() throws Exception {
 		JSch jSch = new JSch();
 
 		ChannelSftp channelSftp = null;
@@ -69,7 +69,8 @@ public class ExecuteCommandViaSSH {
 
 		} catch (Exception e) {
 			System.out.println(e);
-			MainWindow.showErrorMessage(e.getMessage().toString());
+			//MainWindow.showErrorMessage(e.getMessage().toString());
+			throw new Exception(e);
 		}
 	}
 
