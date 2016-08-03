@@ -1,0 +1,50 @@
+pdc install
+
+sudo rpm -i *pdc*
+sudo /opt/phasorpoint-pdc/bin/createdb -u postgres -p P0stgres -d
+sudo /opt/phasorpoint-pdc/bin/upgradedb -u postgres -p P0stgres
+
+
+pdc reinstall
+sudo rpm -e phasorpoint-pdc
+sudo rm -r *pdc*
+
+appserver install
+
+sudo rpm -i *appserver*
+sudo /opt/phasorpoint-appserver/bin/createdb -u postgres -p P0stgres -d
+sudo /opt/phasorpoint-appserver/bin/upgradedb -u postgres -p P0stgres
+sudo echo 'infrastructure.input.addresses=192.168.192.106' >> /etc/phasorpoint-appserver/appserver.properties
+sudo echo 'naming.strategy=urtdsm' >> /etc/phasorpoint-appserver/appserver.properties
+sudo echo 'pdc.1.host=192.168.160.129' >> /etc/phasorpoint-appserver/appserver.properties
+sudo echo 'db.1.host=192.168.160.131' >> /etc/phasorpoint-appserver/appserver.properties
+
+
+appserver reinstall
+sudo rpm -e phasorpoint-appserver
+sudo rm -r *appserver*
+
+
+historian install
+
+sudo rpm -i *historian*
+sudo /opt/phasorpoint-historian/bin/createdb -u postgres -p P0stgres -d
+sudo /opt/phasorpoint-historian/bin/upgradedb -u postgres -p P0stgres
+sudo sed -i.bak "s/#listen_addresses = 'localhost'/listen_addresses = '*'/" /var/lib/pgsql/9.4/data/postgresql.conf
+sudo sh -c "echo 'host all all 192.168.160.136/32 md5' >> /var/lib/pgsql/9.4/data/pg_hba.conf"
+sudo service postgresql-9.4 restart
+
+sudo sh -c "echo  'infrastructure.input.addresses=192.168.160.135' >> /etc/phasorpoint-historian/historian.properties"
+sudo sh -c "echo 'appserver.1.host=192.168.160.136' >> /etc/phasorpoint-historian/historian.properties"
+sudo sh -c "echo 'repository.dir=/var/phasorpoint-historian/data' >> /etc/phasorpoint-historian/historian.properties"
+sudo sh -c "echo 'summary.repository.dir=/var/phasorpoint-historian/summary' >> /etc/phasorpoint-historian/historian.properties"
+sudo sh -c "echo 'repository.size.limit=100000' >> /etc/phasorpoint-historian/historian.properties"
+sudo sh -c "echo 'summary.size.limit=50' >> /etc/phasorpoint-historian/historian.properties"
+
+
+
+
+historian reinstall
+
+sudo rpm -e phasorpoint-historian
+sudo rm -r *historian*

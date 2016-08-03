@@ -1,0 +1,13 @@
+package com.classFile;
+
+import java.io.File;
+
+public class CreateNewFile {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		File f=new File("E:\TheActual_WORKSPACE\Java_WorkSpace\Input_Output_Stream","NEW");
+		f.createNewFile();
+	}
+
+}

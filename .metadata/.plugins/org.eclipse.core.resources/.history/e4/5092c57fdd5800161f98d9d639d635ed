@@ -1,0 +1,38 @@
+package com;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+
+public class ObjectInputSerialization {
+//Program will be open file denis.ser in the current folder and create object Employee from bytes 
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		FileInputStream fIn=null;
+		ObjectInputStream oIn=null;
+		
+		
+		//Code from lines 12 to 19 will get current folder and get absolute path for file with bytes.
+		String current=null;
+		String filePath;
+		try {
+			current = new java.io.File( "." ).getCanonicalPath();
+			filePath=current+"\\denis.ser";
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try{
+			fIn= new FileInputStream("E:\\TheActual_WORKSPACE\\Java_WorkSpace\\Serialization_example\\denis.ser");
+			oIn=new ObjectInputStream(fIn);
+			Employee betEmp=(Employee) oIn.read
+			
+		}catch(ClassNotFoundException e){
+			e.printStackTrace();
+		}catch (IOException e1) {
+			e1.printStackTrace();// TODO: handle exception
+		}	
+
+	}
+
+}

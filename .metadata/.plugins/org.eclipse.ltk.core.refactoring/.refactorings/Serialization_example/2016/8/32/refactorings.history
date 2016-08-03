@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename compilation unit &apos;com.ObjectInputStream.java&apos; to &apos;ObjectInputSerialization.java&apos;&#x0D;&#x0A;- Original project: &apos;Serialization_example&apos;&#x0D;&#x0A;- Original element: &apos;com.ObjectInputStream.java&apos;&#x0D;&#x0A;- Renamed element: &apos;com.ObjectInputSerialization.java&apos;" description="Rename compilation unit &apos;ObjectInputStream.java&apos;" flags="2" id="org.eclipse.jdt.ui.rename.compilationunit" input="/src&lt;com{ObjectInputStream.java" name="ObjectInputSerialization.java" references="false" stamp="1470161892670" version="1.0"/>
+</session>

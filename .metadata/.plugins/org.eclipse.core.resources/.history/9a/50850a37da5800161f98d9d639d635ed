@@ -1,0 +1,11 @@
+package com;
+
+public class ObjectOutputSerialization {
+	public static void main(String args[]){
+		Employee emp=new Employee();
+		emp.lName="Lebedev";
+		emp.fName="Denis";
+		emp.salary=1000;
+	}
+
+}
