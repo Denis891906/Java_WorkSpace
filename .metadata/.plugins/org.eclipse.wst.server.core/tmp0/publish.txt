@@ -1,0 +1,3 @@
+#GlassFish 3
+#Mon Sep 12 23:04:09 EEST 2016
+org.eclipse.jst.jee.server\:lesson27=C\:\\Program Files (x86)\\glassfish4\\glassfish\\domains\\domain1\\eclipseApps\\lesson27

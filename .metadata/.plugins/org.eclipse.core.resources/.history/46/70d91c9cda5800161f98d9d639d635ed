@@ -1,8 +1,0 @@
-package com;
-
-public class Employee {
-	String lName;
-	String fName;
-	int salary;
-
-}
